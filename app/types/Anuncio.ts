@@ -1,6 +1,7 @@
 export interface Anuncio {
   uid: string;
   nome: string;
+  opiniao: string
   descricao: string;
   link: string;
   imagens: Array<string>;

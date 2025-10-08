@@ -5,6 +5,7 @@ import { use, useEffect, useState } from "react";
 import { Anuncio } from "@/app/types/Anuncio";
 import { buscarAnuncio } from "@/app/services/anuncioService";
 import Loading from "@/app/components/Loading";
+import BtnMercadoLivre from "@/app/components/BotaoMercadoLivre";
 
 type PageProps = {
   params: {
@@ -72,18 +73,8 @@ export default function DetalheAnuncio({ params }: PageProps) {
           <h1 className="text-3xl font-semibold mb-3 text-gray-800">
             {anuncio.nome}
           </h1>
-          <p className="text-4xl font-bold text-green-600 mb-6">
-            R$ {anuncio.preco}
-          </p>
 
-          <a
-            href={anuncio.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 px-6 rounded-md w-full inline-block text-center transition"
-          >
-            Comprar agora
-          </a>
+         <BtnMercadoLivre link={anuncio.link} />
 
           <p className="text-sm text-gray-500 mt-3">
             Publicado em:{" "}

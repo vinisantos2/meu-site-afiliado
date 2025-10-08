@@ -1,3 +1,4 @@
+import BtnMercadoLivre from "@/app/components/BotaoMercadoLivre";
 import { Anuncio } from "@/app/types/Anuncio";
 import Link from "next/link";
 
@@ -28,18 +29,8 @@ export default function CardAnuncioAdmin({
       <p className="text-gray-600 dark:text-gray-300 text-sm mt-1">
         {anuncio.descricao}
       </p>
-     
 
-      {/* Link externo */}
-      {anuncio.link && (
-        <Link
-          href={anuncio.link}
-          target="_blank"
-          className="mt-3 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm text-center"
-        >
-          Ver no Mercado Livre
-        </Link>
-      )}
+      <BtnMercadoLivre link={anuncio.link} />
 
       {/* Ações */}
       <div className="flex gap-2 mt-4">

@@ -7,11 +7,14 @@ type FormAnuncioProps = {
   onSubmit: (data: Anuncio) => void; // Função de add/update
 };
 
-export default function FormAnuncio({ initialData = null, onSubmit }: FormAnuncioProps) {
+export default function FormAnuncio({
+  initialData = null,
+  onSubmit,
+}: FormAnuncioProps) {
   const [formData, setFormData] = useState<Anuncio>({
     uid: initialData?.uid || "",
     nome: initialData?.nome || "",
-    preco: initialData?.preco || "",
+    opiniao: initialData?.opiniao || "",
     descricao: initialData?.descricao || "",
     link: initialData?.link || "",
     imagens: initialData?.imagens || [],
@@ -60,14 +63,6 @@ export default function FormAnuncio({ initialData = null, onSubmit }: FormAnunci
         placeholder="Nome"
         value={formData.nome}
         onChange={(e) => handleChange("nome", e.target.value)}
-        className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-      />
-
-      <input
-        type="text"
-        placeholder="Preço"
-        value={formData.preco}
-        onChange={(e) => handleChange("preco", e.target.value)}
         className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
       />
 
@@ -138,6 +133,13 @@ export default function FormAnuncio({ initialData = null, onSubmit }: FormAnunci
         rows={5}
         value={formData.detalhes}
         onChange={(e) => handleChange("detalhes", e.target.value)}
+        className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      />
+      <textarea
+        placeholder="Opinião"
+        rows={5}
+        value={formData.opiniao}
+        onChange={(e) => handleChange("opiniao", e.target.value)}
         className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
       />
 
