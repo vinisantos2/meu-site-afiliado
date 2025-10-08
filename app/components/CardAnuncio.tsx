@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { Anuncio } from "../types/Anuncio";
 
 type Props = {
@@ -5,10 +6,14 @@ type Props = {
 };
 
 export default function CardAnuncio({ anuncio }: Props) {
+  const router = useRouter();
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+    <button
+      onClick={() => router.push("/anuncio/" + anuncio.uid)}
+      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer"
+    >
       <img
-        src={anuncio.imagem}
+        src={anuncio.imagens}
         alt={anuncio.nome}
         className="w-full h-48 object-cover"
       />
@@ -24,6 +29,6 @@ export default function CardAnuncio({ anuncio }: Props) {
           Ver Oferta
         </a>
       </div>
-    </div>
+    </button>
   );
 }

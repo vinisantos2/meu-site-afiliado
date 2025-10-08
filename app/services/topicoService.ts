@@ -1,4 +1,3 @@
-// services/TopicoService.ts
 import {
   addDoc,
   collection,
@@ -10,27 +9,28 @@ import {
 import { Topico } from "../types/Topico";
 import { db } from "../lib/firebase";
 
-// Coleção de usuários
-const TopicosCollection = collection(db, "Topicos");
+// ✅ Nome da coleção em minúsculo (boas práticas)
+const topicosCollection = collection(db, "topicos");
 
-// Salvar (ou atualizar) usuário no Firestore
-export async function salvarTopico(topico: Topico) {
+// 🟢 Criar novo tópico
+export async function salvarTopico(topico: Omit<Topico, "uid">) {
   try {
-    await addDoc(TopicosCollection, {
+    await addDoc(topicosCollection, {
       ...topico,
       criadoEm: topico.criadoEm ?? new Date().toISOString(),
     });
   } catch (error) {
-    console.error("Erro ao salvar usuário:", error);
+    console.error("Erro ao salvar tópico:", error);
     throw error;
   }
 }
 
+// 🟣 Buscar todos os tópicos
 export async function buscarTodosTopicos(): Promise<Topico[]> {
   try {
-    const querySnapshot = await getDocs(TopicosCollection);
+    const querySnapshot = await getDocs(topicosCollection);
 
-    const Topicos: Topico[] = querySnapshot.docs.map((docSnap) => {
+    const topicos: Topico[] = querySnapshot.docs.map((docSnap) => {
       const data = docSnap.data();
 
       return {
@@ -39,28 +39,35 @@ export async function buscarTodosTopicos(): Promise<Topico[]> {
       } as Topico;
     });
 
-    return Topicos;
+    return topicos;
   } catch (error) {
-    console.error("Erro ao buscar anúncios:", error);
+    console.error("Erro ao buscar tópicos:", error);
     throw error;
   }
 }
 
-// 🟠 Editar pedido
-export async function editarTopico(
-  id: string,
-  Topico: Omit<Topico, "id" | "cliente">
-) {
-  const docRef = doc(db, "Topicos", id);
-  const pedidoAtualizado = {
-    ...Topico,
-    criadoEm: Topico.criadoEm ?? new Date().toISOString(),
-  };
-  await updateDoc(docRef, pedidoAtualizado);
+// 🟠 Editar tópico
+export async function editarTopico(id: string, topico: Topico) {
+  try {
+    const docRef = doc(db, "topicos", id);
+    const topicoAtualizado = {
+      ...topico,
+      criadoEm: topico.criadoEm ?? new Date().toISOString(),
+    };
+    await updateDoc(docRef, topicoAtualizado);
+  } catch (error) {
+    console.error("Erro ao editar tópico:", error);
+    throw error;
+  }
 }
 
-// 🔴 Excluir pedido
+// 🔴 Excluir tópico
 export async function excluirTopico(id: string) {
-  const docRef = doc(db, "Topicos", id);
-  await deleteDoc(docRef);
+  try {
+    const docRef = doc(db, "topicos", id);
+    await deleteDoc(docRef);
+  } catch (error) {
+    console.error("Erro ao excluir tópico:", error);
+    throw error;
+  }
 }

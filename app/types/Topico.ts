@@ -1,5 +1,7 @@
 export interface Topico {
   uid: string;
   titulo: string;
-  criadoEm: string
+  icon?: string;
+  url: string
+  criadoEm: string;
 }

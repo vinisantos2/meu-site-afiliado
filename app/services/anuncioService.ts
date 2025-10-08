@@ -39,13 +39,7 @@ export async function buscarAnuncio(uid: string): Promise<Anuncio | null> {
 
     return {
       uid: docSnap.id,
-      nome: data.nome,
-      preco: data.preco,
-      descricao: data.descricao,
-      link: data.link ?? "", // caso não tenha, volta string vazia
-      imagem: data.imagem,
-      topico: data.topico,
-      criadoEm: data.criadoEm,
+      ...data,
     } as Anuncio;
   } catch (error) {
     console.error("Erro ao buscar anúncio:", error);
@@ -62,15 +56,7 @@ export async function buscarTodosAnuncios(): Promise<Anuncio[]> {
 
       return {
         uid: docSnap.id,
-        nome: data.nome,
-        preco: data.preco,
-        descricao: data.descricao,
-        link: data.link ?? "",
-        imagem: data.imagem,
-        topico: data.topico,
-        destaque: data.destaque,
-        detalhes: data.detalhes,
-        criadoEm: data.criadoEm, // pode ser Timestamp, depende de como salvou
+        ...data,
       } as Anuncio;
     });
 

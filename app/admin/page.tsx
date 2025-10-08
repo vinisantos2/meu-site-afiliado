@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "../components/Loading";
 import { auth } from "../lib/firebase";
-import AbaAnunciosAmin from "./abas/AbaAnunciosAdmin";
+import AbaAnunciosAmin from "./abas/AbaAnuncios";
 import AbaAddAnuncio from "./abas/AbaAddAnuncio";
 import { useAuthRedirectAdmin } from "./hooks/useAuthRedirectAdmin";
 import AbaTopicos from "./abas/AbaTopicos";
@@ -13,7 +13,7 @@ export default function Dashboard() {
   const { loading } = useAuthRedirectAdmin();
   const router = useRouter();
   const [aba, setAba] = useState<
-    "anúncios" | "Adicionar anúncio" | "perfil" | "Tópicos"
+    "anúncios" | "Adicionar anúncio" | "perfil" | "Tópicos"| "Cupons"
   >("anúncios");
 
   if (loading) return <Loading />;
@@ -81,6 +81,7 @@ export default function Dashboard() {
         {aba === "anúncios" && <AbaAnunciosAmin />}
         {aba === "Adicionar anúncio" && <AbaAddAnuncio />}
         {aba === "Tópicos" && <AbaTopicos />}
+        {aba === "Cupons" && <AbaTopicos />}
         {/* Adicione o componente para a aba de Perfil aqui, se houver: */}
         {/* {aba === "perfil" && <AbaPerfilAdmin />} */}
       </main>

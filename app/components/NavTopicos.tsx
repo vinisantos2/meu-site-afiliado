@@ -1,48 +1,83 @@
 "use client";
-import { useState } from "react";
-import { Laptop, Smartphone, Printer, Gamepad, Monitor, Tv, Headphones } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  Laptop,
+  Smartphone,
+  Printer,
+  Gamepad,
+  Monitor,
+  Tv,
+  Headphones,
+} from "lucide-react";
+import { buscarTodosTopicos } from "../services/topicoService";
+import { Topico } from "../types/Topico";
+import { useRouter } from "next/navigation";
+
+// Mapa de ícones disponíveis
+const iconMap: Record<string, React.ElementType> = {
+  Laptop,
+  Smartphone,
+  Printer,
+  Gamepad,
+  Monitor,
+  Tv,
+  Headphones,
+};
 
 export default function NavTopicos() {
   const [open, setOpen] = useState(false);
+  const [topicos, setTopicos] = useState<Topico[]>([]);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
-  const topicos = [
-    { nome: "Notebook", icon: Laptop },
-    { nome: "Smartphone", icon: Smartphone },
-    { nome: "Impressoras", icon: Printer },
-    { nome: "PC Gamer", icon: Monitor },
-    { nome: "Console", icon: Gamepad },
-    { nome: "Smart TV", icon: Tv },
-    { nome: "Acessórios Gamer", icon: Headphones },
-  ];
+  useEffect(() => {
+    carregarTopicos();
+  }, []);
+
+  async function carregarTopicos() {
+    setLoading(true);
+    const dados = await buscarTodosTopicos();
+    setTopicos(dados);
+    setLoading(false);
+  }
 
   return (
     <div className="mt-8">
-      {/* Botão para mobile */}
+      {/* Botão mobile */}
       <button
         onClick={() => setOpen(!open)}
-        className="md:hidden bg-white text-indigo-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition"
+        className="md:hidden bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 transition"
       >
-        {open ? "Fechar Tópicos" : "Ver Tópicos"}
+        {open ? "Fechar Categorias" : "Ver Categorias"}
       </button>
 
       {/* Lista de tópicos */}
       <ul
-        className={`flex flex-col md:flex-row gap-4 mt-4 justify-center items-center ${
+        className={`flex flex-col md:flex-row flex-wrap gap-4 justify-center items-center mt-4 transition-all duration-300 ${
           open ? "flex" : "hidden md:flex"
         }`}
       >
-        {topicos.map((item, index) => {
-          const Icon = item.icon;
-          return (
-            <li
-              key={index}
-              className="flex items-center gap-2 bg-white text-indigo-600 px-4 py-2 rounded-lg shadow hover:bg-gray-100 cursor-pointer transition"
-            >
-              <Icon size={18} />
-              <span className="font-medium">{item.nome}</span>
-            </li>
-          );
-        })}
+        {loading ? (
+          <li className="text-gray-500 dark:text-gray-400">Carregando...</li>
+        ) : topicos.length === 0 ? (
+          <li className="text-gray-500 dark:text-gray-400">
+            Nenhuma categoria encontrada.
+          </li>
+        ) : (
+          topicos.map((item, index) => {
+            const Icon = item.icon ? iconMap[item.icon] : null;
+            return (
+              <li
+                key={index}
+                onClick={() => router.push(`/topico/${item.url}`)}
+                className="flex items-center gap-2 bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 px-4 py-2 rounded-lg shadow hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition"
+              >
+                {Icon && <Icon size={18} />}
+                <span className="font-medium">{item.titulo}</span>
+              </li>
+            );
+          })
+        )}
       </ul>
     </div>
   );

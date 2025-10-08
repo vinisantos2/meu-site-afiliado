@@ -9,10 +9,12 @@ import {
 } from "@/app/services/anuncioService";
 import { Anuncio } from "@/app/types/Anuncio";
 import CardAnuncioAdmin from "../componentsAdmin/CardAnuncioAdmin";
+import { useRouter } from "next/navigation";
 
 export default function AbaAnunciosAdmin() {
   const [anuncios, setAnuncios] = useState<Anuncio[]>([]);
   const [loading, setLoading] = useState(true);
+  const route = useRouter();
 
   useEffect(() => {
     fetchAnuncios();
@@ -30,11 +32,6 @@ export default function AbaAnunciosAdmin() {
     if (!confirmar) return;
 
     await excluirAnuncio(id);
-    await fetchAnuncios();
-  }
-
-  async function handleAtualizar(anuncio: Anuncio) {
-    await editarAnuncio(anuncio.uid, { ...anuncio });
     await fetchAnuncios();
   }
 
@@ -68,7 +65,7 @@ export default function AbaAnunciosAdmin() {
               key={anuncio.uid}
               anuncio={anuncio}
               onExcluir={() => handleExcluir(anuncio.uid)}
-              onAtualizar={() => handleAtualizar(anuncio)}
+              onAtualizar={() => route.push(`/admin/anuncio/${anuncio.uid}`)}
             />
           ))}
         </div>

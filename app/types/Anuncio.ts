@@ -1,10 +1,9 @@
 export interface Anuncio {
   uid: string;
   nome: string;
-  preco: string;
   descricao: string;
   link: string;
-  imagem: string;
+  imagens: Array<string>;
   topico: string;
   criadoEm: string;
   detalhes: string;

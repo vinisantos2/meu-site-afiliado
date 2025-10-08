@@ -16,7 +16,7 @@ export default function CardAnuncioAdmin({
     <div className="border rounded-lg shadow-md hover:shadow-lg transition bg-white dark:bg-gray-800 p-4 flex flex-col">
       {/* Imagem */}
       <img
-        src={anuncio.imagem}
+        src={anuncio.imagens[0]}
         alt={anuncio.nome}
         className="rounded mb-4 w-full h-40 object-cover"
       />
@@ -28,9 +28,7 @@ export default function CardAnuncioAdmin({
       <p className="text-gray-600 dark:text-gray-300 text-sm mt-1">
         {anuncio.descricao}
       </p>
-      <p className="text-lg font-bold text-gray-800 dark:text-gray-200 mt-3">
-        R$ {anuncio.preco}
-      </p>
+     
 
       {/* Link externo */}
       {anuncio.link && (
