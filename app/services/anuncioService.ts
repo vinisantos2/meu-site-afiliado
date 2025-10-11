@@ -8,7 +8,7 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
-import { Anuncio } from "../types/Anuncio";
+import { Anuncio, AnuncioComId } from "../types/Anuncio";
 import { db } from "../lib/firebase";
 
 // Coleção de usuários
@@ -28,7 +28,7 @@ export async function salvarAnuncio(anuncio: Anuncio) {
 }
 
 // Buscar anúncio por UID
-export async function buscarAnuncio(uid: string): Promise<Anuncio | null> {
+export async function buscarAnuncio(uid: string): Promise<AnuncioComId | null> {
   try {
     const docRef = doc(AnunciosCollection, uid);
     const docSnap = await getDoc(docRef);
@@ -40,24 +40,24 @@ export async function buscarAnuncio(uid: string): Promise<Anuncio | null> {
     return {
       uid: docSnap.id,
       ...data,
-    } as Anuncio;
+    } as AnuncioComId;
   } catch (error) {
     console.error("Erro ao buscar anúncio:", error);
     throw error;
   }
 }
 
-export async function buscarTodosAnuncios(): Promise<Anuncio[]> {
+export async function buscarTodosAnuncios(): Promise<AnuncioComId[]> {
   try {
     const querySnapshot = await getDocs(AnunciosCollection);
 
-    const anuncios: Anuncio[] = querySnapshot.docs.map((docSnap) => {
+    const anuncios: AnuncioComId[] = querySnapshot.docs.map((docSnap) => {
       const data = docSnap.data();
 
       return {
-        uid: docSnap.id,
+        uid: docSnap.id,   // 👈 adicionando o ID do documento
         ...data,
-      } as Anuncio;
+      } as AnuncioComId;
     });
 
     return anuncios;

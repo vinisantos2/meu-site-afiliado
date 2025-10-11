@@ -42,8 +42,7 @@ export default function NavTopicos() {
   }
 
   return (
-    <div className="mt-8">
-      {/* Botão mobile */}
+    <nav className="">
       <button
         onClick={() => setOpen(!open)}
         className="md:hidden bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 transition"
@@ -53,7 +52,7 @@ export default function NavTopicos() {
 
       {/* Lista de tópicos */}
       <ul
-        className={`flex flex-col md:flex-row flex-wrap gap-4 justify-center items-center mt-4 transition-all duration-300 ${
+        className={`flex flex-col md:flex-row flex-wrap gap-4 justify-center items-center mb-2 mt-2 transition-all duration-300 ${
           open ? "flex" : "hidden md:flex"
         }`}
       >
@@ -79,6 +78,6 @@ export default function NavTopicos() {
           })
         )}
       </ul>
-    </div>
+    </nav>
   );
 }

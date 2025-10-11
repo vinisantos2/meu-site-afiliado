@@ -7,12 +7,12 @@ import {
   editarAnuncio,
   excluirAnuncio,
 } from "@/app/services/anuncioService";
-import { Anuncio } from "@/app/types/Anuncio";
+import { Anuncio, AnuncioComId } from "@/app/types/Anuncio";
 import CardAnuncioAdmin from "../componentsAdmin/CardAnuncioAdmin";
 import { useRouter } from "next/navigation";
 
 export default function AbaAnunciosAdmin() {
-  const [anuncios, setAnuncios] = useState<Anuncio[]>([]);
+  const [anuncios, setAnuncios] = useState<AnuncioComId[]>([]);
   const [loading, setLoading] = useState(true);
   const route = useRouter();
 

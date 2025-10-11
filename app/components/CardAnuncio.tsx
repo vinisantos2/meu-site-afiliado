@@ -1,11 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Anuncio } from "../types/Anuncio";
+import { AnuncioComId } from "../types/Anuncio";
 import BtnMercadoLivre from "./BotaoMercadoLivre";
+import ImgCard from "./ImgCard";
 
 type Props = {
-  anuncio: Anuncio;
+  anuncio: AnuncioComId;
 };
 
 export default function CardAnuncio({ anuncio }: Props) {
@@ -18,13 +19,7 @@ export default function CardAnuncio({ anuncio }: Props) {
       w-full sm:w-[320px] md:w-[360px] lg:w-[380px] min-w-[280px]"
     >
       {/* Imagem */}
-      <div className="overflow-hidden mb-4 w-full h-56">
-        <img
-          src={anuncio.imagens[0]}
-          alt={anuncio.nome}
-          className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-        />
-      </div>
+      <ImgCard img={anuncio.imagens[0]} nome={anuncio.nome} />
 
       {/* Conteúdo */}
       <div className="p-4 flex flex-col flex-1">

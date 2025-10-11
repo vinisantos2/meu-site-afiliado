@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Anuncio } from "@/app/types/Anuncio";
 import { buscarAnuncio, editarAnuncio } from "@/app/services/anuncioService";
@@ -13,13 +13,12 @@ type PageProps = {
 };
 
 export default function EditAnuncio({ params }: PageProps) {
-  const { uid } = params;
+  const { uid } = use(params);
   const router = useRouter();
 
   const [anuncio, setAnuncio] = useState<Anuncio | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Buscar anúncio pelo UID
   useEffect(() => {
     async function fetchAnuncio() {
       try {
@@ -70,7 +69,7 @@ export default function EditAnuncio({ params }: PageProps) {
           </div>
         )}
 
-        {/* Formulário reutilizável */}
+        {/* ✅ agora os dados são carregados corretamente no form */}
         <FormAnuncio onSubmit={handleSubmit} initialData={anuncio} />
       </div>
     </div>

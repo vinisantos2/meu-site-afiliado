@@ -1,25 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Anuncio } from "@/app/types/Anuncio";
-import { Topico } from "@/app/types/Topico";
-import { buscarTodosTopicos } from "@/app/services/topicoService";
 import { salvarAnuncio } from "@/app/services/anuncioService";
 import FormAnuncio from "../componentsAdmin/FormAnuncio";
 
 export default function AbaAddAnuncio() {
-  const [topicos, setTopicos] = useState<Topico[]>([]);
   const [carregando, setCarregando] = useState(false);
 
-  // Carregar tópicos do Firestore
-  useEffect(() => {
-    async function fetchTopicos() {
-      const dados = await buscarTodosTopicos();
-      setTopicos(dados);
-    }
-    fetchTopicos();
-  }, []);
+  
 
   async function handleSubmit(data: Anuncio) {
     try {
@@ -28,7 +18,6 @@ export default function AbaAddAnuncio() {
       // Gera UID e data de criação se for novo
       const anuncioParaSalvar: Anuncio = {
         ...data,
-        uid: data.uid || crypto.randomUUID(),
         criadoEm: data.criadoEm || new Date().toISOString(),
       };
 

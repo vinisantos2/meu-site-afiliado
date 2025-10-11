@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Anuncio } from "@/app/types/Anuncio";
+import { Topico } from "@/app/types/Topico";
+import { buscarTodosTopicos } from "@/app/services/topicoService";
 
 type FormAnuncioProps = {
   initialData?: Anuncio | null; // Dados ao editar
@@ -12,19 +14,21 @@ export default function FormAnuncio({
   onSubmit,
 }: FormAnuncioProps) {
   const [formData, setFormData] = useState<Anuncio>({
-    uid: initialData?.uid || "",
-    nome: initialData?.nome || "",
-    opiniao: initialData?.opiniao || "",
-    descricao: initialData?.descricao || "",
-    link: initialData?.link || "",
-    imagens: initialData?.imagens || [],
-    topico: initialData?.topico || "",
-    criadoEm: initialData?.criadoEm || new Date().toISOString(),
-    detalhes: initialData?.detalhes || "",
-    destaque: initialData?.destaque || false,
+    uid: "",
+    nome: "",
+    opiniao: "",
+    descricao: "",
+    link: "",
+    imagens: [],
+    topico: "",
+    criadoEm: new Date().toISOString(),
+    detalhes: "",
+    destaque: false,
   });
 
-  // Atualiza o estado se initialData mudar (ex: ao editar outro item)
+  const [topicos, setTopicos] = useState<Topico[]>([]);
+
+  // Carregar dados iniciais ao editar
   useEffect(() => {
     if (initialData) {
       setFormData({
@@ -33,6 +37,15 @@ export default function FormAnuncio({
       });
     }
   }, [initialData]);
+
+  // Carregar tópicos do Firestore
+  useEffect(() => {
+    async function fetchTopicos() {
+      const dados = await buscarTodosTopicos();
+      setTopicos(dados);
+    }
+    fetchTopicos();
+  }, []);
 
   const handleChange = (field: keyof Anuncio, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -58,6 +71,7 @@ export default function FormAnuncio({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {/* NOME */}
       <input
         type="text"
         placeholder="Nome"
@@ -66,7 +80,7 @@ export default function FormAnuncio({
         className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
       />
 
-      {/* Campo de imagens com preview */}
+      {/* IMAGENS */}
       <div>
         <div className="flex gap-2">
           <input
@@ -104,14 +118,21 @@ export default function FormAnuncio({
         )}
       </div>
 
-      <input
-        type="text"
-        placeholder="Tópico"
+      {/* SELECT DE TÓPICO */}
+      <select
         value={formData.topico}
         onChange={(e) => handleChange("topico", e.target.value)}
         className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-      />
+      >
+        <option value="">Selecione um tópico</option>
+        {topicos.map((t) => (
+          <option key={t.uid} value={t.url}>
+            {t.titulo}
+          </option>
+        ))}
+      </select>
 
+      {/* LINK */}
       <input
         type="text"
         placeholder="Link do produto"
@@ -120,6 +141,7 @@ export default function FormAnuncio({
         className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
       />
 
+      {/* DESCRIÇÃO */}
       <textarea
         placeholder="Descrição"
         rows={3}
@@ -128,6 +150,7 @@ export default function FormAnuncio({
         className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
       />
 
+      {/* DETALHES */}
       <textarea
         placeholder="Detalhes"
         rows={5}
@@ -135,6 +158,8 @@ export default function FormAnuncio({
         onChange={(e) => handleChange("detalhes", e.target.value)}
         className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
       />
+
+      {/* OPINIÃO */}
       <textarea
         placeholder="Opinião"
         rows={5}
@@ -143,6 +168,7 @@ export default function FormAnuncio({
         className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
       />
 
+      {/* DESTAQUE */}
       <label className="flex items-center gap-2">
         <input
           type="checkbox"
@@ -152,6 +178,7 @@ export default function FormAnuncio({
         Destaque
       </label>
 
+      {/* BOTÃO */}
       <button
         type="submit"
         className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 rounded transition-all"

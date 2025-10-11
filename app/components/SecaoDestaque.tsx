@@ -1,53 +1,52 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import { Anuncio } from "../types/Anuncio";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { AnuncioComId } from "../types/Anuncio";
 import CardAnuncio from "./CardAnuncio";
+
+// Importa os estilos básicos do Swiper
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 type Props = {
   loading: boolean;
-  anunciosDestaque: Array<Anuncio>;
+  anunciosDestaque: Array<AnuncioComId>;
 };
 
 export default function SecaoDestaque({ loading, anunciosDestaque }: Props) {
+  const destaques = anunciosDestaque.filter((item) => item.destaque);
+
+  // Renderização condicional da classe base
+  const containerClasses =
+    destaques.length > 5
+      ? "flex overflow-x-auto snap-x snap-mandatory scroll-p-4 gap-6"
+      : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6";
+
   return (
     <section className="mb-12">
       <h2 className="text-2xl font-semibold mb-4">🔥 Produtos em Destaque</h2>
 
       {loading ? (
         <p className="text-gray-600">Carregando anúncios...</p>
-      ) : anunciosDestaque.length === 0 ? (
+      ) : destaques.length === 0 ? (
         <p className="text-gray-600">Nenhum anúncio disponível.</p>
       ) : (
-        <>
-          {anunciosDestaque.length > 5 ? (
-            <Swiper
-              modules={[Navigation, Pagination]}
-              spaceBetween={16}
-              slidesPerView={5}
-              navigation
-              pagination={{ clickable: true }}
-              className="pb-8"
+        <div className={containerClasses}>
+          {destaques.map((item) => (
+            <div
+              key={item.uid}
+              className={
+                destaques.length > 5
+                  ? "flex-shrink-0 w-full md:w-1/2 lg:w-1/3 snap-start"
+                  : ""
+              }
             >
-              {anunciosDestaque.map((item) => {
-                if (!item.destaque) return null;
-                return (
-                  <SwiperSlide key={item.uid}>
-                    <CardAnuncio anuncio={item} />
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-              {anunciosDestaque.map((item) => {
-                if (!item.destaque) return null;
-                return <CardAnuncio key={item.uid} anuncio={item} />;
-              })}
+              <CardAnuncio anuncio={item} />
             </div>
-          )}
-        </>
+          ))}
+        </div>
       )}
     </section>
   );

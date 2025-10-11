@@ -1,4 +1,5 @@
 import BtnMercadoLivre from "@/app/components/BotaoMercadoLivre";
+import ImgCard from "@/app/components/ImgCard";
 import { Anuncio } from "@/app/types/Anuncio";
 import Link from "next/link";
 
@@ -15,12 +16,7 @@ export default function CardAnuncioAdmin({
 }: CardAnuncioAdminProps) {
   return (
     <div className="border rounded-lg shadow-md hover:shadow-lg transition bg-white dark:bg-gray-800 p-4 flex flex-col">
-      {/* Imagem */}
-      <img
-        src={anuncio.imagens[0]}
-        alt={anuncio.nome}
-        className="rounded mb-4 w-full h-40 object-cover"
-      />
+     <ImgCard img={anuncio.imagens[0]} nome={anuncio.nome} />
 
       {/* Conteúdo */}
       <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">

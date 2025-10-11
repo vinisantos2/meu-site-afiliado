@@ -1,7 +1,6 @@
 export interface Anuncio {
-  uid: string;
   nome: string;
-  opiniao: string
+  opiniao: string;
   descricao: string;
   link: string;
   imagens: Array<string>;
@@ -9,4 +8,8 @@ export interface Anuncio {
   criadoEm: string;
   detalhes: string;
   destaque?: boolean;
+}
+
+export interface AnuncioComId extends Anuncio {
+  uid: string;
 }
