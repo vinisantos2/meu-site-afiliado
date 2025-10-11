@@ -8,6 +8,7 @@ import AbaAnunciosAmin from "./abas/AbaAnuncios";
 import AbaAddAnuncio from "./abas/AbaAddAnuncio";
 import { useAuthRedirectAdmin } from "./hooks/useAuthRedirectAdmin";
 import AbaTopicos from "./abas/AbaTopicos";
+import AbaCupons from "./abas/AbaCupons";
 
 export default function Dashboard() {
   const { loading } = useAuthRedirectAdmin();
@@ -56,12 +57,12 @@ export default function Dashboard() {
 
         {/* Botão Perfil */}
         <button
-          onClick={() => setAba("perfil")}
+          onClick={() => setAba("Cupons")}
           className={`text-left px-4 py-2 rounded hover:bg-gray-700 transition ${
             aba === "perfil" ? "bg-gray-700" : ""
           } mb-2`}
         >
-          Perfil
+          Cupons
         </button>
 
         {/* Botão Sair */}
@@ -81,7 +82,7 @@ export default function Dashboard() {
         {aba === "anúncios" && <AbaAnunciosAmin />}
         {aba === "Adicionar anúncio" && <AbaAddAnuncio />}
         {aba === "Tópicos" && <AbaTopicos />}
-        {aba === "Cupons" && <AbaTopicos />}
+        {aba === "Cupons" && <AbaCupons />}
         {/* Adicione o componente para a aba de Perfil aqui, se houver: */}
         {/* {aba === "perfil" && <AbaPerfilAdmin />} */}
       </main>
