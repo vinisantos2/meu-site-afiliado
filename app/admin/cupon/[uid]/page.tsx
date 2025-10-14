@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Cupon } from "@/app/types/Cupon";
 import { buscarCupon, editarCupon } from "@/app/services/CuponService";
@@ -13,7 +13,7 @@ type PageProps = {
 };
 
 export default function EditCupon({ params }: PageProps) {
-  const { uid } = use(params);
+  const uid = params.uid;
   const router = useRouter();
 
   const [cupon, setCupon] = useState<Cupon | null>(null);
@@ -58,9 +58,6 @@ export default function EditCupon({ params }: PageProps) {
         <h1 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white text-center">
           ✏️ Editar Cupon
         </h1>
-
-       
-   
 
         {/* ✅ agora os dados são carregados corretamente no form */}
         <FormCupon onSubmit={handleSubmit} initialData={cupon} />

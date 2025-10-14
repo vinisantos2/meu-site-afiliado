@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { Anuncio } from "@/app/types/Anuncio";
 import { buscarAnuncio } from "@/app/services/anuncioService";
 import Loading from "@/app/components/Loading";
@@ -14,7 +14,7 @@ type PageProps = {
 };
 
 export default function DetalheAnuncio({ params }: PageProps) {
-  const { uid } = use(params);
+  const  uid  = params.uid;
   const [anuncio, setAnuncio] = useState<Anuncio | null>(null);
   const [imagemSelecionada, setImagemSelecionada] = useState<string | null>(
     null
