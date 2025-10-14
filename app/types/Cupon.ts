@@ -1,7 +1,7 @@
 // types/Cupon.ts
 export interface Cupon {
-  nome: string;
-  descricao: string;
+  titulo: string;
+  regras: string;
   codigo: string;
   desconto: number;
   tipoDesconto: "percentual" | "valor";
@@ -9,6 +9,7 @@ export interface Cupon {
   criadoEm: string;
   validade: string;
   ativo: boolean;
+  categoria: string
   detalhes: string;
   destaque?: boolean;
 }
@@ -16,3 +17,5 @@ export interface Cupon {
 export interface CuponComId extends Cupon {
   uid: string;
 }
+
+

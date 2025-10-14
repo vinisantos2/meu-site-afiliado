@@ -2,7 +2,6 @@
 import Image from "next/image";
 import NavTopicos from "./NavTopicos";
 import { useRouter } from "next/navigation";
-import CampoBusca from "./CampoBusca";
 
 export default function NavPadrao() {
   const router = useRouter();
@@ -10,7 +9,7 @@ export default function NavPadrao() {
   return (
     <header className="bg-gradient-to-r from-indigo-700/90 to-purple-700/90 backdrop-blur-md text-white shadow-lg border-b">
       {/* Barra principal */}
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 py-4 gap-4 transition-all">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row  justify-baseline px-6 py-4 gap-4 transition-all">
         {/* Logo + título */}
         <div
           className="flex items-center gap-2 cursor-pointer group"
@@ -29,9 +28,9 @@ export default function NavPadrao() {
         </div>
 
         {/* Campo de busca */}
-        <div className="w-full md:w-[380px]">
+        {/* <div className="w-full md:w-[380px]">
           <CampoBusca />
-        </div>
+        </div> */}
       </div>
 
       {/* Navegação de tópicos */}

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import {
   buscarTodosAnuncios,
-  editarAnuncio,
   excluirAnuncio,
 } from "@/app/services/anuncioService";
 import { Anuncio, AnuncioComId } from "@/app/types/Anuncio";

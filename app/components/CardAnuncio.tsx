@@ -26,6 +26,17 @@ export default function CardAnuncio({ anuncio }: Props) {
         <h3 className="font-semibold text-lg text-gray-800 mb-1 line-clamp-1">
           {anuncio.nome}
         </h3>
+
+        {/* Valor */}
+        <p className="text-green-600 font-bold text-lg mb-2">
+          {anuncio.valor
+            ? anuncio.valor.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })
+            : "Preço não informado"}
+        </p>
+
         <p className="text-gray-600 text-sm mb-3 line-clamp-2">
           {anuncio.descricao}
         </p>

@@ -53,24 +53,38 @@ export default function EditAnuncio({ params }: PageProps) {
     );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-4">
-      <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 shadow-xl rounded-xl p-6 transition-all duration-300">
-        <h1 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white text-center">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-10 px-4 transition-colors duration-300">
+      <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 shadow-2xl rounded-xl p-6 md:p-10 transition-all duration-300">
+        {/* Título */}
+        <h1 className="text-3xl font-bold mb-2 text-center text-gray-900 dark:text-white">
           ✏️ Editar Anúncio
         </h1>
 
+        {/* Preço */}
+        {anuncio?.valor && (
+          <p className="text-center text-xl font-semibold text-green-600 dark:text-green-400 mb-6">
+            💰 R$ {Number(anuncio.valor).toFixed(2)}
+          </p>
+        )}
+
+        {/* Imagem de destaque */}
         {anuncio?.imagens && anuncio.imagens.length > 0 && (
-          <div className="mb-6 flex justify-center">
+          <div className="mb-8 flex justify-center">
             <img
               src={anuncio.imagens[0]}
               alt="Imagem do anúncio"
-              className="w-64 h-64 object-cover rounded-lg border shadow-md dark:border-gray-700"
+              className="w-72 h-72 object-cover rounded-xl border border-gray-300 dark:border-gray-700 shadow-md hover:scale-105 transition-transform"
             />
           </div>
         )}
 
-        {/* ✅ agora os dados são carregados corretamente no form */}
+        {/* Formulário */}
         <FormAnuncio onSubmit={handleSubmit} initialData={anuncio} />
+
+        {/* Rodapé */}
+        <div className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
+          Última atualização automática após salvar ✅
+        </div>
       </div>
     </div>
   );

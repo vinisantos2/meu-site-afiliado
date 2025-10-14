@@ -1,12 +1,11 @@
 "use client";
 import Image from "next/image";
 import NavTopicos from "./NavTopicos";
-import { Search } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import CampoBusca from "./CampoBusca";
 
-export default function BannerInicial() {
+export default function NavInicial() {
   const [busca, setBusca] = useState("");
   const router = useRouter();
 

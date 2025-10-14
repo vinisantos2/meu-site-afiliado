@@ -7,6 +7,7 @@ export interface Anuncio {
   topico: string;
   criadoEm: string;
   detalhes: string;
+  valor: number
   destaque?: boolean;
 }
 

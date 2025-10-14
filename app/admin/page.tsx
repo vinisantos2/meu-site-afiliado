@@ -7,14 +7,19 @@ import { auth } from "../lib/firebase";
 import AbaAnunciosAmin from "./abas/AbaAnuncios";
 import AbaAddAnuncio from "./abas/AbaAddAnuncio";
 import { useAuthRedirectAdmin } from "./hooks/useAuthRedirectAdmin";
-import AbaTopicos from "./abas/AbaTopicos";
 import AbaCupons from "./abas/AbaCupons";
+import AbaAddCupon from "./abas/AbaAddCupon";
 
 export default function Dashboard() {
   const { loading } = useAuthRedirectAdmin();
   const router = useRouter();
   const [aba, setAba] = useState<
-    "anúncios" | "Adicionar anúncio" | "perfil" | "Tópicos"| "Cupons"
+    | "anúncios"
+    | "Adicionar anúncio"
+    | "perfil"
+    | "Tópicos"
+    | "Cupons"
+    | "Adicionar Cupons"
   >("anúncios");
 
   if (loading) return <Loading />;
@@ -44,18 +49,16 @@ export default function Dashboard() {
         >
           Adicionar anúncio
         </button>
-
-        {/* Botão topico */}
         <button
-          onClick={() => setAba("Tópicos")}
+          onClick={() => setAba("Adicionar Cupons")}
           className={`text-left px-4 py-2 rounded hover:bg-gray-700 transition ${
-            aba === "Tópicos" ? "bg-gray-700" : ""
+            aba === "Adicionar Cupons" ? "bg-gray-700" : ""
           } mb-2`}
         >
-          Tópicos
+          Adicionar Cupons
         </button>
 
-        {/* Botão Perfil */}
+        {/* Botão cupons */}
         <button
           onClick={() => setAba("Cupons")}
           className={`text-left px-4 py-2 rounded hover:bg-gray-700 transition ${
@@ -81,7 +84,7 @@ export default function Dashboard() {
       <main className="flex-1 p-8 overflow-auto">
         {aba === "anúncios" && <AbaAnunciosAmin />}
         {aba === "Adicionar anúncio" && <AbaAddAnuncio />}
-        {aba === "Tópicos" && <AbaTopicos />}
+        {aba === "Adicionar Cupons" && <AbaAddCupon />}
         {aba === "Cupons" && <AbaCupons />}
         {/* Adicione o componente para a aba de Perfil aqui, se houver: */}
         {/* {aba === "perfil" && <AbaPerfilAdmin />} */}

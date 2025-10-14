@@ -1,8 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Anuncio } from "@/app/types/Anuncio";
-import { Topico } from "@/app/types/Topico";
-import { buscarTodosTopicos } from "@/app/services/topicoService";
+import { TOPICOS } from "@/app/data/DataTopicos";
 
 type FormAnuncioProps = {
   initialData?: Anuncio | null; // Dados ao editar
@@ -14,7 +13,6 @@ export default function FormAnuncio({
   onSubmit,
 }: FormAnuncioProps) {
   const [formData, setFormData] = useState<Anuncio>({
-    uid: "",
     nome: "",
     opiniao: "",
     descricao: "",
@@ -24,9 +22,8 @@ export default function FormAnuncio({
     criadoEm: new Date().toISOString(),
     detalhes: "",
     destaque: false,
+    valor: 0, // novo campo de valor
   });
-
-  const [topicos, setTopicos] = useState<Topico[]>([]);
 
   // Carregar dados iniciais ao editar
   useEffect(() => {
@@ -34,18 +31,10 @@ export default function FormAnuncio({
       setFormData({
         ...initialData,
         imagens: initialData.imagens || [],
+        valor: initialData.valor || 0,
       });
     }
   }, [initialData]);
-
-  // Carregar tópicos do Firestore
-  useEffect(() => {
-    async function fetchTopicos() {
-      const dados = await buscarTodosTopicos();
-      setTopicos(dados);
-    }
-    fetchTopicos();
-  }, []);
 
   const handleChange = (field: keyof Anuncio, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -77,6 +66,15 @@ export default function FormAnuncio({
         placeholder="Nome"
         value={formData.nome}
         onChange={(e) => handleChange("nome", e.target.value)}
+        className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      />
+
+      {/* VALOR */}
+      <input
+        type="number"
+        placeholder="Valor (R$)"
+        value={formData.valor}
+        onChange={(e) => handleChange("valor", parseFloat(e.target.value) || 0)}
         className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
       />
 
@@ -125,8 +123,8 @@ export default function FormAnuncio({
         className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
       >
         <option value="">Selecione um tópico</option>
-        {topicos.map((t) => (
-          <option key={t.uid} value={t.url}>
+        {TOPICOS.map((t, i) => (
+          <option key={i} value={t.url}>
             {t.titulo}
           </option>
         ))}

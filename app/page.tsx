@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { buscarTodosAnuncios } from "./services/anuncioService";
 import SecaoDestaque from "./components/SecaoDestaque";
-import BannerInicial from "./components/BannerInicial";
+import NavInicial from "./components/NavInicial";
 import { AnuncioComId } from "./types/Anuncio";
+import SecaoCupon from "./components/SecaoCupon";
 
 export default function Home() {
   const [anunciosDestaque, setAnunciosDestaque] = useState<AnuncioComId[]>([]);
@@ -26,17 +27,10 @@ export default function Home() {
 
   return (
     <div className="font-sans min-h-screen bg-gray-50">
-      <BannerInicial />
+      <NavInicial />
       <main className="max-w-6xl mx-auto p-5">
         <SecaoDestaque loading={loading} anunciosDestaque={anunciosDestaque} />
-
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">📘 Últimas Dicas</h2>
-          <p className="text-gray-700">
-            Aqui você vai encontrar comparativos, listas dos melhores produtos e
-            recomendações de tecnologia para todos os bolsos.
-          </p>
-        </section>
+        <SecaoCupon />
       </main>
 
       <footer className="bg-gray-800 text-white py-6 text-center mt-12">
