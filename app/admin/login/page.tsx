@@ -1,36 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuthRedirectAdmin } from "../hooks/useAuthRedirectAdmin";
+import Loading from "@/app/components/Loading";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/app/lib/firebase";
+import { useRouter } from "next/navigation";
 
 export default function LoginAdmin() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [erro, setErro] = useState("");
+  const router = useRouter();
 
-  function handleLogin(e: React.FormEvent) {
+  const [erro, setErro] = useState("");
+  const { loading, usuario } = useAuthRedirectAdmin();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Exemplo de validação simples
-    if (!email || !senha) {
-      setErro("Preencha todos os campos");
-      return;
-    }
+     await signInWithEmailAndPassword(auth, email, senha)
+      .then(() => {
+        router.replace("/admin/");
+      })
+      .catch((erro) => {
+        setErro("Erro ao logar");
+        console.log(erro);
+      });
+  };
 
-    // Aqui você pode chamar Firebase Auth ou outro serviço
-    console.log("Email:", email, "Senha:", senha);
-    setErro("");
-  }
+  if (loading) return <Loading />;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white px-4">
       <div className="max-w-md w-full bg-gray-800 rounded-xl shadow-lg p-8 space-y-6">
         <h1 className="text-3xl font-bold text-center">Admin Login</h1>
 
-        {erro && (
-          <p className="text-red-500 text-center font-medium">{erro}</p>
-        )}
+        {erro && <p className="text-red-500 text-center font-medium">{erro}</p>}
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block mb-1 font-medium">Email</label>
             <input
@@ -64,7 +71,10 @@ export default function LoginAdmin() {
         </form>
 
         <p className="text-center text-gray-400 text-sm">
-          Esqueceu a senha? <span className="text-indigo-500 cursor-pointer hover:underline">Recuperar</span>
+          Esqueceu a senha?{" "}
+          <span className="text-indigo-500 cursor-pointer hover:underline">
+            Recuperar
+          </span>
         </p>
       </div>
     </div>
