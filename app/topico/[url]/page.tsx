@@ -1,10 +1,10 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import CardAnuncio from "@/app/components/CardAnuncio";
 import Loading from "@/app/components/Loading";
 import { buscarTodosAnuncios } from "@/app/services/anuncioService";
-import { Anuncio } from "@/app/types/Anuncio";
+import { AnuncioComId } from "@/app/types/Anuncio";
 import NavPadrao from "@/app/components/NavPadrao";
 
 type PageProps = {
@@ -14,10 +14,10 @@ type PageProps = {
 };
 
 export default function Topico({ params }: PageProps) {
-  const [anuncios, setAnuncios] = useState<Anuncio[]>([]);
+  const [anuncios, setAnuncios] = useState<AnuncioComId[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const { url } = use(params);
+  const  url  = params.url;
 
   useEffect(() => {
     async function carregarDados() {

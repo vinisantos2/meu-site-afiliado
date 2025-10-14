@@ -1,7 +1,7 @@
 // services/usuarioService.ts
 import { collection, doc, getDoc, setDoc } from "firebase/firestore"
-import { db } from "../app/lib/firebase"
 import { Usuario } from "../types/Usuario"
+import { db } from "../lib/firebase"
 
 // Coleção de usuários
 const usuariosCollection = collection(db, "usuarios")
