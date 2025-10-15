@@ -7,22 +7,22 @@ import {
 } from "@/app/services/anuncioService";
 import { useRouter } from "next/navigation";
 import { CuponComId } from "@/app/types/Cupon";
-import { buscarTodosCupons } from "@/app/services/CuponService";
+import { buscarTodosCupons, excluirCupon } from "@/app/services/CuponService";
 import CardCuponAdmin from "../componentsAdmin/CardCuponAdmin";
 
 export default function AbaCuponsAdmin() {
-  const [anuncios, setAnuncios] = useState<CuponComId[]>([]);
+  const [cupons, setCupons] = useState<CuponComId[]>([]);
   const [loading, setLoading] = useState(true);
   const route = useRouter();
 
   useEffect(() => {
-    fetchAnuncios();
+    fetcCupons();
   }, []);
 
-  async function fetchAnuncios() {
+  async function fetcCupons() {
     setLoading(true);
     const lista = await buscarTodosCupons();
-    setAnuncios(lista);
+    setCupons(lista);
     setLoading(false);
   }
 
@@ -30,8 +30,8 @@ export default function AbaCuponsAdmin() {
     const confirmar = confirm("Tem certeza que deseja excluir este anúncio?");
     if (!confirmar) return;
 
-    await excluirAnuncio(id);
-    await fetchAnuncios();
+    await excluirCupon(id);
+    await fetcCupons();
   }
 
   if (loading) return <Loading />;
@@ -51,7 +51,7 @@ export default function AbaCuponsAdmin() {
       </div>
 
       {/* Conteúdo */}
-      {anuncios.length === 0 ? (
+      {cupons.length === 0 ? (
         <div className="text-center py-16 border rounded-lg bg-gray-50 dark:bg-gray-800">
           <p className="text-gray-600 dark:text-gray-300 text-lg">
             Nenhum anúncio encontrado.
@@ -59,12 +59,12 @@ export default function AbaCuponsAdmin() {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {anuncios.map((anuncio) => (
+          {cupons.map((cupon) => (
             <CardCuponAdmin
-              key={anuncio.uid}
-              anuncio={anuncio}
-              onExcluir={() => handleExcluir(anuncio.uid)}
-              onAtualizar={() => route.push(`/admin/cupon/${anuncio.uid}`)}
+              key={cupon.uid}
+              anuncio={cupon}
+              onExcluir={() => handleExcluir(cupon.uid)}
+              onAtualizar={() => route.push(`/admin/cupon/${cupon.uid}`)}
             />
           ))}
         </div>

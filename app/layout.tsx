@@ -14,8 +14,38 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VS-Tech Ofertas",
-  description: "VS-Tech Ofertas é o seu espaço para descobrir as melhores promoções, novidades e dicas sobre tecnologia.",
+  title: "VS-Tech Ofertas | Cupons, Descontos e Promoções de Tecnologia",
+  description:
+    "VS-Tech Ofertas é o seu espaço para descobrir as melhores promoções, cupons de desconto e novidades do mundo da tecnologia — atualizado diariamente para você economizar mais!",
+  keywords: [
+    "promoções",
+    "cupons de desconto",
+    "ofertas",
+    "tecnologia",
+    "VS-Tech Ofertas",
+    "descontos",
+    "produtos de tecnologia",
+    "compras online",
+  ],
+  openGraph: {
+    title: "VS-Tech Ofertas | Cupons e Promoções Atualizadas",
+    description:
+      "Descubra cupons de desconto e ofertas incríveis em produtos de tecnologia. Atualizado todos os dias!",
+    type: "website",
+    locale: "pt_BR",
+    url: "https://www.seusite.com", // 👉 substitua pelo seu domínio real
+    siteName: "VS-Tech Ofertas",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VS-Tech Ofertas | Cupons e Promoções",
+    description:
+      "Encontre cupons de desconto e ofertas exclusivas em tecnologia — atualizado diariamente!",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -25,12 +55,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-gray-50 text-gray-900 antialiased`}
       >
         {children}
-          <Analytics /> {/* 👈 adiciona o componente de rastreamento */}
+        <Analytics />
       </body>
     </html>
   );
