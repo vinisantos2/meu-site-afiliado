@@ -1,35 +1,24 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { buscarTodosAnuncios } from "./services/anuncioService";
 import SecaoDestaque from "./components/SecaoDestaque";
 import NavInicial from "./components/NavInicial";
-import { AnuncioComId } from "./types/Anuncio";
 import SecaoCupon from "./components/SecaoCupon";
+import { AnuncioComId } from "./types/Anuncio";
 
-export default function Home() {
-  const [anunciosDestaque, setAnunciosDestaque] = useState<AnuncioComId[]>([]);
-  const [loading, setLoading] = useState(true);
+export const metadata = {
+  title: "Tech Ofertas - Promoções e Cupons",
+  description: "As melhores ofertas e cupons atualizados diariamente.",
+};
 
-  useEffect(() => {
-    async function carregar() {
-      try {
-        const dados = await buscarTodosAnuncios();
-        setAnunciosDestaque(dados.filter((item) => item.destaque));
-      } catch (error) {
-        console.error("Erro ao buscar anúncios:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    carregar();
-  }, []);
+export default async function Home() {
+  // 🚀 A busca acontece no servidor automaticamente
+  const dados: AnuncioComId[] = await buscarTodosAnuncios();
+  const anunciosDestaque = dados.filter((item) => item.destaque);
 
   return (
     <div className="font-sans min-h-screen bg-gray-50">
       <NavInicial />
       <main className="max-w-6xl mx-auto p-5">
-        <SecaoDestaque loading={loading} anunciosDestaque={anunciosDestaque} />
+        <SecaoDestaque loading={false} anunciosDestaque={anunciosDestaque} />
         <SecaoCupon />
       </main>
 
