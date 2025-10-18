@@ -4,6 +4,8 @@ export const CATEGORIAS = [
   "eletrodomésticos",
   "Moda Feminina",
   "Moda Masculina",
+  "Mercado",
+  "Suplemento",
   "Beleza e Saúde",
   "Casa e Decoração",
   "Supermercado",
@@ -21,4 +23,5 @@ export const CATEGORIAS = [
   "Automotivo",
   "Marketplace",
   "Cupons Exclusivos",
-];
+].sort();
+

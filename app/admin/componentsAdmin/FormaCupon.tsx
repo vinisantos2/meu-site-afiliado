@@ -52,6 +52,7 @@ export default function FormCupon({
         <input
           type="text"
           placeholder="Título"
+          required
           value={formData.titulo}
           onChange={(e) => setFormData({ ...formData, titulo: e.target.value })}
           className="w-full border dark:border-gray-700 bg-transparent rounded p-2"
@@ -59,6 +60,7 @@ export default function FormCupon({
         <input
           type="text"
           placeholder="Código"
+          required
           value={formData.codigo}
           onChange={(e) => setFormData({ ...formData, codigo: e.target.value })}
           className="w-full border dark:border-gray-700 bg-transparent rounded p-2"
@@ -66,6 +68,7 @@ export default function FormCupon({
         <input
           type="number"
           placeholder="Desconto"
+          required
           value={formData.desconto}
           onChange={(e) =>
             setFormData({ ...formData, desconto: Number(e.target.value) })
@@ -74,6 +77,7 @@ export default function FormCupon({
         />
         <select
           value={formData.tipoDesconto}
+          required
           onChange={(e) =>
             setFormData({
               ...formData,
@@ -89,6 +93,7 @@ export default function FormCupon({
         <input
           type="date"
           value={formData.validade}
+          required
           onChange={(e) =>
             setFormData({ ...formData, validade: e.target.value })
           }
@@ -97,6 +102,7 @@ export default function FormCupon({
         <input
           type="text"
           placeholder="Link"
+          required
           value={formData.link}
           onChange={(e) => setFormData({ ...formData, link: e.target.value })}
           className="w-full border dark:border-gray-700 bg-transparent rounded p-2"
@@ -105,6 +111,7 @@ export default function FormCupon({
         {/* 🏷️ Campo de categoria */}
         <select
           value={formData.categoria || ""}
+          required
           onChange={(e) =>
             setFormData({ ...formData, categoria: e.target.value })
           }
@@ -123,6 +130,7 @@ export default function FormCupon({
 
       <textarea
         placeholder="Regras"
+        required
         value={formData.regras}
         onChange={(e) => setFormData({ ...formData, regras: e.target.value })}
         className="w-full border dark:border-gray-700 bg-transparent rounded p-2"
