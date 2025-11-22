@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { Anuncio, AnuncioComId } from "../types/Anuncio";
 import { db } from "../lib/firebase";
+import { NOTEBOOKS_RANK } from "../data/JsonTemp";
 
 // Coleção de usuários
 const AnunciosCollection = collection(db, "anuncios");
@@ -55,7 +56,7 @@ export async function buscarTodosAnuncios(): Promise<AnuncioComId[]> {
       const data = docSnap.data();
 
       return {
-        uid: docSnap.id,   // 👈 adicionando o ID do documento
+        uid: docSnap.id, // 👈 adicionando o ID do documento
         ...data,
       } as AnuncioComId;
     });
@@ -84,4 +85,12 @@ export async function editarAnuncio(
 export async function excluirAnuncio(id: string) {
   const docRef = doc(db, "anuncios", id);
   await deleteDoc(docRef);
+}
+
+export async function importarNotebooks() {
+  for (const item of NOTEBOOKS_RANK) {
+    await addDoc(AnunciosCollection, item);
+  }
+
+  console.log("Importação concluída!");
 }

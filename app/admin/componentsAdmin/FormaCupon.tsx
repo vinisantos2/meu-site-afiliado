@@ -1,8 +1,8 @@
 "use client";
 
-import { CATEGORIAS } from "@/app/data/DataCategorias";
+import { TOPICOS } from "@/app/data/DataTopicos";
 import { Cupon } from "@/app/types/Cupon";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 type FormAnuncioProps = {
   initialData?: Cupon | null; // Dados ao editar
@@ -23,7 +23,7 @@ export default function FormCupon({
     regras: "",
     tipoDesconto: "valor",
     detalhes: "",
-    validade:"",
+    validade: "",
     criadoEm: new Date().toISOString(),
     destaque: false,
   });
@@ -41,13 +41,16 @@ export default function FormCupon({
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-   const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 space-y-3">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 space-y-3"
+    >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <input
           type="text"
@@ -120,9 +123,9 @@ export default function FormCupon({
           <option className="dark:bg-gray-500" value="">
             Selecione uma categoria
           </option>
-          {CATEGORIAS.map((cat) => (
-            <option className="dark:bg-gray-700" key={cat} value={cat}>
-              {cat}
+          {TOPICOS.map((cat, key) => (
+            <option className="dark:bg-gray-700" key={key} value={cat.titulo}>
+              {cat.titulo}
             </option>
           ))}
         </select>

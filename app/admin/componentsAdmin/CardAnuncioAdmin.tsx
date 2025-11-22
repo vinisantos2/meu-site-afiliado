@@ -1,4 +1,4 @@
-import BtnMercadoLivre from "@/app/components/BotaoMercadoLivre";
+import BtnMercadoLivre from "@/app/components/btnLinks";
 import ImgCard from "@/app/components/ImgCard";
 import { Anuncio } from "@/app/types/Anuncio";
 import Link from "next/link";
@@ -36,7 +36,7 @@ export default function CardAnuncioAdmin({
           : "Preço não informado"}
       </p>
 
-      <BtnMercadoLivre link={anuncio.link} />
+      <BtnMercadoLivre link={anuncio.links} />
 
       {/* Ações */}
       <div className="flex gap-2 mt-4">

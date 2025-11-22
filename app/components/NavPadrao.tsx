@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import NavTopicos from "./NavTopicos";
 import { useRouter } from "next/navigation";
 
 export default function NavPadrao() {
@@ -23,18 +22,10 @@ export default function NavPadrao() {
             className="drop-shadow-lg group-hover:scale-105 transition-transform duration-200"
           />
           <h1 className="text-2xl font-extrabold leading-tight tracking-tight">
-            VS-Tech <span className="text-yellow-300">Ofertas</span>
+            VS-Tech <span className="text-yellow-300">Compare</span>
           </h1>
         </div>
-
-        {/* Campo de busca */}
-        {/* <div className="w-full md:w-[380px]">
-          <CampoBusca />
-        </div> */}
       </div>
-
-      {/* Navegação de tópicos */}
-      <NavTopicos />
     </header>
   );
 }

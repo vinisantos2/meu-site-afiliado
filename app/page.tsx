@@ -1,8 +1,10 @@
 import { buscarTodosAnuncios } from "./services/anuncioService";
-import SecaoDestaque from "./components/SecaoDestaque";
+import SecaoDestaque from "./components/TopicosGrid";
 import NavInicial from "./components/NavInicial";
 import SecaoCupon from "./components/SecaoCupon";
 import { AnuncioComId } from "./types/Anuncio";
+import Footer from "./components/Footer";
+import TopicosGrid from "./components/TopicosGrid";
 
 export const metadata = {
   title: "Tech Ofertas - Promoções e Cupons",
@@ -17,17 +19,12 @@ export default async function Home() {
   return (
     <div className="font-sans min-h-screen bg-gray-50">
       <NavInicial />
-      <main className="max-w-6xl mx-auto p-5">
-        <SecaoDestaque loading={false} anunciosDestaque={anunciosDestaque} />
+      <main className="max-w-6xl mx-auto p-5 border-8">
+        <TopicosGrid  />
         <SecaoCupon />
       </main>
 
-      <footer className="bg-gray-800 text-white py-6 text-center mt-12">
-        <p className="text-sm">
-          © 2025 Tech Ofertas - Todos os direitos reservados.
-          <br /> Este site participa do programa de afiliados do Mercado Livre.
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -1,15 +1,18 @@
 "use client";
 
-import {  useEffect, useState } from "react";
-import CardAnuncio from "@/app/components/CardAnuncio";
+import { useEffect, useState } from "react";
 import Loading from "@/app/components/Loading";
 import { buscarTodosAnuncios } from "@/app/services/anuncioService";
 import { AnuncioComId } from "@/app/types/Anuncio";
 import NavPadrao from "@/app/components/NavPadrao";
+import CardAnuncio from "@/app/components/CardAnuncio";
+import Footer from "@/app/components/Footer";
+import { TOPICOS } from "@/app/data/DataTopicos";
 
 type PageProps = {
   params: {
     url: string;
+    titulo: string;
   };
 };
 
@@ -17,19 +20,46 @@ export default function Topico({ params }: PageProps) {
   const [anuncios, setAnuncios] = useState<AnuncioComId[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const  url  = params.url;
+  const url = params.url;
+
+  // Pega o tópico atual
+  const topicoAtual = TOPICOS.find((t) => t.url === url);
+  const categoriasDoTopico = topicoAtual?.categorias || [];
+
+  // Define categoria inicial: "Top 10 ..."
+  const categoriaTop10 = categoriasDoTopico.find((c) =>
+    c.toLowerCase().includes("top 10")
+  );
+
+  // Estado do filtro
+  const [categoria, setCategoria] = useState(categoriaTop10 || "");
+
+  // Atualiza categoria quando mudar de tópico
+  useEffect(() => {
+    setCategoria(categoriaTop10 || "");
+  }, [url]);
 
   useEffect(() => {
     async function carregarDados() {
       setLoading(true);
+
       const todos = await buscarTodosAnuncios();
-      const filtrados = todos.filter((item) => item.topico === url);
+
+      // FILTRO FINAL → tópico + categoria
+      const filtrados = todos
+        .filter((item) => item.topico === url)
+        .filter((item) => {
+          if (!categoria) return true;
+          return item.categorias?.includes(categoria);
+        })
+        .sort((a, b) => (b.nota ?? 5) - (a.nota ?? 5)); // ranking
+
       setAnuncios(filtrados);
       setLoading(false);
     }
 
     carregarDados();
-  }, [url]);
+  }, [url, categoria]);
 
   if (loading) {
     return (
@@ -42,40 +72,56 @@ export default function Topico({ params }: PageProps) {
   return (
     <>
       <NavPadrao />
-      <main className="min-h-screen bg-gray-100 dark:bg-gray-900 py-10 px-4 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto">
+
+      <main className="min-h-screen bg-gray-100 dark:bg-gray-900 py-12 px-6">
+        <div className="max-w-4xl mx-auto bg-gray-50 dark:bg-[#1f1f1f] p-6 md:p-10 rounded-xl shadow-lg border border-gray-200 dark:border-[#333]">
+          {/* TÍTULO */}
+          <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-100">
+            {url.charAt(0).toUpperCase() + url.slice(1)} — Ranking atualizado
+          </h1>
+
+          {/* FILTRO DE CATEGORIAS (SEM BOTÃO TODOS) */}
+          {categoriasDoTopico.length > 0 && (
+            <div className="flex flex-wrap justify-center gap-3 mb-10">
+              {categoriasDoTopico.map((cat, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCategoria(cat)}
+                  className={`px-4 py-2 rounded-full border transition
+                    ${
+                      categoria === cat
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-200"
+                    }
+                  `}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* RESULTADOS */}
           {anuncios.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {anuncios.map((item) => (
-                <CardAnuncio key={item.uid} anuncio={item} />
+            <div className="flex flex-col gap-8 items-center">
+              {anuncios.map((item, index) => (
+                <div key={item.uid} className="w-full md:w-[70%]">
+                  <CardAnuncio index={index} anuncio={item} />
+                </div>
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center text-center text-gray-600 dark:text-gray-400 mt-20">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-16 w-16 mb-4 text-gray-400 dark:text-gray-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-9-12v12m0 0l3.75-3.75M12 16.5l-3.75-3.75"
-                />
-              </svg>
+            <div className="text-center text-gray-600 dark:text-gray-400 mt-20">
               <p className="text-lg font-medium">
-                Nenhum anúncio disponível ainda
+                Nenhum anúncio nessa categoria
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                Volte mais tarde ou explore outros tópicos.
-              </p>
+              <p className="text-sm mt-1">Tente outra categoria.</p>
             </div>
           )}
         </div>
       </main>
+
+      <Footer />
     </>
   );
 }

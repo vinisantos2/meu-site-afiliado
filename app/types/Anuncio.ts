@@ -1,14 +1,18 @@
 export interface Anuncio {
   nome: string;
-  opiniao: string;
-  descricao: string;
-  link: string;
-  imagens: Array<string>;
-  topico: string;
+  pros: string[];
+  contras: string[];
+  opiniao: string; // opinião detalhada
+  veredito?: string; // resumo curto
+  nota?: number; // 0–10
+  links: string[];
+  valor?: number;
+  imagens: string[];
+  topico: string; // categoria principal
+  categorias: string[]; // categorias extras
   criadoEm: string;
-  detalhes: string;
-  valor: number
   destaque?: boolean;
+  detalhes: string;
 }
 
 export interface AnuncioComId extends Anuncio {

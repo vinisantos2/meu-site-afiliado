@@ -1,104 +1,46 @@
 import { Topico } from "../types/Topico";
 
-export const TOPICOS: Array<Topico> = [
+export const TOPICOS = <Array<Topico>>[
   {
+    titulo: "Notebooks",
+    url: "notebooks",
     icon: "Laptop",
-    titulo: "Notebook",
-    url: "notebook",
+    categorias: [
+      // Preço
+      "Até 2000R$",
+      "Até 3000R$",
+
+      // Ranking
+      "Top 10 Notebooks",
+      "Melhor Custo-Benefício",
+      "Mais Vendidos",
+
+      // Uso
+      "Para Estudo",
+      "Para Programação",
+      "Para Home Office",
+
+      // Gamer
+      "Gamer",
+
+      // Sistemas e linhas especiais
+      "MacBook",
+    ],
   },
   {
-    icon: "Tv",
-    titulo: "Smart TV",
-    url: "smart-tv",
-  },
-  {
+    titulo: "Smartphones",
+    url: "Smartphone",
     icon: "Smartphone",
-    titulo: "Smartphone",
-    url: "smartphone",
+    categorias: [
+      "Até 2000R$",
+      "Top 10 Smartphones",
+      "Mais Vendidos",
+      "Melhor Avaliado",
+    ],
   },
   {
-    icon: "Headphones",
-    titulo: "Fones de Ouvido",
-    url: "fones",
-  },
-  {
-    icon: "Gamepad2",
-    titulo: "Games",
-    url: "games",
-  },
-  {
-    icon: "Watch",
-    titulo: "Smartwatch",
-    url: "smartwatch",
-  },
-  {
-    icon: "MousePointer",
-    titulo: "Periféricos",
-    url: "perifericos",
-  },
-  {
-    icon: "Cpu",
-    titulo: "Computadores",
-    url: "computadores",
-  },
-  {
-    icon: "Keyboard",
-    titulo: "Teclados",
-    url: "teclados",
-  },
-  {
-    icon: "Monitor",
-    titulo: "Monitores",
-    url: "monitores",
-  },
-  {
-    icon: "Fridge",
-    titulo: "Eletrodomésticos",
-    url: "eletrodomesticos",
-  },
-  {
-    icon: "ShoppingBag",
-    titulo: "Moda",
-    url: "moda",
-  },
-  {
-    icon: "Dumbbell",
-    titulo: "Esportes",
-    url: "esportes",
-  },
-  {
-    icon: "Car",
-    titulo: "Automotivo",
-    url: "automotivo",
-  },
-  {
-    icon: "BookOpen",
-    titulo: "Livros",
-    url: "livros",
-  },
-  {
-    icon: "Home",
-    titulo: "Casa e Jardim",
-    url: "casa-e-jardim",
-  },
-  {
-    icon: "Gift",
-    titulo: "Presentes",
-    url: "presentes",
-  },
-  {
-    icon: "Tag",
-    titulo: "Ofertas",
-    url: "ofertas",
-  },
-  {
-    icon: "Percent",
-    titulo: "Cupons",
-    url: "cupons",
-  },
-  {
-    icon: "TrendingUp",
-    titulo: "Mais Vendidos",
-    url: "mais-vendidos",
+    titulo: "Tablets",
+    url: "tablets",
+    categorias: ["Para Estudo", "Baratos"],
   },
 ];

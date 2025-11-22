@@ -6,13 +6,18 @@ import {
   buscarTodosAnuncios,
   excluirAnuncio,
 } from "@/app/services/anuncioService";
-import { Anuncio, AnuncioComId } from "@/app/types/Anuncio";
+import { AnuncioComId } from "@/app/types/Anuncio";
 import CardAnuncioAdmin from "../componentsAdmin/CardAnuncioAdmin";
 import { useRouter } from "next/navigation";
+import { TOPICOS } from "@/app/data/DataTopicos";
 
 export default function AbaAnunciosAdmin() {
   const [anuncios, setAnuncios] = useState<AnuncioComId[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const [busca, setBusca] = useState("");       // Busca por nome
+  const [filtroTopico, setFiltroTopico] = useState(""); // Novo filtro por tópico
+
   const route = useRouter();
 
   useEffect(() => {
@@ -36,6 +41,13 @@ export default function AbaAnunciosAdmin() {
 
   if (loading) return <Loading />;
 
+  // 🔥 FILTRO FINAL (busca + tópico)
+  const anunciosFiltrados = anuncios.filter((anuncio) => {
+    const combinaBusca = anuncio.nome.toLowerCase().includes(busca.toLowerCase());
+    const combinaTopico = filtroTopico ? anuncio.topico === filtroTopico : true;
+    return combinaBusca && combinaTopico;
+  });
+
   return (
     <section className="w-full">
       {/* Header */}
@@ -50,8 +62,49 @@ export default function AbaAnunciosAdmin() {
         </div>
       </div>
 
+      {/* Busca + filtro */}
+      <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {/* Campo de busca */}
+        <div className="col-span-2">
+          <input
+            type="text"
+            placeholder="Buscar anúncio pelo nome..."
+            value={busca}
+            onChange={(e) => setBusca(e.target.value)}
+            className="
+              w-full p-3 rounded-lg border 
+              bg-white text-gray-900 
+              dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700
+              focus:outline-none focus:ring-2 focus:ring-blue-500
+              transition
+            "
+          />
+        </div>
+
+        {/* Select de tópico */}
+        <div>
+          <select
+            value={filtroTopico}
+            onChange={(e) => setFiltroTopico(e.target.value)}
+            className="
+              w-full p-3 rounded-lg border 
+              bg-white text-gray-900 
+              dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700
+              focus:outline-none focus:ring-2 focus:ring-blue-500
+            "
+          >
+            <option value="">Todos os tópicos</option>
+            {TOPICOS.map((t, i) => (
+              <option key={i} value={t.url}>
+                {t.titulo}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
       {/* Conteúdo */}
-      {anuncios.length === 0 ? (
+      {anunciosFiltrados.length === 0 ? (
         <div className="text-center py-16 border rounded-lg bg-gray-50 dark:bg-gray-800">
           <p className="text-gray-600 dark:text-gray-300 text-lg">
             Nenhum anúncio encontrado.
@@ -59,12 +112,14 @@ export default function AbaAnunciosAdmin() {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {anuncios.map((anuncio) => (
+          {anunciosFiltrados.map((anuncio) => (
             <CardAnuncioAdmin
               key={anuncio.uid}
               anuncio={anuncio}
               onExcluir={() => handleExcluir(anuncio.uid)}
-              onAtualizar={() => route.push(`/admin/anuncio/${anuncio.uid}`)}
+              onAtualizar={() =>
+                route.push(`/admin/anuncio/${anuncio.uid}`)
+              }
             />
           ))}
         </div>

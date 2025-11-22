@@ -4,7 +4,7 @@ import {  useEffect, useState } from "react";
 import { Anuncio } from "@/app/types/Anuncio";
 import { buscarAnuncio } from "@/app/services/anuncioService";
 import Loading from "@/app/components/Loading";
-import BtnMercadoLivre from "@/app/components/BotaoMercadoLivre";
+import BtnMercadoLivre from "@/app/components/btnLinks";
 import NavPadrao from "@/app/components/NavPadrao";
 
 type PageProps = {
@@ -81,14 +81,9 @@ export default function DetalheAnuncio({ params }: PageProps) {
               {anuncio.nome}
             </h1>
 
-            {/* Preço */}
-            {anuncio.valor && (
-              <p className="text-2xl font-semibold text-green-600 dark:text-green-400 mb-4">
-                💰 R$ {Number(anuncio.valor).toFixed(2)}
-              </p>
-            )}
+           
 
-            <BtnMercadoLivre link={anuncio.link} />
+            <BtnMercadoLivre link={anuncio.links} />
 
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
               Publicado em:{" "}
