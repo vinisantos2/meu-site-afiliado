@@ -1,8 +1,8 @@
 import { AnuncioSmartphone } from "./DetalheSmartphone";
 import { AnuncioNotebook } from "./DetalhesNotebook ";
+import { TopicoUrl } from "./Topico";
 
 export type Anuncio = AnuncioNotebook | AnuncioSmartphone;
-
 
 export interface AnuncioBase {
   nome: string;
@@ -17,8 +17,9 @@ export interface AnuncioBase {
   categorias: string[]; // categorias extras
   criadoEm: string;
   destaque?: boolean;
+  topico: TopicoUrl; // 👈 AQUI  
 }
 
-export interface AnuncioComId extends AnuncioBase {
+export type AnuncioComId = Anuncio & {
   uid: string;
-}
+};

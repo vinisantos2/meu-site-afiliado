@@ -8,15 +8,15 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
-import { AnuncioBase, AnuncioComId } from "../types/AnuncioBase";
 import { db } from "../lib/firebase";
 import { NOTEBOOKS_RANK } from "../data/JsonTemp";
+import { Anuncio, AnuncioComId } from "../types/AnuncioBase";
 
 // Coleção de usuários
 const AnunciosCollection = collection(db, "anuncios");
 
 // Salvar (ou atualizar) usuário no Firestore
-export async function salvarAnuncio(anuncio: AnuncioBase) {
+export async function salvarAnuncio(anuncio: Anuncio) {
   try {
     await addDoc(AnunciosCollection, {
       ...anuncio,
@@ -71,7 +71,7 @@ export async function buscarTodosAnuncios(): Promise<AnuncioComId[]> {
 // 🟠 Editar pedido
 export async function editarAnuncio(
   id: string,
-  anuncio: Omit<AnuncioBase, "id" | "cliente">
+  anuncio: Omit<Anuncio, "id" | "cliente">
 ) {
   const docRef = doc(db, "anuncios", id);
   const pedidoAtualizado = {

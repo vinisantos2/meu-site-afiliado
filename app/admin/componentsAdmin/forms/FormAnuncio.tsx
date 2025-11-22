@@ -13,7 +13,7 @@ import {
   AnuncioSmartphone,
   DetalhesSmartphone,
 } from "@/app/types/DetalheSmartphone";
-import { Anuncio } from "@/app/types/AnuncioBase";
+import { Anuncio, AnuncioBase } from "@/app/types/AnuncioBase";
 import FormBase from "./FormAnuncioBase";
 
 type FormAnuncioProps = {
@@ -27,7 +27,7 @@ export default function FormAnuncio({
 }: FormAnuncioProps) {
   const [topico, setTopico] = useState<string>("");
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<AnuncioBase>({
     nome: "",
     pros: [],
     contras: [],
@@ -40,6 +40,7 @@ export default function FormAnuncio({
     categorias: [],
     criadoEm: new Date().toISOString(),
     destaque: false,
+    topico: ""
   });
 
   const [detalhesNotebook, setDetalhesNotebook] = useState<DetalhesNotebook>({
@@ -87,7 +88,10 @@ export default function FormAnuncio({
     }
   }, [initialData]);
 
-  const handleChange = (field: keyof Anuncio, value: any) => {
+  const handleChange = <K extends keyof AnuncioBase>(
+    field: K,
+    value: AnuncioBase[K]
+  ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -96,7 +100,7 @@ export default function FormAnuncio({
 
     let anuncioFinal: AnuncioSmartphone | AnuncioNotebook;
 
-    if (topico === "notebook") {
+    if (topico === "notebooks") {
       anuncioFinal = {
         ...formData,
         topico: "notebook",
@@ -121,23 +125,6 @@ export default function FormAnuncio({
       <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
         {initialData ? "✏️ Editar Anúncio" : "📌 Novo Anúncio"}
       </h2>
-
-      {/* TÓPICO */}
-      <div>
-        <label className="font-semibold">Tópico</label>
-        <select
-          value={topico}
-          onChange={(e) => setTopico(e.target.value)}
-          className="w-full p-3 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-        >
-          <option value="">Selecione um tópico</option>
-          {TOPICOS.map((t) => (
-            <option key={t.url} value={t.url}>
-              {t.titulo}
-            </option>
-          ))}
-        </select>
-      </div>
 
       {/* FORM BASE */}
       <FormBase
