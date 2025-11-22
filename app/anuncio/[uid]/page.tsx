@@ -1,10 +1,9 @@
 "use client";
 
 import {  useEffect, useState } from "react";
-import { Anuncio } from "@/app/types/Anuncio";
+import { AnuncioBase } from "@/app/types/AnuncioBase";
 import { buscarAnuncio } from "@/app/services/anuncioService";
 import Loading from "@/app/components/Loading";
-import BtnMercadoLivre from "@/app/components/btnLinks";
 import NavPadrao from "@/app/components/NavPadrao";
 
 type PageProps = {
@@ -15,7 +14,7 @@ type PageProps = {
 
 export default function DetalheAnuncio({ params }: PageProps) {
   const  uid  = params.uid;
-  const [anuncio, setAnuncio] = useState<Anuncio | null>(null);
+  const [anuncio, setAnuncio] = useState<AnuncioBase | null>(null);
   const [imagemSelecionada, setImagemSelecionada] = useState<string | null>(
     null
   );
@@ -83,7 +82,7 @@ export default function DetalheAnuncio({ params }: PageProps) {
 
            
 
-            <BtnMercadoLivre link={anuncio.links} />
+            
 
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
               Publicado em:{" "}
@@ -95,7 +94,7 @@ export default function DetalheAnuncio({ params }: PageProps) {
                 Informações do produto
               </h2>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                {anuncio.descricao}
+             
               </p>
             </div>
           </div>
@@ -107,7 +106,7 @@ export default function DetalheAnuncio({ params }: PageProps) {
             Detalhes do produto
           </h2>
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
-            {anuncio.detalhes || "Nenhum detalhe adicional informado."}
+           
           </p>
         </section>
       </main>

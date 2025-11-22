@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { AnuncioComId } from "../types/Anuncio";
+import { AnuncioComId } from "../types/AnuncioBase";
 import ImgCard from "./ImgCard";
 import BtnLinks from "./btnLinks";
 
@@ -17,9 +17,9 @@ export default function CardAnuncio({ anuncio, index }: Props) {
 
   return (
     <div
-      // onClick={() => router.push("/anuncio/" + anuncio.uid)}
+      onClick={() => router.push("/anuncio/" + anuncio.uid)}
       className="
-    bg-white dark:bg-[#1a1a1a]
+    bg-white dark:bg-[#1a1a1a] cursor-pointer
     rounded-xl shadow-md overflow-hidden 
     transition transform hover:scale-[1.01] hover:shadow-xl 
     flex flex-col
@@ -109,11 +109,6 @@ export default function CardAnuncio({ anuncio, index }: Props) {
               {/* Opinião */}
               <p className="text-sm text-gray-700 dark:text-gray-300 border-l-4 border-blue-500 dark:border-blue-400 pl-3 mb-3">
                 {anuncio.opiniao}
-              </p>
-
-              {/* Detalhes */}
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {anuncio.detalhes}
               </p>
             </div>
           )}

@@ -1,5 +1,5 @@
-import { Anuncio } from "../types/Anuncio";
+import { AnuncioBase } from "../types/AnuncioBase";
 
-export const NOTEBOOKS_RANK: Anuncio[] = [
+export const NOTEBOOKS_RANK: AnuncioBase[] = [
   
 ];

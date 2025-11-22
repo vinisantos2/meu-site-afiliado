@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { AnuncioComId } from "@/app/types/Anuncio";
+import { AnuncioComId } from "@/app/types/AnuncioBase";
 import { buscarTodosAnuncios } from "../services/anuncioService";
 import CardRanking from "../components/CardRanking";
 

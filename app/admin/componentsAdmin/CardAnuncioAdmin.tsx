@@ -1,10 +1,10 @@
 import BtnMercadoLivre from "@/app/components/btnLinks";
 import ImgCard from "@/app/components/ImgCard";
-import { Anuncio } from "@/app/types/Anuncio";
+import { AnuncioBase } from "@/app/types/AnuncioBase";
 import Link from "next/link";
 
 interface CardAnuncioAdminProps {
-  anuncio: Anuncio;
+  anuncio: AnuncioBase;
   onExcluir: () => void;
   onAtualizar: () => void;
 }

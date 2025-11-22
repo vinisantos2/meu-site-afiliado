@@ -13,7 +13,7 @@ import {
 import { Topico } from "../types/Topico";
 import { useRouter } from "next/navigation";
 import { TOPICOS } from "../data/DataTopicos";
-import { Anuncio } from "../types/Anuncio";
+import { AnuncioBase } from "../types/AnuncioBase";
 import { buscarTodosAnuncios } from "../services/anuncioService";
 
 // 🧭 Mapa de ícones disponíveis
@@ -29,7 +29,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 export default function NavTopicos() {
   const [open, setOpen] = useState(false);
-  const [anuncios, setAnuncios] = useState<Anuncio[]>([]);
+  const [anuncios, setAnuncios] = useState<AnuncioBase[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 

@@ -6,7 +6,7 @@ import {
   buscarTodosAnuncios,
   excluirAnuncio,
 } from "@/app/services/anuncioService";
-import { AnuncioComId } from "@/app/types/Anuncio";
+import { AnuncioComId } from "@/app/types/AnuncioBase";
 import CardAnuncioAdmin from "../componentsAdmin/CardAnuncioAdmin";
 import { useRouter } from "next/navigation";
 import { TOPICOS } from "@/app/data/DataTopicos";

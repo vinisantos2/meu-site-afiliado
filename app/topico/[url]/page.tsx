@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Loading from "@/app/components/Loading";
 import { buscarTodosAnuncios } from "@/app/services/anuncioService";
-import { AnuncioComId } from "@/app/types/Anuncio";
+import { AnuncioComId } from "@/app/types/AnuncioBase";
 import NavPadrao from "@/app/components/NavPadrao";
 import CardAnuncio from "@/app/components/CardAnuncio";
 import Footer from "@/app/components/Footer";

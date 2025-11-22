@@ -1,4 +1,10 @@
-export interface Anuncio {
+import { AnuncioSmartphone } from "./DetalheSmartphone";
+import { AnuncioNotebook } from "./DetalhesNotebook ";
+
+export type Anuncio = AnuncioNotebook | AnuncioSmartphone;
+
+
+export interface AnuncioBase {
   nome: string;
   pros: string[];
   contras: string[];
@@ -8,13 +14,11 @@ export interface Anuncio {
   links: string[];
   valor?: number;
   imagens: string[];
-  topico: string; // categoria principal
   categorias: string[]; // categorias extras
   criadoEm: string;
   destaque?: boolean;
-  detalhes: string;
 }
 
-export interface AnuncioComId extends Anuncio {
+export interface AnuncioComId extends AnuncioBase {
   uid: string;
 }

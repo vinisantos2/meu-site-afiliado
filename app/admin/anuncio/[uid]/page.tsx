@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Anuncio } from "@/app/types/Anuncio";
+import { AnuncioBase } from "@/app/types/AnuncioBase";
 import { buscarAnuncio, editarAnuncio } from "@/app/services/anuncioService";
-import FormAnuncio from "../../componentsAdmin/FormAnuncio";
+import FormAnuncio from "../../componentsAdmin/forms/FormAnuncio";
 
 type PageProps = {
   params: {
@@ -16,7 +16,7 @@ export default function EditAnuncio({ params }: PageProps) {
   const uid = params.uid;
   const router = useRouter();
 
-  const [anuncio, setAnuncio] = useState<Anuncio | null>(null);
+  const [anuncio, setAnuncio] = useState<AnuncioBase | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function EditAnuncio({ params }: PageProps) {
     fetchAnuncio();
   }, [uid]);
 
-  async function handleSubmit(data: Anuncio) {
+  async function handleSubmit(data: AnuncioBase) {
     try {
       await editarAnuncio(uid, data);
       alert("✅ Anúncio atualizado com sucesso!");

@@ -2,7 +2,7 @@ import { buscarTodosAnuncios } from "./services/anuncioService";
 import SecaoDestaque from "./components/TopicosGrid";
 import NavInicial from "./components/NavInicial";
 import SecaoCupon from "./components/SecaoCupon";
-import { AnuncioComId } from "./types/Anuncio";
+import { AnuncioComId } from "./types/AnuncioBase";
 import Footer from "./components/Footer";
 import TopicosGrid from "./components/TopicosGrid";
 

@@ -8,7 +8,7 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
-import { Anuncio, AnuncioComId } from "../types/Anuncio";
+import { AnuncioBase, AnuncioComId } from "../types/AnuncioBase";
 import { db } from "../lib/firebase";
 import { NOTEBOOKS_RANK } from "../data/JsonTemp";
 
@@ -16,7 +16,7 @@ import { NOTEBOOKS_RANK } from "../data/JsonTemp";
 const AnunciosCollection = collection(db, "anuncios");
 
 // Salvar (ou atualizar) usuário no Firestore
-export async function salvarAnuncio(anuncio: Anuncio) {
+export async function salvarAnuncio(anuncio: AnuncioBase) {
   try {
     await addDoc(AnunciosCollection, {
       ...anuncio,
@@ -71,7 +71,7 @@ export async function buscarTodosAnuncios(): Promise<AnuncioComId[]> {
 // 🟠 Editar pedido
 export async function editarAnuncio(
   id: string,
-  anuncio: Omit<Anuncio, "id" | "cliente">
+  anuncio: Omit<AnuncioBase, "id" | "cliente">
 ) {
   const docRef = doc(db, "anuncios", id);
   const pedidoAtualizado = {
