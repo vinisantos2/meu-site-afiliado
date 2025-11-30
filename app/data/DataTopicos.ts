@@ -2,8 +2,8 @@ import { Topico } from "../types/Topico";
 
 export const TOPICOS = <Array<Topico>>[
   {
-    titulo: "Notebooks",
-    url: "notebooks",
+    titulo: "Notebook",
+    url: "notebook",
     icon: "Laptop",
     categorias: [
       // Preço
@@ -28,8 +28,8 @@ export const TOPICOS = <Array<Topico>>[
     ],
   },
   {
-    titulo: "Smartphones",
-    url: "Smartphone",
+    titulo: "smartphone",
+    url: "smartphone",
     icon: "Smartphone",
     categorias: [
       "Até 2000R$",
@@ -39,8 +39,9 @@ export const TOPICOS = <Array<Topico>>[
     ],
   },
   {
-    titulo: "Tablets",
-    url: "tablets",
+    titulo: "tablet",
+    url: "tablet",
+    icon: "Tablet",
     categorias: ["Para Estudo", "Baratos"],
   },
 ];

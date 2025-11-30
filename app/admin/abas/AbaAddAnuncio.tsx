@@ -2,21 +2,19 @@
 
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AnuncioBase } from "@/app/types/AnuncioBase";
 import { salvarAnuncio } from "@/app/services/anuncioService";
 import FormAnuncio from "../componentsAdmin/forms/FormAnuncio";
+import { Anuncio } from "@/app/types/AnuncioBase";
 
 export default function AbaAddAnuncio() {
   const [carregando, setCarregando] = useState(false);
 
-  
-
-  async function handleSubmit(data: AnuncioBase) {
+  async function handleSubmit(data: Anuncio) {
     try {
       setCarregando(true);
 
       // Gera UID e data de criação se for novo
-      const anuncioParaSalvar: AnuncioBase = {
+      const anuncioParaSalvar: Anuncio = {
         ...data,
         criadoEm: data.criadoEm || new Date().toISOString(),
       };

@@ -22,9 +22,6 @@ export default function CardAnuncioAdmin({
       <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
         {anuncio.nome}
       </h2>
-      <p className="text-gray-600 dark:text-gray-300 text-sm mt-1">
-        {anuncio.descricao}
-      </p>
 
       {/* Valor */}
       <p className="text-green-600 font-bold text-lg mb-2">
@@ -36,7 +33,9 @@ export default function CardAnuncioAdmin({
           : "Preço não informado"}
       </p>
 
-      <BtnMercadoLivre link={anuncio.links} />
+      {anuncio.links.map((link) => (
+        <BtnMercadoLivre link={link} />
+      ))}
 
       {/* Ações */}
       <div className="flex gap-2 mt-4">

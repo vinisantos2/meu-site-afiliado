@@ -14,7 +14,7 @@ export default function Page() {
         onClick={handleImport}
         className="bg-green-600 text-white px-4 py-2 rounded"
       >
-        Importar Notebooks
+        Importar dados
       </button>
     </div>
   );

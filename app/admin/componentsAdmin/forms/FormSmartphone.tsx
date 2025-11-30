@@ -1,5 +1,8 @@
 import { DetalhesSmartphone } from "@/app/types/DetalheSmartphone";
 
+import InputPadrao from "@/app/components/Input";
+import CheckboxPadrao from "@/app/components/CheckboxPadrao";
+
 interface Props {
   value: DetalhesSmartphone;
   onChange: (data: DetalhesSmartphone) => void;
@@ -13,71 +16,85 @@ export default function FormSmartphone({ value, onChange }: Props) {
   ) {
     onChange({
       ...value,
-      [key]: newValue
+      [key]: newValue,
     });
   }
 
   return (
-    <div className="space-y-3">
-      <h2 className="text-lg font-semibold">Detalhes do Smartphone</h2>
+    <div className="space-y-4 border p-4 rounded">
+      <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+        📱 Detalhes do Smartphone
+      </h2>
 
-      <input
-        type="text"
-        placeholder="Processador"
+      <InputPadrao
+        label="Processador"
+        placeholder="Ex: Snapdragon 695"
         value={value.processador}
         onChange={(e) => handleChange("processador", e.target.value)}
       />
 
-      <input
+      <InputPadrao
+        label="RAM (GB)"
         type="number"
-        placeholder="RAM (GB)"
-        value={value.ramGB}
-        onChange={(e) => handleChange("ramGB", Number(e.target.value))}
+        value={value.ramGB.toString()}
+        onChange={(e) =>
+          handleChange(
+            "ramGB",
+            e.target.value ? Number(e.target.value) : 0
+          )
+        }
       />
 
-      <input
+      <InputPadrao
+        label="Armazenamento (GB)"
         type="number"
-        placeholder="Armazenamento (GB)"
-        value={value.armazenamentoGB}
-        onChange={(e) => handleChange("armazenamentoGB", Number(e.target.value))}
+        value={value.armazenamentoGB.toString()}
+        onChange={(e) =>
+          handleChange(
+            "armazenamentoGB",
+            e.target.value ? Number(e.target.value) : 0
+          )
+        }
       />
 
-      <input
-        type="text"
-        placeholder="Tela"
+      <InputPadrao
+        label="Tela"
+        placeholder="Ex: 6.5\ AMOLED"
         value={value.tela}
         onChange={(e) => handleChange("tela", e.target.value)}
       />
 
-      <input
+      <InputPadrao
+        label="Bateria (mAh)"
         type="number"
-        placeholder="Bateria (mAh)"
-        value={value.bateriaMah}
-        onChange={(e) => handleChange("bateriaMah", Number(e.target.value))}
+        value={value.bateriaMah.toString()}
+        onChange={(e) =>
+          handleChange(
+            "bateriaMah",
+            e.target.value ? Number(e.target.value) : 0
+          )
+        }
       />
 
-      <input
-        type="text"
-        placeholder="Câmeras"
+      <InputPadrao
+        label="Câmeras"
+        placeholder="Ex: 50MP + 8MP + 2MP"
         value={value.cameras}
         onChange={(e) => handleChange("cameras", e.target.value)}
       />
 
-      <input
-        type="text"
-        placeholder="Sistema"
+      <InputPadrao
+        label="Sistema"
+        placeholder="Ex: Android 14"
         value={value.sistema}
         onChange={(e) => handleChange("sistema", e.target.value)}
       />
 
-      <div className="flex items-center gap-2">
-        <label>Tem 5G?</label>
-        <input
-          type="checkbox"
-          checked={value.tem5G}
-          onChange={(e) => handleChange("tem5G", e.target.checked)}
-        />
-      </div>
+      <CheckboxPadrao
+        label="Possui 5G?"
+        checked={value.tem5G}
+        onChange={(val) => handleChange("tem5G", val)}
+      />
     </div>
   );
 }

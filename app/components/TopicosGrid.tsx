@@ -3,14 +3,14 @@
 import * as Icons from "lucide-react";
 import Link from "next/link";
 import { TOPICOS } from "../data/DataTopicos";
+// Importar o tipo Icon do lucide-react para tipagem
 
 export default function TopicosGrid() {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
       {TOPICOS.map((item) => {
-        // Corrige erro de ícone (fallback para HelpCircle)
-        const Icon =
-          Icons[item.icon as keyof typeof Icons] || Icons.HelpCircle;
+        // --- Linha Corrigida/Reforçada ---
+        const Icon = (Icons[item.icon as keyof typeof Icons] || Icons.HelpCircle) as Icons.LucideIcon;
 
         return (
           <Link
@@ -24,6 +24,7 @@ export default function TopicosGrid() {
               transition-all duration-200
             "
           >
+            {/* Linha 27: Aqui o componente Icon está tipado corretamente */}
             <Icon size={32} className="text-blue-600 dark:text-blue-400" />
             <p className="font-semibold text-center capitalize text-zinc-800 dark:text-zinc-200">
               {item.titulo}

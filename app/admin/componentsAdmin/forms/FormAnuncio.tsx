@@ -25,8 +25,6 @@ export default function FormAnuncio({
   initialData = null,
   onSubmit,
 }: FormAnuncioProps) {
-  const [topico, setTopico] = useState<string>("");
-
   const [formData, setFormData] = useState<AnuncioBase>({
     nome: "",
     pros: [],
@@ -40,7 +38,7 @@ export default function FormAnuncio({
     categorias: [],
     criadoEm: new Date().toISOString(),
     destaque: false,
-    topico: ""
+    topico: "",
   });
 
   const [detalhesNotebook, setDetalhesNotebook] = useState<DetalhesNotebook>({
@@ -68,16 +66,12 @@ export default function FormAnuncio({
       tem5G: false,
     });
 
-  const categoriasDoTopico =
-    TOPICOS.find((t) => t.url === topico)?.categorias || [];
-
   useEffect(() => {
     if (!initialData) return;
 
     const { topico, detalhes, ...base } = initialData;
 
-    setTopico(topico);
-    setFormData(base);
+    setFormData({ ...base, topico });
 
     if (topico === "notebook") {
       setDetalhesNotebook(detalhes);
@@ -100,13 +94,13 @@ export default function FormAnuncio({
 
     let anuncioFinal: AnuncioSmartphone | AnuncioNotebook;
 
-    if (topico === "notebooks") {
+    if (formData.topico === "notebook") {
       anuncioFinal = {
         ...formData,
         topico: "notebook",
         detalhes: detalhesNotebook,
       };
-    } else if (topico === "smartphone") {
+    } else if (formData.topico === "smartphone") {
       anuncioFinal = {
         ...formData,
         topico: "smartphone",
@@ -133,11 +127,11 @@ export default function FormAnuncio({
       />
 
       {/* FORM DINÂMICO */}
-      {topico === "notebook" && (
+      {formData.topico === "notebook" && (
         <FormNotebook value={detalhesNotebook} onChange={setDetalhesNotebook} />
       )}
 
-      {topico === "smartphone" && (
+      {formData.topico === "smartphone" && (
         <FormSmartphone
           value={detalhesSmartphone}
           onChange={setDetalhesSmartphone}

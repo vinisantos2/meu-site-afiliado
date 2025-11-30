@@ -52,7 +52,8 @@ export default function Topico({ params }: PageProps) {
           if (!categoria) return true;
           return item.categorias?.includes(categoria);
         })
-        .sort((a, b) => (b.nota ?? 5) - (a.nota ?? 5)); // ranking
+        .sort((a, b) => (b.nota ?? 5) - (a.nota ?? 5))
+        .slice(0, 10); // ranking
 
       setAnuncios(filtrados);
       setLoading(false);

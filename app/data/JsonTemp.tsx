@@ -1,5 +1,3 @@
-import { AnuncioBase } from "../types/AnuncioBase";
+import { AnuncioSmartphone } from "../types/DetalheSmartphone";
 
-export const NOTEBOOKS_RANK: AnuncioBase[] = [
-  
-];
+export const SMARTPHONES: AnuncioSmartphone[] = [];
