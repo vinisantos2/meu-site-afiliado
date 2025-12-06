@@ -13,6 +13,9 @@ type FormBaseProps = {
 };
 
 export default function FormBase({ data, onChange }: FormBaseProps) {
+
+  const topicoSelecionado = TOPICOS.find((t) => t.url === data.topico);
+  
   return (
     <div className="space-y-6">
       {/* NOME */}
@@ -23,7 +26,7 @@ export default function FormBase({ data, onChange }: FormBaseProps) {
         placeholder="Digite o nome do produto"
       />
 
-      {/* Topico */}
+      {/* TÓPICO */}
       <SelectPadrao
         label="Tópico"
         value={data.topico}
@@ -34,6 +37,36 @@ export default function FormBase({ data, onChange }: FormBaseProps) {
           label: t.titulo,
         }))}
       />
+
+      {/* ✅ CATEGORIAS */}
+      {/* ✅ CATEGORIAS (DEPENDENTES DO TÓPICO) */}
+      {topicoSelecionado && (
+        <div>
+          <p className="text-sm font-semibold mb-2">Categorias</p>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {topicoSelecionado.categorias.map((categoria) => {
+              const checked = data.categorias.includes(categoria);
+
+              return (
+                <CheckboxPadrao
+                  key={categoria}
+                  label={categoria}
+                  checked={checked}
+                  onChange={(value) => {
+                    onChange(
+                      "categorias",
+                      value
+                        ? [...data.categorias, categoria]
+                        : data.categorias.filter((c) => c !== categoria)
+                    );
+                  }}
+                />
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* REVIEW */}
       <div className="border p-4 rounded space-y-4">
