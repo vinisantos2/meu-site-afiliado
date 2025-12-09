@@ -33,7 +33,7 @@ export default function FormBase({ data, onChange }: FormBaseProps) {
         onChange={(value) => onChange("topico", value)}
         placeholder="Selecione um tópico"
         options={TOPICOS.map((t) => ({
-          value: t.url,
+          value: t.titulo,
           label: t.titulo,
         }))}
       />

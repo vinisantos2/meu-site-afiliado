@@ -47,7 +47,7 @@ export default function Topico({ params }: PageProps) {
 
       // FILTRO FINAL → tópico + categoria
       const filtrados = todos
-        .filter((item) => item.topico === url)
+        .filter((item) => item.topico === topicoAtual?.titulo)
         .filter((item) => {
           if (!categoria) return true;
           return item.categorias?.includes(categoria);
@@ -78,7 +78,7 @@ export default function Topico({ params }: PageProps) {
         <div className="max-w-4xl mx-auto bg-gray-50 dark:bg-[#1f1f1f] p-6 md:p-10 rounded-xl shadow-lg border border-gray-200 dark:border-[#333]">
           {/* TÍTULO */}
           <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-100">
-            {url.charAt(0).toUpperCase() + url.slice(1)} — Ranking atualizado
+            {topicoAtual?.titulo} — Ranking atualizado
           </h1>
 
           {/* FILTRO DE CATEGORIAS (SEM BOTÃO TODOS) */}

@@ -12,6 +12,6 @@ export interface DetalhesSmartphone {
 }
 
 export interface AnuncioSmartphone extends AnuncioBase {
-  topico: "smartphone";
+  topico: "Smartphone" | "smartphone";
   detalhes: DetalhesSmartphone;
 }

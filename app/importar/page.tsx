@@ -1,10 +1,10 @@
 "use client";
 
-import { importarNotebooks } from "../services/anuncioService";
+import { importarDados } from "../services/anuncioService";
 
 export default function Page() {
   const handleImport = async () => {
-    await importarNotebooks();
+    await importarDados();
     alert("Importado com sucesso!");
   };
 

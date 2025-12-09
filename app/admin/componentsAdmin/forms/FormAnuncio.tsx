@@ -5,16 +5,20 @@ import { TOPICOS } from "@/app/data/DataTopicos";
 
 import FormNotebook from "./FormNotebook";
 import FormSmartphone from "./FormSmartphone";
-import {
-  AnuncioNotebook,
-  DetalhesNotebook,
-} from "@/app/types/DetalhesNotebook ";
+import FormPlacaMae from "./FormPlacaMae";
+import FormBase from "./FormAnuncioBase";
+
 import {
   AnuncioSmartphone,
   DetalhesSmartphone,
 } from "@/app/types/DetalheSmartphone";
+
 import { Anuncio, AnuncioBase } from "@/app/types/AnuncioBase";
-import FormBase from "./FormAnuncioBase";
+import {
+  AnuncioNotebook,
+  DetalhesNotebook,
+} from "@/app/types/DetalhesNotebook ";
+import { AnuncioPlacaMae, DetalhesPlacaMae } from "@/app/types/DetalhePlacaMae";
 
 type FormAnuncioProps = {
   initialData?: Anuncio | null;
@@ -25,6 +29,7 @@ export default function FormAnuncio({
   initialData = null,
   onSubmit,
 }: FormAnuncioProps) {
+  /* ---------------- BASE ---------------- */
   const [formData, setFormData] = useState<AnuncioBase>({
     nome: "",
     pros: [],
@@ -41,6 +46,7 @@ export default function FormAnuncio({
     topico: "",
   });
 
+  /* ---------------- NOTEBOOK ---------------- */
   const [detalhesNotebook, setDetalhesNotebook] = useState<DetalhesNotebook>({
     processador: "",
     ramGB: 0,
@@ -54,6 +60,7 @@ export default function FormAnuncio({
     portas: [],
   });
 
+  /* ---------------- SMARTPHONE ---------------- */
   const [detalhesSmartphone, setDetalhesSmartphone] =
     useState<DetalhesSmartphone>({
       processador: "",
@@ -66,22 +73,46 @@ export default function FormAnuncio({
       tem5G: false,
     });
 
+  /* ---------------- PLACA-MÃE ---------------- */
+  const [detalhesPlacaMae, setDetalhesPlacaMae] = useState<DetalhesPlacaMae>({
+    socket: "",
+    chipset: "",
+    formato: "ATX",
+    memoriaTipo: "DDR4",
+    maxRamGB: 0,
+    slotsRam: 0,
+    frequenciaMaxRamMHz: 0,
+    pciExpress: "",
+    gpuIntegradaSuporte: false,
+    armazenamento: { sata: 0, m2: 0 },
+    rede: { lan: "" },
+    usb: { usb2: 0, usb3: 0, usbC: 0 },
+    rgb: false,
+    overclock: false,
+    biosFlashback: false,
+  });
+
+  /* ---------------- EDIT MODE ---------------- */
   useEffect(() => {
     if (!initialData) return;
 
     const { topico, detalhes, ...base } = initialData;
-
     setFormData({ ...base, topico });
 
-    if (topico === "notebook") {
+    if (topico === "Notebook" || topico === "notebooks") {
       setDetalhesNotebook(detalhes);
     }
 
-    if (topico === "smartphone") {
+    if (topico === "Smartphone" || topico === "smartphone") {
       setDetalhesSmartphone(detalhes);
+    }
+
+    if (topico === "Placa-mãe" || topico === "placa-mae") {
+      setDetalhesPlacaMae(detalhes);
     }
   }, [initialData]);
 
+  /* ---------------- BASE CHANGE ---------------- */
   const handleChange = <K extends keyof AnuncioBase>(
     field: K,
     value: AnuncioBase[K]
@@ -89,23 +120,30 @@ export default function FormAnuncio({
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  /* ---------------- SUBMIT ---------------- */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    let anuncioFinal: AnuncioSmartphone | AnuncioNotebook;
+    let anuncioFinal: Anuncio;
 
-    if (formData.topico === "notebook") {
+    if (formData.topico === "Notebook") {
       anuncioFinal = {
         ...formData,
-        topico: "notebook",
+        topico: "Notebook",
         detalhes: detalhesNotebook,
-      };
-    } else if (formData.topico === "smartphone") {
+      } as AnuncioNotebook;
+    } else if (formData.topico === "Smartphone") {
       anuncioFinal = {
         ...formData,
-        topico: "smartphone",
+        topico: "Smartphone",
         detalhes: detalhesSmartphone,
-      };
+      } as AnuncioSmartphone;
+    } else if (formData.topico === "Placa-mãe") {
+      anuncioFinal = {
+        ...formData,
+        topico: "Placa-mãe",
+        detalhes: detalhesPlacaMae,
+      } as AnuncioPlacaMae;
     } else {
       alert("Selecione um tópico válido");
       return;
@@ -114,28 +152,33 @@ export default function FormAnuncio({
     onSubmit(anuncioFinal);
   };
 
+  /* ---------------- RENDER ---------------- */
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
         {initialData ? "✏️ Editar Anúncio" : "📌 Novo Anúncio"}
       </h2>
 
-      {/* FORM BASE */}
+      {/* BASE */}
       <FormBase
         data={{ ...formData, categorias: formData.categorias }}
         onChange={handleChange}
       />
 
-      {/* FORM DINÂMICO */}
-      {formData.topico === "notebook" && (
+      {/* DINÂMICO */}
+      {formData.topico === "Notebook" && (
         <FormNotebook value={detalhesNotebook} onChange={setDetalhesNotebook} />
       )}
 
-      {formData.topico === "smartphone" && (
+      {formData.topico === "Smartphone" && (
         <FormSmartphone
           value={detalhesSmartphone}
           onChange={setDetalhesSmartphone}
         />
+      )}
+
+      {formData.topico === "Placa-mãe" && (
+        <FormPlacaMae value={detalhesPlacaMae} onChange={setDetalhesPlacaMae} />
       )}
 
       {/* BOTÃO */}

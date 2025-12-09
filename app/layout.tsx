@@ -14,33 +14,35 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VS-Tech Ofertas | Cupons, Descontos e Promoções de Tecnologia",
+  title: "Tech Ranking | Análises e Comparativos de Tecnologia",
   description:
-    "VS-Tech Ofertas é o seu espaço para descobrir as melhores promoções, cupons de desconto e novidades do mundo da tecnologia — atualizado diariamente para você economizar mais!",
+    "Tech Ranking é um site independente de análises, rankings e comparações de produtos de tecnologia. Encontre os melhores smartphones, notebooks e acessórios com foco em custo-benefício.",
   keywords: [
-    "promoções",
-    "cupons de desconto",
-    "ofertas",
-    "tecnologia",
-    "VS-Tech Ofertas",
-    "descontos",
+    "análises de tecnologia",
+    "comparativo de smartphones",
+    "ranking de celulares",
+    "melhor custo benefício",
+    "reviews de produtos",
+    "notebooks",
+    "smartphones",
     "produtos de tecnologia",
-    "compras online",
+    "Tech Ranking",
+    "VS-Tech afiliados",
   ],
   openGraph: {
-    title: "VS-Tech Ofertas | Cupons e Promoções Atualizadas",
+    title: "Tech Ranking | Rankings e Reviews de Tecnologia",
     description:
-      "Descubra cupons de desconto e ofertas incríveis em produtos de tecnologia. Atualizado todos os dias!",
+      "Compare produtos de tecnologia, veja rankings atualizados e escolha com segurança o melhor custo-benefício.",
     type: "website",
     locale: "pt_BR",
-    url: "https://www.seusite.com", // 👉 substitua pelo seu domínio real
-    siteName: "VS-Tech Ofertas",
+    url: "https://www.seusite.com", // substitua pelo domínio final
+    siteName: "Tech Ranking",
   },
   twitter: {
     card: "summary_large_image",
-    title: "VS-Tech Ofertas | Cupons e Promoções",
+    title: "Tech Ranking | Reviews e Rankings de Tecnologia",
     description:
-      "Encontre cupons de desconto e ofertas exclusivas em tecnologia — atualizado diariamente!",
+      "Análises e comparações de produtos de tecnologia para você comprar com mais segurança.",
   },
   robots: {
     index: true,
@@ -50,16 +52,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-br">
+    <html lang="pt-BR">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable}  text-gray-900 antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} text-gray-900 antialiased`}
       >
         {children}
         <Analytics />

@@ -8,4 +8,4 @@ export interface Topico {
   categorias: string[];
 }
 
-export type TopicoUrl = typeof TOPICOS[number]["url"];
+export type TopicoTitulo = typeof TOPICOS[number]["titulo"];

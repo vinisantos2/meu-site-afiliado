@@ -1,8 +1,9 @@
+import { AnuncioPlacaMae } from "./DetalhePlacaMae";
 import { AnuncioSmartphone } from "./DetalheSmartphone";
 import { AnuncioNotebook } from "./DetalhesNotebook ";
-import { TopicoUrl } from "./Topico";
+import { TopicoTitulo } from "./Topico";
 
-export type Anuncio = AnuncioNotebook | AnuncioSmartphone;
+export type Anuncio = AnuncioNotebook | AnuncioSmartphone | AnuncioPlacaMae;
 
 export interface AnuncioBase {
   nome: string;
@@ -17,7 +18,7 @@ export interface AnuncioBase {
   categorias: string[]; // categorias extras
   criadoEm: string;
   destaque?: boolean;
-  topico: TopicoUrl; // 👈 AQUI  
+  topico: TopicoTitulo; // 👈 AQUI  
 }
 
 export type AnuncioComId = Anuncio & {

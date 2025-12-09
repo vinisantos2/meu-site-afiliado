@@ -9,7 +9,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../lib/firebase";
-import { SMARTPHONES } from "../data/JsonTemp";
+import { DADOS } from "../data/JsonTemp";
 import { Anuncio, AnuncioComId } from "../types/AnuncioBase";
 
 // Coleção de usuários
@@ -87,9 +87,13 @@ export async function excluirAnuncio(id: string) {
   await deleteDoc(docRef);
 }
 
-export async function importarNotebooks() {
-  for (const item of SMARTPHONES) {
-    await addDoc(AnunciosCollection, item);
+export async function importarDados() {
+  for (const item of DADOS) {
+    try {
+      await addDoc(AnunciosCollection, item);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   console.log("Importação concluída!");

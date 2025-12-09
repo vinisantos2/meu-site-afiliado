@@ -1,3 +1,256 @@
-import { AnuncioSmartphone } from "../types/DetalheSmartphone";
+import { Anuncio } from "../types/AnuncioBase";
 
-export const SMARTPHONES: AnuncioSmartphone[] = [];
+export const DADOS: Anuncio[] = [
+  {
+    nome: "Placa-mãe ASUS TUF Gaming B550M-PLUS",
+    topico: "placa-mãe",
+    pros: [
+      "Ótima construção e durabilidade (linha TUF)",
+      "Suporte a processadores Ryzen com overclock",
+      "VRM robusto para uso gamer",
+      "Suporte a SSD M.2 NVMe",
+    ],
+    contras: [
+      "Não possui Wi-Fi integrado em algumas versões",
+      "Formato Micro-ATX pode limitar expansão",
+    ],
+    opiniao:
+      "A ASUS TUF Gaming B550M-PLUS é uma placa-mãe intermediária muito sólida para montar um PC gamer com Ryzen, oferecendo bom VRM, suporte a overclock moderado e recursos modernos sem custar tão caro.",
+    veredito: "Excelente custo-benefício para PCs gamer com Ryzen.",
+    nota: 8.8,
+    valor: 899,
+    links: ["https://mercadolivre.com/sec/2CJcdPe"],
+    imagens: [
+      "https://http2.mlstatic.com/D_NQ_NP_2X_738342-MLA99933211929_112025-F.webp",
+    ],
+    categorias: [
+      "Placa-Mãe Gamer",
+      "AMD Ryzen",
+      "Intermediária",
+      "Custo-Benefício",
+    ],
+    destaque: false,
+    criadoEm: new Date().toISOString(),
+    detalhes: {
+      socket: "AM4",
+      chipset: "B550",
+      formato: "Micro-ATX",
+      memoriaTipo: "DDR4",
+      maxRamGB: 128,
+      slotsRam: 4,
+      frequenciaMaxRamMHz: 4600,
+      pciExpress: "PCIe 4.0",
+      gpuIntegradaSuporte: true, // suporta iGPU dos Ryzen G
+      armazenamento: {
+        sata: 4,
+        m2: 2,
+      },
+      rede: {
+        lan: "2.5Gb",
+      },
+      usb: {
+        usb2: 4,
+        usb3: 6,
+        usbC: 1,
+      },
+      rgb: true,
+      overclock: true,
+      biosFlashback: true,
+    },
+  },
+
+  {
+    nome: "ASUS ROG Crosshair X870E Hero",
+    topico: "placa-mãe",
+    pros: [
+      "Suporte a processadores AMD Ryzen série 7000/8000/9000 (socket AM5)",
+      "Suporte a DDR5 até 256GB e overclock robusto",
+      "PCIe 5.0 e múltiplos slots M.2 rápidos",
+      "Ótimo VRM e fase de alimentação para estabilidade e overclock",
+      "Wi-Fi / Ethernet de altíssima velocidade + conectividade completa",
+      "Refrigeração excelente e possibilidade de water-cooling / fan tuning",
+      "Grande número de portas USB e opções de expansão",
+      "Construção premium, durabilidade e design para PC gamer high-end",
+    ],
+    contras: [
+      "Preço bastante elevado (topo de linha)",
+      "Placa em formato ATX/E-ATX — ocupa mais espaço em gabinetes pequenos",
+      "Exige componentes igualmente potentes para aproveitar todo o potencial",
+    ],
+    opiniao:
+      "A ROG Crosshair X870E Hero é uma placa-mãe premium ideal para montar um PC gamer ou workstation de altíssimo desempenho. Excelente para overclock, multitarefa pesada, futuras gerações de CPUs e GPUs — perfeita para quem não quer fazer upgrades por bastante tempo.",
+    veredito:
+      "Flagship absoluto para quem busca desempenho e longevidade máxima.",
+    nota: 9.7,
+    valor: 4489,
+    links: ["https://mercadolivre.com/sec/1tvQhy2"],
+    imagens: [
+      "https://http2.mlstatic.com/D_NQ_NP_2X_730326-CBT85185137369_052025-F.webp",
+    ],
+    categorias: [
+      "Placa-Mãe Gamer",
+      "Premium",
+      "Top de Linha",
+      "AM5",
+      "DDR5",
+      "PCIe 5.0",
+      "Overclock",
+    ],
+    destaque: true,
+    criadoEm: new Date().toISOString(),
+    detalhes: {
+      socket: "AM5",
+      chipset: "X870E",
+      formato: "ATX",
+      memoriaTipo: "DDR5",
+      maxRamGB: 256,
+      slotsRam: 4,
+      frequenciaMaxRamMHz: 8400,
+      pciExpress: "PCIe 5.0",
+      gpuIntegradaSuporte: false,
+      armazenamento: {
+        sata: 6,
+        m2: 5,
+      },
+      rede: {
+        lan: "2.5Gb",
+        wifi: "Wi-Fi 7",
+        bluetooth: "5.3",
+      },
+      usb: {
+        usb2: 2,
+        usb3: 8,
+        usbC: 2,
+      },
+      rgb: true,
+      overclock: true,
+      biosFlashback: true,
+    },
+  },
+
+  {
+    nome: "Placa-mãe MSI MEG Z790 ACE",
+    topico: "placa-mãe",
+    pros: [
+      "Desempenho extremo para processadores Intel de última geração",
+      "Suporte a DDR5 com altíssimas frequências",
+      "VRM extremamente robusto para overclock pesado",
+      "PCIe 5.0 para GPU e SSDs",
+      "Grande quantidade de slots M.2 NVMe",
+      "Conectividade premium com Wi-Fi e LAN de alta velocidade",
+      "Construção premium com excelente dissipação térmica",
+    ],
+    contras: [
+      "Preço muito elevado",
+      "Formato grande exige gabinete espaçoso",
+      "Excesso de recursos para usuários básicos",
+    ],
+    opiniao:
+      "A MSI MEG Z790 ACE é uma placa-mãe flagship voltada para entusiastas, gamers exigentes e criadores de conteúdo que utilizam processadores Intel topo de linha. Ideal para setups extremos e overclock avançado.",
+    veredito: "Flagship Intel para máximo desempenho e overclock.",
+    nota: 9.6,
+    valor: 3200,
+    links: ["https://mercadolivre.com/sec/1EDM7Pg"],
+    imagens: ["https://http2.mlstatic.com/D_NQ_NP_2X_EXEMPLO-Z790-ACE.webp"],
+    categorias: [
+      "Placa-Mãe Gamer",
+      "Premium",
+      "Top de Linha",
+      "Intel",
+      "DDR5",
+      "PCIe 5.0",
+      "Overclock",
+    ],
+    destaque: true,
+    criadoEm: new Date().toISOString(),
+    detalhes: {
+      socket: "LGA1700",
+      chipset: "Z790",
+      formato: "ATX",
+      memoriaTipo: "DDR5",
+      maxRamGB: 192,
+      slotsRam: 4,
+      frequenciaMaxRamMHz: 7800,
+      pciExpress: "PCIe 5.0",
+      gpuIntegradaSuporte: true,
+      armazenamento: {
+        sata: 6,
+        m2: 5,
+      },
+      rede: {
+        lan: "2.5Gb",
+        wifi: "Wi-Fi 6E",
+        bluetooth: "5.3",
+      },
+      usb: {
+        usb2: 2,
+        usb3: 8,
+        usbC: 2,
+      },
+      rgb: true,
+      overclock: true,
+      biosFlashback: true,
+    },
+  },
+
+  {
+    nome: "Placa-mãe Gigabyte B550M AORUS Elite",
+    topico: "placa-mãe",
+    pros: [
+      "Excelente custo-benefício para PC gamer",
+      "Suporte a processadores AMD Ryzen série 3000, 4000G e 5000",
+      "PCIe 4.0 para GPU e SSD NVMe",
+      "VRM robusto para jogos e overclock moderado",
+      "Boa qualidade de construção da linha AORUS",
+    ],
+    contras: [
+      "Não possui Wi-Fi integrado",
+      "Formato Micro-ATX limita expansão",
+      "Não suporta DDR5",
+    ],
+    opiniao:
+      "A Gigabyte B550M AORUS Elite é uma placa-mãe gamer muito equilibrada para quem monta um PC com Ryzen visando alto desempenho em jogos sem gastar demais. Oferece recursos modernos, boa estabilidade e ótima compatibilidade com GPUs atuais.",
+    veredito: "Excelente placa-mãe gamer custo-benefício para AMD Ryzen.",
+    nota: 8.9,
+    valor: 879,
+    links: ["https://mercadolivre.com/sec/2AcufTZ"],
+    imagens: [
+      "https://http2.mlstatic.com/D_NQ_NP_2X_846714-MLA99464080574_112025-F.webp",
+    ],
+    categorias: [
+      "Placa-Mãe Gamer",
+      "AMD Ryzen",
+      "Intermediária",
+      "Custo-Benefício",
+      "PCIe 4.0",
+    ],
+    destaque: false,
+    criadoEm: new Date().toISOString(),
+    detalhes: {
+      socket: "AM4",
+      chipset: "B550",
+      formato: "Micro-ATX",
+      memoriaTipo: "DDR4",
+      maxRamGB: 128,
+      slotsRam: 4,
+      frequenciaMaxRamMHz: 4733,
+      pciExpress: "PCIe 4.0",
+      gpuIntegradaSuporte: true,
+      armazenamento: {
+        sata: 4,
+        m2: 2,
+      },
+      rede: {
+        lan: "2.5Gb",
+      },
+      usb: {
+        usb2: 4,
+        usb3: 6,
+        usbC: 1,
+      },
+      rgb: true,
+      overclock: true,
+      biosFlashback: false,
+    },
+  },
+];

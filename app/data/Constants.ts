@@ -1,0 +1,1 @@
+export const NOME_LOJA = "VS-Tech Afiliados"

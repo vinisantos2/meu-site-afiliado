@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { NOME_LOJA } from "../data/Constants";
 
 export default function NavPadrao() {
   const router = useRouter();
@@ -22,7 +23,7 @@ export default function NavPadrao() {
             className="drop-shadow-lg group-hover:scale-105 transition-transform duration-200"
           />
           <h1 className="text-2xl font-extrabold leading-tight tracking-tight">
-            VS-Tech <span className="text-yellow-300">Compare</span>
+            {NOME_LOJA}
           </h1>
         </div>
       </div>
