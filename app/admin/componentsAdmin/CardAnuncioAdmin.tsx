@@ -1,7 +1,6 @@
 import BtnMercadoLivre from "@/app/components/btnLinks";
 import ImgCard from "@/app/components/ImgCard";
 import { AnuncioBase } from "@/app/types/AnuncioBase";
-import Link from "next/link";
 
 interface CardAnuncioAdminProps {
   anuncio: AnuncioBase;
@@ -33,8 +32,8 @@ export default function CardAnuncioAdmin({
           : "Preço não informado"}
       </p>
 
-      {anuncio.links.map((link) => (
-        <BtnMercadoLivre link={link} />
+      {anuncio.links.map((link, key) => (
+        <BtnMercadoLivre key={key} link={link} />
       ))}
 
       {/* Ações */}

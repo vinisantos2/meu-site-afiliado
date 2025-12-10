@@ -1,8 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 
-import { TOPICOS } from "@/app/data/DataTopicos";
-
 import FormNotebook from "./FormNotebook";
 import FormSmartphone from "./FormSmartphone";
 import FormPlacaMae from "./FormPlacaMae";
@@ -99,15 +97,15 @@ export default function FormAnuncio({
     const { topico, detalhes, ...base } = initialData;
     setFormData({ ...base, topico });
 
-    if (topico === "Notebook" || topico === "notebooks") {
+    if (topico === "Notebook") {
       setDetalhesNotebook(detalhes);
     }
 
-    if (topico === "Smartphone" || topico === "smartphone") {
+    if (topico === "Smartphone") {
       setDetalhesSmartphone(detalhes);
     }
 
-    if (topico === "Placa-mãe" || topico === "placa-mae") {
+    if (topico === "Placa-mãe") {
       setDetalhesPlacaMae(detalhes);
     }
   }, [initialData]);

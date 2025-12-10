@@ -30,6 +30,6 @@ export interface DetalhesPlacaMae {
 }
 
 export interface AnuncioPlacaMae extends AnuncioBase {
-  topico: "Placa-mãe" | "placa-mae";
+  topico: "Placa-mãe";
   detalhes: DetalhesPlacaMae;
 }

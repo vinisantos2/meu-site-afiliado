@@ -1,19 +1,17 @@
 "use client";
 
-import {  useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { AnuncioBase } from "@/app/types/AnuncioBase";
 import { buscarAnuncio } from "@/app/services/anuncioService";
 import Loading from "@/app/components/Loading";
 import NavPadrao from "@/app/components/NavPadrao";
 
-type PageProps = {
-  params: {
-    uid: string;
-  };
-};
-
-export default function DetalheAnuncio({ params }: PageProps) {
-  const  uid  = params.uid;
+export default function DetalheAnuncio({
+  params,
+}: {
+  params: Promise<{ uid: string }>;
+}) {
+  const { uid } = use(params);
   const [anuncio, setAnuncio] = useState<AnuncioBase | null>(null);
   const [imagemSelecionada, setImagemSelecionada] = useState<string | null>(
     null
@@ -80,10 +78,6 @@ export default function DetalheAnuncio({ params }: PageProps) {
               {anuncio.nome}
             </h1>
 
-           
-
-            
-
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
               Publicado em:{" "}
               {new Date(anuncio.criadoEm).toLocaleDateString("pt-BR")}
@@ -93,9 +87,7 @@ export default function DetalheAnuncio({ params }: PageProps) {
               <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
                 Informações do produto
               </h2>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-             
-              </p>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed"></p>
             </div>
           </div>
         </div>
@@ -105,9 +97,7 @@ export default function DetalheAnuncio({ params }: PageProps) {
           <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
             Detalhes do produto
           </h2>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
-           
-          </p>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line"></p>
         </section>
       </main>
     </>

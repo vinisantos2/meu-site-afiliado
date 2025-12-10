@@ -8,4 +8,4 @@ export interface Topico {
   categorias: string[];
 }
 
-export type TopicoTitulo = typeof TOPICOS[number]["titulo"];
+export type TopicoTitulo = "Smartphone" | "Notebook" | "Placa-mãe" | "";

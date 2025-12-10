@@ -95,7 +95,7 @@ export default function AbaAnunciosAdmin() {
           >
             <option value="">Todos os tópicos</option>
             {TOPICOS.map((t, i) => (
-              <option key={i} value={t.url}>
+              <option key={i} value={t.titulo}>
                 {t.titulo}
               </option>
             ))}

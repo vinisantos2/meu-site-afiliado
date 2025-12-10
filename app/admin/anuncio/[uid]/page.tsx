@@ -1,19 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { buscarAnuncio, editarAnuncio } from "@/app/services/anuncioService";
 import FormAnuncio from "../../componentsAdmin/forms/FormAnuncio";
 import { Anuncio } from "@/app/types/AnuncioBase";
 
-type PageProps = {
-  params: {
-    uid: string;
-  };
-};
-
-export default function EditAnuncio({ params }: PageProps) {
-  const uid = params.uid;
+export default function EditAnuncio({
+  params,
+}: {
+  params: Promise<{ uid: string }>;
+}) {
+  const { uid } = use(params);
   const router = useRouter();
 
   const [anuncio, setAnuncio] = useState<Anuncio | null>(null);

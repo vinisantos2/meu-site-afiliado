@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Loading from "@/app/components/Loading";
 import { buscarTodosAnuncios } from "@/app/services/anuncioService";
 import { AnuncioComId } from "@/app/types/AnuncioBase";
@@ -9,18 +9,15 @@ import CardAnuncio from "@/app/components/CardAnuncio";
 import Footer from "@/app/components/Footer";
 import { TOPICOS } from "@/app/data/DataTopicos";
 
-type PageProps = {
-  params: {
-    url: string;
-    titulo: string;
-  };
-};
-
-export default function Topico({ params }: PageProps) {
+export default function Topico({
+  params,
+}: {
+  params: Promise<{ url: string }>;
+}) {
   const [anuncios, setAnuncios] = useState<AnuncioComId[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const url = params.url;
+  const { url } = use(params);
 
   // Pega o tópico atual
   const topicoAtual = TOPICOS.find((t) => t.url === url);

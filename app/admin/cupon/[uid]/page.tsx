@@ -1,19 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Cupon } from "@/app/types/Cupon";
 import { buscarCupon, editarCupon } from "@/app/services/CuponService";
 import FormCupon from "../../componentsAdmin/FormaCupon";
 
-type PageProps = {
-  params: {
-    uid: string;
-  };
-};
-
-export default function EditCupon({ params }: PageProps) {
-  const uid = params.uid;
+export default function EditCupon({
+  params,
+}: {
+  params: Promise<{ uid: string }>;
+}) {
+  const {uid} = use(params);
   const router = useRouter();
 
   const [cupon, setCupon] = useState<Cupon | null>(null);

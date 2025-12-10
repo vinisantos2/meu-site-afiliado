@@ -1,7 +1,7 @@
 import { AnuncioBase } from "./AnuncioBase";
 
 export interface AnuncioNotebook extends AnuncioBase {
-  topico: "Notebook"| "notebooks";
+  topico: "Notebook";
   detalhes: DetalhesNotebook;
 }
 
