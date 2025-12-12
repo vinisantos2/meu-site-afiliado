@@ -1,6 +1,6 @@
 "use client";
 
-import { TOPICOS } from "@/app/data/DataTopicos";
+import { TOPICO_CUPONS } from "@/app/data/DataTopicoCupons";
 import { Cupon } from "@/app/types/Cupon";
 import { useEffect, useState } from "react";
 
@@ -37,13 +37,32 @@ export default function FormCupon({
     }
   }, [initialData]);
 
+  function resetForm() {
+    setFormData({
+      titulo: "",
+      link: "",
+      categoria: "",
+      ativo: false,
+      codigo: "",
+      desconto: 0,
+      regras: "",
+      tipoDesconto: "valor",
+      detalhes: "",
+      validade: "",
+      criadoEm: "",
+      destaque: false,
+    });
+  }
+
   const handleChange = (field: keyof Cupon, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+  
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(formData);
+    resetForm()
   };
 
   return (
@@ -123,9 +142,9 @@ export default function FormCupon({
           <option className="dark:bg-gray-500" value="">
             Selecione uma categoria
           </option>
-          {TOPICOS.map((cat, key) => (
-            <option className="dark:bg-gray-700" key={key} value={cat.titulo}>
-              {cat.titulo}
+          {TOPICO_CUPONS.map((topico, key) => (
+            <option className="dark:bg-gray-700" key={key} value={topico}>
+              {topico}
             </option>
           ))}
         </select>

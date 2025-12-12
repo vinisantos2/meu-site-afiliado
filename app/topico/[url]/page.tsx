@@ -78,6 +78,18 @@ export default function Topico({
             {topicoAtual?.titulo} — Ranking atualizado
           </h1>
 
+          {/* TEXTO EXPLICATIVO DO TÓPICO */}
+          {topicoAtual?.texto && (
+            <p className="text-center text-gray-700 dark:text-gray-300 mb-10 leading-relaxed">
+              {topicoAtual.texto}
+            </p>
+          )}
+
+          <p className="text-center text-sm text-gray-600 dark:text-gray-400 mb-10">
+            Alguns links podem gerar comissão e ajudam a manter este projeto no
+            ar, sem custo extra para você.
+          </p>
+
           {/* FILTRO DE CATEGORIAS (SEM BOTÃO TODOS) */}
           {categoriasDoTopico.length > 0 && (
             <div className="flex flex-wrap justify-center gap-3 mb-10">

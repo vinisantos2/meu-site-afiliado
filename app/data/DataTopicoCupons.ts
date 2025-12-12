@@ -1,0 +1,22 @@
+export const TOPICO_CUPONS = [
+  "Tecnologia",
+  "Smartphones",
+  "Notebooks",
+  "Hardware",
+  "Periféricos",
+  "Relógios",
+  "Games",
+  "Eletrodomésticos",
+  "Casa e Cozinha",
+  "Moda",
+  "Calçados",
+  "Beleza e Saúde",
+  "Suplementos",
+  "Mercado",
+  "Viagens",
+  "Serviços",
+  "Streaming",
+  "Educação",
+  "Ferramentas Digitais",
+  "Escritório"
+].sort();
