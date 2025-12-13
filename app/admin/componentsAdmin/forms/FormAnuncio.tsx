@@ -1,23 +1,34 @@
 "use client";
 import { useState, useEffect } from "react";
 
+/* ---------------- FORMS ---------------- */
 import FormNotebook from "./FormNotebook";
 import FormSmartphone from "./FormSmartphone";
 import FormPlacaMae from "./FormPlacaMae";
+import FormFone from "./FormFone";
 import FormBase from "./FormAnuncioBase";
+
+/* ---------------- TYPES ---------------- */
+import { Anuncio, AnuncioBase } from "@/app/types/AnuncioBase";
+
+import {
+  AnuncioNotebook,
+  DetalhesNotebook,
+} from "@/app/types/DetalhesNotebook ";
 
 import {
   AnuncioSmartphone,
   DetalhesSmartphone,
 } from "@/app/types/DetalheSmartphone";
 
-import { Anuncio, AnuncioBase } from "@/app/types/AnuncioBase";
 import {
-  AnuncioNotebook,
-  DetalhesNotebook,
-} from "@/app/types/DetalhesNotebook ";
-import { AnuncioPlacaMae, DetalhesPlacaMae } from "@/app/types/DetalhePlacaMae";
+  AnuncioPlacaMae,
+  DetalhesPlacaMae,
+} from "@/app/types/DetalhePlacaMae";
 
+import { AnuncioFone, DetalhesFone } from "@/app/types/DetalhesFone";
+
+/* ---------------- PROPS ---------------- */
 type FormAnuncioProps = {
   initialData?: Anuncio | null;
   onSubmit: (data: Anuncio) => void;
@@ -28,8 +39,6 @@ export default function FormAnuncio({
   onSubmit,
 }: FormAnuncioProps) {
   /* ---------------- BASE ---------------- */
-
-  console.log(initialData);
   const [formData, setFormData] = useState<AnuncioBase>({
     nome: "",
     pros: [],
@@ -43,22 +52,23 @@ export default function FormAnuncio({
     categorias: [],
     criadoEm: new Date().toISOString(),
     destaque: false,
-    topico: "Smartphone"
+    topico: "Smartphone",
   });
 
   /* ---------------- NOTEBOOK ---------------- */
-  const [detalhesNotebook, setDetalhesNotebook] = useState<DetalhesNotebook>({
-    processador: "",
-    ramGB: 0,
-    armazenamento: "",
-    tipoArmazenamento: "SSD",
-    placaVideo: "",
-    tela: "",
-    sistema: "",
-    bateria: "",
-    peso: "",
-    portas: [],
-  });
+  const [detalhesNotebook, setDetalhesNotebook] =
+    useState<DetalhesNotebook>({
+      processador: "",
+      ramGB: 0,
+      armazenamento: "",
+      tipoArmazenamento: "SSD",
+      placaVideo: "",
+      tela: "",
+      sistema: "",
+      bateria: "",
+      peso: "",
+      portas: [],
+    });
 
   /* ---------------- SMARTPHONE ---------------- */
   const [detalhesSmartphone, setDetalhesSmartphone] =
@@ -74,22 +84,37 @@ export default function FormAnuncio({
     });
 
   /* ---------------- PLACA-MÃE ---------------- */
-  const [detalhesPlacaMae, setDetalhesPlacaMae] = useState<DetalhesPlacaMae>({
-    socket: "",
-    chipset: "",
-    formato: "ATX",
-    memoriaTipo: "DDR4",
-    maxRamGB: 0,
-    slotsRam: 0,
-    frequenciaMaxRamMHz: 0,
-    pciExpress: "",
-    gpuIntegradaSuporte: false,
-    armazenamento: { sata: 0, m2: 0 },
-    rede: { lan: "" },
-    usb: { usb2: 0, usb3: 0, usbC: 0 },
-    rgb: false,
-    overclock: false,
-    biosFlashback: false,
+  const [detalhesPlacaMae, setDetalhesPlacaMae] =
+    useState<DetalhesPlacaMae>({
+      socket: "",
+      chipset: "",
+      formato: "ATX",
+      memoriaTipo: "DDR4",
+      maxRamGB: 0,
+      slotsRam: 0,
+      frequenciaMaxRamMHz: 0,
+      pciExpress: "",
+      gpuIntegradaSuporte: false,
+      armazenamento: { sata: 0, m2: 0 },
+      rede: { lan: "" },
+      usb: { usb2: 0, usb3: 0, usbC: 0 },
+      rgb: false,
+      overclock: false,
+      biosFlashback: false,
+    });
+
+  /* ---------------- FONE ---------------- */
+  const [detalhesFone, setDetalhesFone] = useState<DetalhesFone>({
+    tipo: "TWS",
+    conectividade: "Bluetooth",
+    bluetoothVersao: "",
+    cancelamentoRuido: false,
+    bateriaHoras: 0,
+    bateriaComEstojoHoras: undefined,
+    resistenciaAgua: "",
+    microfone: true,
+    controles: "Toque",
+    compatibilidade: ["Android", "iOS"],
   });
 
   /* ---------------- EDIT MODE ---------------- */
@@ -99,17 +124,10 @@ export default function FormAnuncio({
     const { topico, detalhes, ...base } = initialData;
     setFormData({ ...base, topico });
 
-    if (topico === "Notebook") {
-      setDetalhesNotebook(detalhes);
-    }
-
-    if (topico === "Smartphone") {
-      setDetalhesSmartphone(detalhes);
-    }
-
-    if (topico === "Placa-mãe") {
-      setDetalhesPlacaMae(detalhes);
-    }
+    if (topico === "Notebook") setDetalhesNotebook(detalhes);
+    if (topico === "Smartphone") setDetalhesSmartphone(detalhes);
+    if (topico === "Placa-mãe") setDetalhesPlacaMae(detalhes);
+    if (topico === "Fone de ouvido") setDetalhesFone(detalhes);
   }, [initialData]);
 
   /* ---------------- BASE CHANGE ---------------- */
@@ -144,6 +162,12 @@ export default function FormAnuncio({
         topico: "Placa-mãe",
         detalhes: detalhesPlacaMae,
       } as AnuncioPlacaMae;
+    } else if (formData.topico === "Fone de ouvido") {
+      anuncioFinal = {
+        ...formData,
+        topico: "Fone de ouvido",
+        detalhes: detalhesFone,
+      } as AnuncioFone;
     } else {
       alert("Selecione um tópico válido");
       return;
@@ -160,14 +184,14 @@ export default function FormAnuncio({
       </h2>
 
       {/* BASE */}
-      <FormBase
-        data={{ ...formData, categorias: formData.categorias }}
-        onChange={handleChange}
-      />
+      <FormBase data={formData} onChange={handleChange} />
 
       {/* DINÂMICO */}
       {formData.topico === "Notebook" && (
-        <FormNotebook value={detalhesNotebook} onChange={setDetalhesNotebook} />
+        <FormNotebook
+          value={detalhesNotebook}
+          onChange={setDetalhesNotebook}
+        />
       )}
 
       {formData.topico === "Smartphone" && (
@@ -178,7 +202,14 @@ export default function FormAnuncio({
       )}
 
       {formData.topico === "Placa-mãe" && (
-        <FormPlacaMae value={detalhesPlacaMae} onChange={setDetalhesPlacaMae} />
+        <FormPlacaMae
+          value={detalhesPlacaMae}
+          onChange={setDetalhesPlacaMae}
+        />
+      )}
+
+      {formData.topico === "Fone de ouvido" && (
+        <FormFone value={detalhesFone} onChange={setDetalhesFone} />
       )}
 
       {/* BOTÃO */}

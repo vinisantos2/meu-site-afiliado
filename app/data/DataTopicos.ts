@@ -97,4 +97,45 @@ export const TOPICOS = <Array<Topico>>[
   //   categorias: [],
   // texto: "Descubra os melhores relógios e smartwatches para saúde, esportes, produtividade e uso diário. Organizamos os modelos por funcionalidades, estilos e faixas de preço, facilitando sua escolha com análises diretas e recomendações para cada tipo de usuário.",
   // },
+
+  {
+    titulo: "Fone de ouvido",
+    url: "fones-de-ouvido",
+    icon: "Headphones",
+    texto:
+      "Compare os melhores fones de ouvido e headphones sem fio do mercado. Avaliamos qualidade de som, bateria, conforto e custo-benefício para te ajudar a escolher o modelo ideal.",
+    categorias: [
+      "Até 100R$",
+      "Até 200R$",
+      "Até 300R$",
+      "Até 500R$",
+
+      "Top 10 Fones Sem Fio",
+      "Melhor Custo-Benefício",
+      "Mais Vendidos",
+      "Melhor Avaliação",
+
+      "In-Ear (intra-auricular)",
+      "On-Ear",
+      "Over-Ear",
+      "True Wireless (TWS)",
+
+      "Com Cancelamento de Ruído",
+      "Sem Cancelamento de Ruído",
+      "Boa Bateria",
+      "Carregamento Rápido",
+
+      "Para Academia",
+      "Para Trabalho",
+      "Para Jogos",
+      "Para Viagens",
+
+      "JBL",
+      "Samsung",
+      "Apple (AirPods)",
+      "Xiaomi",
+      "Edifier",
+      "Philips",
+    ],
+  },
 ];

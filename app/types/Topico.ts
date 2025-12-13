@@ -9,4 +9,4 @@ export interface Topico {
   texto: string
 }
 
-export type TopicoTitulo = "Smartphone" | "Notebook" | "Placa-mãe";
+export type TopicoTitulo = "Smartphone" | "Notebook" | "Placa-mãe"| "Fone de ouvido";
