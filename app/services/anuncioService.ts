@@ -20,7 +20,7 @@ export async function salvarAnuncio(anuncio: Anuncio) {
   try {
     await addDoc(AnunciosCollection, {
       ...anuncio,
-      criadoEm: anuncio.criadoEm ?? new Date().toISOString(),
+      criadoEm:  new Date().toISOString(),
     });
   } catch (error) {
     console.error("Erro ao salvar usuário:", error);
@@ -76,7 +76,7 @@ export async function editarAnuncio(
   const docRef = doc(db, "anuncios", id);
   const pedidoAtualizado = {
     ...anuncio,
-    criadoEm: anuncio.criadoEm ?? new Date().toISOString(),
+    criadoEm: new Date().toISOString(),
   };
   await updateDoc(docRef, pedidoAtualizado);
 }

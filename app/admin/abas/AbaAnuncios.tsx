@@ -15,7 +15,7 @@ export default function AbaAnunciosAdmin() {
   const [anuncios, setAnuncios] = useState<AnuncioComId[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const [busca, setBusca] = useState("");       // Busca por nome
+  const [busca, setBusca] = useState(""); // Busca por nome
   const [filtroTopico, setFiltroTopico] = useState(""); // Novo filtro por tópico
 
   const route = useRouter();
@@ -27,6 +27,9 @@ export default function AbaAnunciosAdmin() {
   async function fetchAnuncios() {
     setLoading(true);
     const lista = await buscarTodosAnuncios();
+    lista.sort(
+      (a, b) => new Date(a.criadoEm).getTime() - new Date(b.criadoEm).getTime()
+    );
     setAnuncios(lista);
     setLoading(false);
   }
@@ -43,7 +46,9 @@ export default function AbaAnunciosAdmin() {
 
   // 🔥 FILTRO FINAL (busca + tópico)
   const anunciosFiltrados = anuncios.filter((anuncio) => {
-    const combinaBusca = anuncio.nome.toLowerCase().includes(busca.toLowerCase());
+    const combinaBusca = anuncio.nome
+      .toLowerCase()
+      .includes(busca.toLowerCase());
     const combinaTopico = filtroTopico ? anuncio.topico === filtroTopico : true;
     return combinaBusca && combinaTopico;
   });
@@ -117,9 +122,7 @@ export default function AbaAnunciosAdmin() {
               key={anuncio.uid}
               anuncio={anuncio}
               onExcluir={() => handleExcluir(anuncio.uid)}
-              onAtualizar={() =>
-                route.push(`/admin/anuncio/${anuncio.uid}`)
-              }
+              onAtualizar={() => route.push(`/admin/anuncio/${anuncio.uid}`)}
             />
           ))}
         </div>

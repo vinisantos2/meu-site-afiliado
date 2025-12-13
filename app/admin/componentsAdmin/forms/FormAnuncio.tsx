@@ -28,6 +28,8 @@ export default function FormAnuncio({
   onSubmit,
 }: FormAnuncioProps) {
   /* ---------------- BASE ---------------- */
+
+  console.log(initialData);
   const [formData, setFormData] = useState<AnuncioBase>({
     nome: "",
     pros: [],
@@ -41,7 +43,7 @@ export default function FormAnuncio({
     categorias: [],
     criadoEm: new Date().toISOString(),
     destaque: false,
-    topico: "",
+    topico: "Smartphone"
   });
 
   /* ---------------- NOTEBOOK ---------------- */

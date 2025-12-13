@@ -31,6 +31,10 @@ export default function CardAnuncioAdmin({
             })
           : "Preço não informado"}
       </p>
+      {/* atualizado em  */}
+      <p className="text-gray-900font-bold text-xs mb-2">
+       Atualizado em {anuncio.criadoEm ? anuncio.criadoEm : "Data não cadastrada aind"}
+      </p>
 
       {anuncio.links.map((link, key) => (
         <BtnMercadoLivre key={key} link={link} />

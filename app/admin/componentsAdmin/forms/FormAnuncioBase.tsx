@@ -14,7 +14,7 @@ type FormBaseProps = {
 
 export default function FormBase({ data, onChange }: FormBaseProps) {
 
-  const topicoSelecionado = TOPICOS.find((t) => t.url === data.topico);
+  const topicoSelecionado = TOPICOS.find((t) => t.titulo === data.topico);
   
   return (
     <div className="space-y-6">
@@ -37,6 +37,7 @@ export default function FormBase({ data, onChange }: FormBaseProps) {
           label: t.titulo,
         }))}
       />
+      
 
       {/* ✅ CATEGORIAS */}
       {/* ✅ CATEGORIAS (DEPENDENTES DO TÓPICO) */}
