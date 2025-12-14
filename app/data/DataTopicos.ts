@@ -114,10 +114,12 @@ export const TOPICOS = <Array<Topico>>[
       "Melhor Custo-Benefício",
       "Mais Vendidos",
       "Melhor Avaliação",
+      "Premium",
+      "Com Fio",
 
-      "In-Ear (intra-auricular)",
-      "On-Ear",
-      "Over-Ear",
+      // "In-Ear (intra-auricular)",
+      // "On-Ear",
+      // "Over-Ear",
       "True Wireless (TWS)",
 
       "Com Cancelamento de Ruído",
@@ -135,7 +137,6 @@ export const TOPICOS = <Array<Topico>>[
       "Apple (AirPods)",
       "Xiaomi",
       "Edifier",
-      "Philips",
     ],
   },
 ];
