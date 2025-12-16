@@ -117,15 +117,8 @@ export const TOPICOS = <Array<Topico>>[
       "Premium",
       "Com Fio",
 
-      // "In-Ear (intra-auricular)",
-      // "On-Ear",
-      // "Over-Ear",
       "True Wireless (TWS)",
-
       "Com Cancelamento de Ruído",
-      "Sem Cancelamento de Ruído",
-      "Boa Bateria",
-      "Carregamento Rápido",
 
       "Para Academia",
       "Para Trabalho",
@@ -137,6 +130,45 @@ export const TOPICOS = <Array<Topico>>[
       "Apple (AirPods)",
       "Xiaomi",
       "Edifier",
+    ],
+  },
+
+  {
+    titulo: "Smartwatch",
+    url: "smartwatch",
+    icon: "Watch",
+    texto:
+      "Compare os melhores smartwatches do mercado. Avaliamos recursos de saúde, bateria, compatibilidade com Android e iOS, além do custo-benefício para te ajudar a escolher o modelo ideal.",
+    categorias: [
+      // Preço
+      "Até 200R$",
+      "Até 300R$",
+      "Até 500R$",
+      "Premium",
+
+      // Rankings
+      "Top Smartwatch",
+      "Melhor Custo-Benefício",
+      "Mais Vendidos",
+      "Smartwatch Barato",
+
+      // Uso
+      "Para Academia",
+      "Para Corrida",
+      "Para Trabalho",
+      "Saúde e Monitoramento",
+
+      // Sistemas
+      "Android",
+      "iOS",
+
+      // Marcas
+      "Apple",
+      "Samsung",
+      "Xiaomi",
+      "Huawei",
+      "Amazfit",
+      "QCY",
     ],
   },
 ];

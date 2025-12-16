@@ -21,12 +21,14 @@ import {
   DetalhesSmartphone,
 } from "@/app/types/DetalheSmartphone";
 
-import {
-  AnuncioPlacaMae,
-  DetalhesPlacaMae,
-} from "@/app/types/DetalhePlacaMae";
+import { AnuncioPlacaMae, DetalhesPlacaMae } from "@/app/types/DetalhePlacaMae";
 
 import { AnuncioFone, DetalhesFone } from "@/app/types/DetalhesFone";
+import {
+  AnuncioSmartWatch,
+  DetalhesSmartwatch,
+} from "@/app/types/DetelhesSmartwatch";
+import FormSmartWatch from "./FormSmartWach";
 
 /* ---------------- PROPS ---------------- */
 type FormAnuncioProps = {
@@ -55,20 +57,34 @@ export default function FormAnuncio({
     topico: "Smartphone",
   });
 
-  /* ---------------- NOTEBOOK ---------------- */
-  const [detalhesNotebook, setDetalhesNotebook] =
-    useState<DetalhesNotebook>({
-      processador: "",
-      ramGB: 0,
-      armazenamento: "",
-      tipoArmazenamento: "SSD",
-      placaVideo: "",
-      tela: "",
-      sistema: "",
-      bateria: "",
-      peso: "",
-      portas: [],
+  /* ---------------- SMARTWATCH ---------------- */
+  const [detalhesSmartWatch, setDetalhesSmartWatch] =
+    useState<DetalhesSmartwatch>({
+      tipo: "TWS",
+      conectividade: "Bluetooth",
+      bluetoothVersao: "",
+      cancelamentoRuido: false,
+      bateriaHoras: 0,
+      bateriaComEstojoHoras: undefined,
+      resistenciaAgua: "",
+      microfone: true,
+      controles: "Toque",
+      compatibilidade: ["Android", "iOS"],
     });
+
+  /* ---------------- NOTEBOOK ---------------- */
+  const [detalhesNotebook, setDetalhesNotebook] = useState<DetalhesNotebook>({
+    processador: "",
+    ramGB: 0,
+    armazenamento: "",
+    tipoArmazenamento: "SSD",
+    placaVideo: "",
+    tela: "",
+    sistema: "",
+    bateria: "",
+    peso: "",
+    portas: [],
+  });
 
   /* ---------------- SMARTPHONE ---------------- */
   const [detalhesSmartphone, setDetalhesSmartphone] =
@@ -84,24 +100,23 @@ export default function FormAnuncio({
     });
 
   /* ---------------- PLACA-MÃE ---------------- */
-  const [detalhesPlacaMae, setDetalhesPlacaMae] =
-    useState<DetalhesPlacaMae>({
-      socket: "",
-      chipset: "",
-      formato: "ATX",
-      memoriaTipo: "DDR4",
-      maxRamGB: 0,
-      slotsRam: 0,
-      frequenciaMaxRamMHz: 0,
-      pciExpress: "",
-      gpuIntegradaSuporte: false,
-      armazenamento: { sata: 0, m2: 0 },
-      rede: { lan: "" },
-      usb: { usb2: 0, usb3: 0, usbC: 0 },
-      rgb: false,
-      overclock: false,
-      biosFlashback: false,
-    });
+  const [detalhesPlacaMae, setDetalhesPlacaMae] = useState<DetalhesPlacaMae>({
+    socket: "",
+    chipset: "",
+    formato: "ATX",
+    memoriaTipo: "DDR4",
+    maxRamGB: 0,
+    slotsRam: 0,
+    frequenciaMaxRamMHz: 0,
+    pciExpress: "",
+    gpuIntegradaSuporte: false,
+    armazenamento: { sata: 0, m2: 0 },
+    rede: { lan: "" },
+    usb: { usb2: 0, usb3: 0, usbC: 0 },
+    rgb: false,
+    overclock: false,
+    biosFlashback: false,
+  });
 
   /* ---------------- FONE ---------------- */
   const [detalhesFone, setDetalhesFone] = useState<DetalhesFone>({
@@ -128,6 +143,7 @@ export default function FormAnuncio({
     if (topico === "Smartphone") setDetalhesSmartphone(detalhes);
     if (topico === "Placa-mãe") setDetalhesPlacaMae(detalhes);
     if (topico === "Fone de ouvido") setDetalhesFone(detalhes);
+    if (topico === "Smartwatch") setDetalhesSmartWatch(detalhes);
   }, [initialData]);
 
   /* ---------------- BASE CHANGE ---------------- */
@@ -168,6 +184,13 @@ export default function FormAnuncio({
         topico: "Fone de ouvido",
         detalhes: detalhesFone,
       } as AnuncioFone;
+      0;
+    } else if (formData.topico === "Smartwatch") {
+      anuncioFinal = {
+        ...formData,
+        topico: "Smartwatch",
+        detalhes: detalhesSmartWatch,
+      } as AnuncioSmartWatch;
     } else {
       alert("Selecione um tópico válido");
       return;
@@ -175,6 +198,8 @@ export default function FormAnuncio({
 
     onSubmit(anuncioFinal);
   };
+
+  console.log(formData);
 
   /* ---------------- RENDER ---------------- */
   return (
@@ -188,10 +213,7 @@ export default function FormAnuncio({
 
       {/* DINÂMICO */}
       {formData.topico === "Notebook" && (
-        <FormNotebook
-          value={detalhesNotebook}
-          onChange={setDetalhesNotebook}
-        />
+        <FormNotebook value={detalhesNotebook} onChange={setDetalhesNotebook} />
       )}
 
       {formData.topico === "Smartphone" && (
@@ -202,14 +224,18 @@ export default function FormAnuncio({
       )}
 
       {formData.topico === "Placa-mãe" && (
-        <FormPlacaMae
-          value={detalhesPlacaMae}
-          onChange={setDetalhesPlacaMae}
-        />
+        <FormPlacaMae value={detalhesPlacaMae} onChange={setDetalhesPlacaMae} />
       )}
 
       {formData.topico === "Fone de ouvido" && (
         <FormFone value={detalhesFone} onChange={setDetalhesFone} />
+      )}
+
+      {formData.topico === "Smartwatch" && (
+        <FormSmartWatch
+          value={detalhesSmartWatch}
+          onChange={setDetalhesSmartWatch}
+        />
       )}
 
       {/* BOTÃO */}

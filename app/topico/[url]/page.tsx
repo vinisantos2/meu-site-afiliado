@@ -23,9 +23,9 @@ export default function Topico({
   const topicoAtual = TOPICOS.find((t) => t.url === url);
   const categoriasDoTopico = topicoAtual?.categorias || [];
 
-  // Define categoria inicial: "Top 10 ..."
+  // Define categoria inicial: "Top"
   const categoriaTop10 = categoriasDoTopico.find((c) =>
-    c.toLowerCase().includes("top 10")
+    c.toLowerCase().includes("top")
   );
 
   // Estado do filtro

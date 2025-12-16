@@ -6,7 +6,12 @@ export interface Topico {
   url: string;
   filtro: string;
   categorias: string[];
-  texto: string
+  texto: string;
 }
 
-export type TopicoTitulo = "Smartphone" | "Notebook" | "Placa-mãe"| "Fone de ouvido";
+export type TopicoTitulo =
+  | "Smartphone"
+  | "Notebook"
+  | "Placa-mãe"
+  | "Fone de ouvido"
+  | "Smartwatch";

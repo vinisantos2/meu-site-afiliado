@@ -2,13 +2,15 @@ import { AnuncioPlacaMae } from "./DetalhePlacaMae";
 import { AnuncioFone } from "./DetalhesFone";
 import { AnuncioSmartphone } from "./DetalheSmartphone";
 import { AnuncioNotebook } from "./DetalhesNotebook ";
+import { AnuncioSmartWatch } from "./DetelhesSmartwatch";
 import { TopicoTitulo } from "./Topico";
 
 export type Anuncio =
   | AnuncioNotebook
   | AnuncioSmartphone
   | AnuncioPlacaMae
-  | AnuncioFone;
+  | AnuncioFone
+  | AnuncioSmartWatch;
 
 export interface AnuncioBase {
   nome: string;
