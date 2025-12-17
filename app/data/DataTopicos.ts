@@ -171,4 +171,40 @@ export const TOPICOS = <Array<Topico>>[
       "QCY",
     ],
   },
+
+  {
+    titulo: "Smart TV",
+    url: "smart-tv",
+    icon: "Tv",
+    texto:
+      "Compare as melhores Smart TVs do mercado. Avaliamos qualidade de imagem, sistema operacional, recursos inteligentes e custo-benefício para te ajudar a escolher a TV ideal para sua casa.",
+    categorias: [
+      // Tamanho
+      'Até 43"',
+      '50" a 55"',
+      'Acima de 60"',
+
+      // Resolução
+      "Full HD",
+      "4K",
+      "8K",
+
+      // Rankings
+      "Top Smart TV",
+      "Melhor Custo-Benefício",
+      "Mais Vendidas",
+
+      // Sistemas
+      "Android TV / Google TV",
+      "Tizen",
+      "webOS",
+
+      // Marcas
+      "Samsung",
+      "LG",
+      "Sony",
+      "Philips",
+      "TCL",
+    ],
+  },
 ];

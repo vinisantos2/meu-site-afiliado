@@ -14,4 +14,5 @@ export type TopicoTitulo =
   | "Notebook"
   | "Placa-mãe"
   | "Fone de ouvido"
-  | "Smartwatch";
+  | "Smartwatch"
+  | "Smart TV";

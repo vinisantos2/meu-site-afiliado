@@ -29,6 +29,12 @@ import {
   DetalhesSmartwatch,
 } from "@/app/types/DetelhesSmartwatch";
 import FormSmartWatch from "./FormSmartWach";
+import { useFormBase } from "../../hooks/useFormBase";
+import { useDetalhesSmartwatch } from "../../hooks/useDetalhesSmartwatch";
+import { useDetalhesNotebook } from "../../hooks/useDetalhesNotebook";
+import { useDetalhesSmartphone } from "../../hooks/useDetalhesSmartphone";
+import { useDetalhesPlacaMae } from "../../hooks/useDetalhesPlacaMae";
+import { useDetalhesFone } from "../../hooks/useDetalhesFone";
 
 /* ---------------- PROPS ---------------- */
 type FormAnuncioProps = {
@@ -40,97 +46,22 @@ export default function FormAnuncio({
   initialData = null,
   onSubmit,
 }: FormAnuncioProps) {
-  /* ---------------- BASE ---------------- */
-  const [formData, setFormData] = useState<AnuncioBase>({
-    nome: "",
-    pros: [],
-    contras: [],
-    opiniao: "",
-    veredito: "",
-    nota: 0,
-    links: [],
-    valor: undefined,
-    imagens: [],
-    categorias: [],
-    criadoEm: new Date().toISOString(),
-    destaque: false,
-    topico: "Smartphone",
-  });
+  const { formData, setFormData, updateField, resetForm } = useFormBase();
 
   /* ---------------- SMARTWATCH ---------------- */
-  const [detalhesSmartWatch, setDetalhesSmartWatch] =
-    useState<DetalhesSmartwatch>({
-      tipo: "TWS",
-      conectividade: "Bluetooth",
-      bluetoothVersao: "",
-      cancelamentoRuido: false,
-      bateriaHoras: 0,
-      bateriaComEstojoHoras: undefined,
-      resistenciaAgua: "",
-      microfone: true,
-      controles: "Toque",
-      compatibilidade: ["Android", "iOS"],
-    });
+  const { detalhesSmartWatch, setDetalhesSmartWatch } = useDetalhesSmartwatch();
 
   /* ---------------- NOTEBOOK ---------------- */
-  const [detalhesNotebook, setDetalhesNotebook] = useState<DetalhesNotebook>({
-    processador: "",
-    ramGB: 0,
-    armazenamento: "",
-    tipoArmazenamento: "SSD",
-    placaVideo: "",
-    tela: "",
-    sistema: "",
-    bateria: "",
-    peso: "",
-    portas: [],
-  });
+  const { detalhesNotebook, setDetalhesNotebook } = useDetalhesNotebook();
 
   /* ---------------- SMARTPHONE ---------------- */
-  const [detalhesSmartphone, setDetalhesSmartphone] =
-    useState<DetalhesSmartphone>({
-      processador: "",
-      ramGB: 0,
-      armazenamentoGB: 0,
-      tela: "",
-      bateriaMah: 0,
-      cameras: "",
-      sistema: "",
-      tem5G: false,
-    });
+  const { detalhesSmartphone, setDetalhesSmartphone } = useDetalhesSmartphone();
 
   /* ---------------- PLACA-MÃE ---------------- */
-  const [detalhesPlacaMae, setDetalhesPlacaMae] = useState<DetalhesPlacaMae>({
-    socket: "",
-    chipset: "",
-    formato: "ATX",
-    memoriaTipo: "DDR4",
-    maxRamGB: 0,
-    slotsRam: 0,
-    frequenciaMaxRamMHz: 0,
-    pciExpress: "",
-    gpuIntegradaSuporte: false,
-    armazenamento: { sata: 0, m2: 0 },
-    rede: { lan: "" },
-    usb: { usb2: 0, usb3: 0, usbC: 0 },
-    rgb: false,
-    overclock: false,
-    biosFlashback: false,
-  });
+  const { detalhesPlacaMae, setDetalhesPlacaMae } = useDetalhesPlacaMae();
 
   /* ---------------- FONE ---------------- */
-  const [detalhesFone, setDetalhesFone] = useState<DetalhesFone>({
-    tipo: "TWS",
-    conectividade: "Bluetooth",
-    bluetoothVersao: "",
-    cancelamentoRuido: false,
-    bateriaHoras: 0,
-    bateriaComEstojoHoras: undefined,
-    resistenciaAgua: "",
-    microfone: true,
-    controles: "Toque",
-    compatibilidade: ["Android", "iOS"],
-  });
+  const { detalhesFone, setDetalhesFone } = useDetalhesFone();
 
   /* ---------------- EDIT MODE ---------------- */
   useEffect(() => {
@@ -151,7 +82,7 @@ export default function FormAnuncio({
     field: K,
     value: AnuncioBase[K]
   ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    updateField(field, value);
   };
 
   /* ---------------- SUBMIT ---------------- */
@@ -184,7 +115,6 @@ export default function FormAnuncio({
         topico: "Fone de ouvido",
         detalhes: detalhesFone,
       } as AnuncioFone;
-      0;
     } else if (formData.topico === "Smartwatch") {
       anuncioFinal = {
         ...formData,
