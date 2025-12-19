@@ -3,7 +3,7 @@ import { AnuncioBase } from "./AnuncioBase";
 export interface DetalhesSmartTV {
   tamanhoTelaPolegadas: number; // ex: 43, 55, 65
   resolucao: "HD" | "Full HD" | "4K" | "8K";
-  tipoTela: "LED" | "QLED" | "OLED" | "Mini-LED";
+  tipoTela: "LED" | "QLED" | "OLED" | "Mini-LED" | "QNED";
   taxaAtualizacaoHz: number; // ex: 60, 120
   sistemaOperacional:
     | "Android TV"
@@ -15,7 +15,7 @@ export interface DetalhesSmartTV {
   portasHDMI: number;
   portasUSB: number;
   assistenteVoz?: ("Google Assistant" | "Alexa" | "Bixby")[];
-  hdr?: ("HDR10" | "HDR10+" | "Dolby Vision")[];
+  hdr?: ("HDR10" | "HDR10+" | "Dolby Vision"| "HLG")[];
   somWatts?: number;
   gamer?: boolean; // VRR, ALLM, modo jogo
 }

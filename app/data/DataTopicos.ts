@@ -15,7 +15,6 @@ export const TOPICOS = <Array<Topico>>[
       // Ranking
       "Top 10 Notebooks",
       "Melhor Custo-Benefício",
-      // "Mais Vendidos",
 
       // Uso
       "Para Estudo",
@@ -28,7 +27,10 @@ export const TOPICOS = <Array<Topico>>[
       // Sistemas e linhas especiais
       "MacBook",
     ],
+
+    dica: "Antes de comprar um notebook, avalie o tipo de uso (estudo, trabalho, programação ou jogos), o processador, a quantidade de memória RAM (mínimo de 8GB para bom desempenho), o tipo de armazenamento (SSD) e o tamanho da tela. Esses fatores fazem toda a diferença na experiência e na durabilidade do equipamento.",
   },
+
   {
     titulo: "Smartphone",
     url: "smartphone",
