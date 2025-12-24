@@ -3,6 +3,7 @@ import Footer from "./components/Footer";
 import TopicosGrid from "./components/TopicosGrid";
 import NavPadrao from "./components/NavPadrao";
 import Apresentacao from "./components/Apresentacao";
+import Publicacoes from "./components/Publicacoes";
 
 
 export default async function Home() {
@@ -11,9 +12,9 @@ export default async function Home() {
   return (
     <div className="font-sans min-h-screen bg-gray-50">
       <NavPadrao />
-      <main className="max-w-6xl mx-auto p-5 border-8">
+      <main className="border-2 border-amber-300">
         <Apresentacao />
-        <TopicosGrid />
+        <Publicacoes />
         <SecaoCupon />
       </main>
 
