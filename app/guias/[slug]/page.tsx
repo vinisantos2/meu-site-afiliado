@@ -1,3 +1,5 @@
+import CardBloco from "@/app/components/CardBloco";
+import NavPadrao from "@/app/components/NavPadrao";
 import { PUBLICACOES } from "@/app/data/Categorias";
 import { notFound } from "next/navigation";
 import { use } from "react";
@@ -17,13 +19,10 @@ export default function GuiaPage({
 
   return (
     <main className="bg-gray-50 dark:bg-zinc-950">
+      <NavPadrao />
       <section className="max-w-4xl mx-auto px-6 py-16">
         {/* Cabeçalho */}
         <header className="mb-10">
-          <span className="inline-block mb-4 text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
-            {publicacao.tipo}
-          </span>
-
           <h1 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-zinc-100 mb-4 leading-tight">
             {publicacao.titulo}
           </h1>
@@ -34,40 +33,10 @@ export default function GuiaPage({
         </header>
 
         {/* Conteúdo */}
-        <article
-          className="
-            prose prose-zinc max-w-none
-            dark:prose-invert
-            prose-headings:scroll-mt-24
-          "
-        >
-          <p>
-            Aqui entra o conteúdo completo do guia. Depois você pode transformar
-            isso em texto longo, listas, imagens e links internos para categorias
-            e rankings.
-          </p>
-
-          <h2>O que você deve analisar antes de comprar</h2>
-
-          <p>
-            Cada tipo de produto possui características específicas que fazem
-            toda a diferença no dia a dia. Avaliar corretamente evita gastos
-            desnecessários e arrependimentos.
-          </p>
-
-          <ul>
-            <li>Desempenho e processador</li>
-            <li>Qualidade da tela</li>
-            <li>Duração da bateria</li>
-            <li>Custo-benefício</li>
-          </ul>
-
-          <h2>Vale a pena investir agora?</h2>
-
-          <p>
-            Antes de decidir, compare modelos, leia avaliações reais e veja
-            rankings atualizados para fazer a melhor escolha.
-          </p>
+        <article className="prose dark:prose-invert max-w-none">
+          {publicacao.blocos.map((bloco, index) => (
+            <CardBloco key={index} blocoConteudo={bloco} />
+          ))}
         </article>
 
         {/* CTA */}

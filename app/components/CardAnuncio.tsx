@@ -1,9 +1,10 @@
 "use client";
 
+import { AnuncioComId } from "@/app/types/AnuncioBase";
 import { useState } from "react";
-import { AnuncioComId } from "../types/AnuncioBase";
 import ImgCard from "./ImgCard";
 import BtnLinks from "./btnLinks";
+
 
 type Props = {
   anuncio: AnuncioComId;

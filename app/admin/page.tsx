@@ -9,6 +9,7 @@ import AbaAddAnuncio from "./abas/AbaAddAnuncio";
 import { useAuthRedirectAdmin } from "./hooks/useAuthRedirectAdmin";
 import AbaCupons from "./abas/AbaCupons";
 import AbaAddCupon from "./abas/AbaAddCupon";
+import AbaPublicacoes from "./abas/AbaPublicacoes";
 
 export default function Dashboard() {
   const { loading } = useAuthRedirectAdmin();
@@ -21,6 +22,7 @@ export default function Dashboard() {
     | "Tópicos"
     | "Cupons"
     | "Adicionar Cupons"
+    | "Publicações"
   >("anúncios");
 
   const [darkMode, setDarkMode] = useState(false);
@@ -49,7 +51,6 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 transition-colors">
-
       {/* Sidebar */}
       <aside className="w-64 bg-gray-800 dark:bg-gray-950 text-white flex flex-col py-6 px-4 transition-colors">
         <h2 className="text-xl font-bold mb-6">Admin</h2>
@@ -89,6 +90,14 @@ export default function Dashboard() {
         >
           Cupons
         </button>
+        {/* Botão publicações */}
+        <button
+          onClick={() => setAba("Publicações")}
+          className={`text-left px-4 py-2 rounded transition mb-2 
+          ${aba === "Cupons" ? "bg-gray-700" : "hover:bg-gray-700"}`}
+        >
+          Publicações
+        </button>
 
         {/* Botão Dark Mode */}
         <button
@@ -116,6 +125,7 @@ export default function Dashboard() {
         {aba === "Adicionar anúncio" && <AbaAddAnuncio />}
         {aba === "Adicionar Cupons" && <AbaAddCupon />}
         {aba === "Cupons" && <AbaCupons />}
+        {aba === "Publicações" && <AbaPublicacoes />}
       </main>
     </div>
   );

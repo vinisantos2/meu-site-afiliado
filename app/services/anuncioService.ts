@@ -87,7 +87,7 @@ export async function excluirAnuncio(id: string) {
   await deleteDoc(docRef);
 }
 
-export async function importarDados() {
+export async function importarAnuncios() {
   for (const item of DADOS) {
     try {
       await addDoc(AnunciosCollection, item);
