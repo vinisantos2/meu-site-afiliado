@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import CardPublicacaoAdmin from "../componentsAdmin/CardPublicacaoAdmin";
 import { PublicacaoComID } from "@/app/types/Publicacao";
 import ButtonPadrao from "@/app/components/BottonPadrao";
+import { OPCOES_TIPO_PUBLICACAO } from "@/app/data/Constants";
+import SelectPadrao from "@/app/components/SelectPadrao";
 
 export default function AbaPublicacoes() {
   const [publicacoes, setPublicacoes] = useState<PublicacaoComID[]>([]);
@@ -95,24 +97,12 @@ export default function AbaPublicacoes() {
         </div>
 
         {/* Filtro por tipo */}
-        <div>
-          <select
-            value={filtroTipo}
-            onChange={(e) => setFiltroTipo(e.target.value)}
-            className="
-              w-full p-3 rounded-lg border 
-              bg-white text-gray-900 
-              dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700
-              focus:outline-none focus:ring-2 focus:ring-blue-500
-            "
-          >
-            <option value="">Todos os tipos</option>
-            <option value="guia">Guia</option>
-            <option value="artigo">Artigo</option>
-            <option value="checklist">Checklist</option>
-            <option value="ranking">Ranking</option>
-          </select>
-        </div>
+        <SelectPadrao
+          value={filtroTipo}
+          options={OPCOES_TIPO_PUBLICACAO}
+          placeholder="Selecione o tipo"
+          onChange={(value) => setFiltroTipo(value)}
+        />
       </div>
 
       {/* Conteúdo */}

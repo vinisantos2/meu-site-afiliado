@@ -18,15 +18,13 @@ import {
 
 import {
   AnuncioSmartphone,
-  DetalhesSmartphone,
 } from "@/app/types/DetalheSmartphone";
 
-import { AnuncioPlacaMae, DetalhesPlacaMae } from "@/app/types/DetalhePlacaMae";
+import { AnuncioPlacaMae } from "@/app/types/DetalhePlacaMae";
 
-import { AnuncioFone, DetalhesFone } from "@/app/types/DetalhesFone";
+import { AnuncioFone } from "@/app/types/DetalhesFone";
 import {
   AnuncioSmartWatch,
-  DetalhesSmartwatch,
 } from "@/app/types/DetelhesSmartwatch";
 import FormSmartWatch from "./FormSmartWach";
 import { useFormBase } from "../../hooks/useFormBase";

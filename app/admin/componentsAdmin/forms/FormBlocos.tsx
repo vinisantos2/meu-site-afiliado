@@ -1,6 +1,10 @@
 "use client";
 
+import ButtonPadrao from "@/app/components/BottonPadrao";
 import SelectPadrao from "@/app/components/SelectPadrao";
+import InputPadrao from "@/app/components/Input";
+import TextareaPadrao from "@/app/components/TextareaPadrao";
+
 import { BlocoConteudo } from "@/app/types/Publicacao";
 
 const opcoesBlocos = [
@@ -17,27 +21,17 @@ type Props = {
 
 export default function FormBlocos({ blocos, onChange }: Props) {
   function adicionarBloco(tipo: BlocoConteudo["tipo"]) {
-    let novoBloco: BlocoConteudo;
-
-    switch (tipo) {
-      case "titulo":
-        novoBloco = { tipo: "titulo", conteudo: "" };
-        break;
-      case "paragrafo":
-        novoBloco = { tipo: "paragrafo", conteudo: "" };
-        break;
-      case "lista":
-        novoBloco = { tipo: "lista", itens: [""] };
-        break;
-      case "check":
-        novoBloco = {
-          tipo: "check",
-          itens: [{ texto: "", marcado: false }],
-        };
-        break;
-      default:
-        return;
-    }
+    const novoBloco: BlocoConteudo =
+      tipo === "titulo"
+        ? { tipo: "titulo", conteudo: "" }
+        : tipo === "paragrafo"
+        ? { tipo: "paragrafo", conteudo: "" }
+        : tipo === "lista"
+        ? { tipo: "lista", itens: [""] }
+        : {
+            tipo: "check",
+            itens: [{ texto: "", marcado: false }],
+          };
 
     onChange([...blocos, novoBloco]);
   }
@@ -58,33 +52,33 @@ export default function FormBlocos({ blocos, onChange }: Props) {
         Conteúdo da publicação
       </h2>
 
-      {/* Lista de blocos */}
+      {/* Blocos */}
       {blocos.map((bloco, index) => (
         <div
           key={index}
           className="
-            border rounded-lg p-4
+            rounded-lg border p-4 space-y-4
             bg-gray-50 dark:bg-gray-800
             dark:border-gray-700
           "
         >
-          <div className="flex justify-between items-center mb-3">
-            <span className="text-sm uppercase text-gray-500">
+          <div className="flex justify-between items-center">
+            <span className="text-xs uppercase text-gray-500">
               {bloco.tipo}
             </span>
+
             <button
               type="button"
               onClick={() => removerBloco(index)}
-              className="text-sm text-red-600 hover:underline"
+              className="text-xs text-red-600 hover:underline"
             >
               Remover
             </button>
           </div>
 
-          {/* Editor por tipo */}
+          {/* TÍTULO */}
           {bloco.tipo === "titulo" && (
-            <input
-              className="w-full p-2 rounded border"
+            <InputPadrao
               placeholder="Título do bloco"
               value={bloco.conteudo}
               onChange={(e) =>
@@ -96,11 +90,11 @@ export default function FormBlocos({ blocos, onChange }: Props) {
             />
           )}
 
+          {/* PARÁGRAFO */}
           {bloco.tipo === "paragrafo" && (
-            <textarea
-              className="w-full p-2 rounded border"
-              rows={4}
+            <TextareaPadrao
               placeholder="Texto do parágrafo"
+              rows={4}
               value={bloco.conteudo}
               onChange={(e) =>
                 atualizarBloco(index, {
@@ -111,12 +105,13 @@ export default function FormBlocos({ blocos, onChange }: Props) {
             />
           )}
 
+          {/* LISTA */}
           {bloco.tipo === "lista" && (
             <div className="space-y-2">
               {bloco.itens.map((item, i) => (
-                <input
+                <InputPadrao
                   key={i}
-                  className="w-full p-2 rounded border"
+                  placeholder={`Item ${i + 1}`}
                   value={item}
                   onChange={(e) => {
                     const novosItens = [...bloco.itens];
@@ -128,31 +123,33 @@ export default function FormBlocos({ blocos, onChange }: Props) {
                   }}
                 />
               ))}
-              <button
-                type="button"
+
+              <ButtonPadrao
+                texto="+ Adicionar item"
                 onClick={() =>
                   atualizarBloco(index, {
                     ...bloco,
                     itens: [...bloco.itens, ""],
                   })
                 }
-                className="text-sm text-blue-600"
-              >
-                + Adicionar item
-              </button>
+              />
             </div>
           )}
 
+          {/* CHECKLIST */}
           {bloco.tipo === "check" && (
             <div className="space-y-2">
               {bloco.itens.map((item, i) => (
-                <input
+                <InputPadrao
                   key={i}
-                  className="w-full p-2 rounded border"
+                  placeholder={`Item ${i + 1}`}
                   value={item.texto}
                   onChange={(e) => {
                     const novosItens = [...bloco.itens];
-                    novosItens[i].texto = e.target.value;
+                    novosItens[i] = {
+                      ...novosItens[i],
+                      texto: e.target.value,
+                    };
                     atualizarBloco(index, {
                       ...bloco,
                       itens: novosItens,
@@ -160,36 +157,32 @@ export default function FormBlocos({ blocos, onChange }: Props) {
                   }}
                 />
               ))}
-              <button
-                type="button"
+
+              <ButtonPadrao
+                texto="+ Adicionar item"
                 onClick={() =>
                   atualizarBloco(index, {
                     ...bloco,
-                    itens: [...bloco.itens, { texto: "", marcado: false }],
+                    itens: [
+                      ...bloco.itens,
+                      { texto: "", marcado: false },
+                    ],
                   })
                 }
-                className="text-sm text-blue-600"
-              >
-                + Adicionar item
-              </button>
+              />
             </div>
           )}
         </div>
       ))}
 
-      {/* Adicionar bloco */}
-      <div className="flex gap-3">
-        <SelectPadrao
-          label="Adicionar novo bloco"
-          placeholder="Escolha o tipo de bloco"
-          options={opcoesBlocos}
-          onChange={(value) => {
-            if (!value) return;
-            adicionarBloco(value as any);
-          }}
-          className="max-w-xs"
-        />
-      </div>
+      {/* Adicionar novo bloco */}
+      <SelectPadrao
+        label="Adicionar novo bloco"
+        placeholder="Escolha o tipo"
+        options={opcoesBlocos}
+        onChange={(value) => value && adicionarBloco(value as any)}
+        className="max-w-xs"
+      />
     </div>
   );
 }

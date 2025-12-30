@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import CardPublicacao from "./CardPublicacao";
-import { Publicacao } from "../types/Publicacao";
-import { buscarTodasPublicacoes } from "../services/PublicacaoService";
-import Loading from "./Loading";
+import CardPublicacao from "./components/CardPublicacao";
+import { Publicacao } from "./types/Publicacao";
+import { buscarTodasPublicacoes } from "./services/PublicacaoService";
+import Loading from "./components/Loading";
 
 export default function Publicacoes() {
   const [publicacoes, setPublicacoes] = useState<Array<Publicacao>>([]);
