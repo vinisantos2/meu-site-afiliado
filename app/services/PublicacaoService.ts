@@ -7,20 +7,14 @@ import {
   getDoc,
   getDocs,
   updateDoc,
-  setDoc,
+  query,
+  where,
+  limit,
 } from "firebase/firestore";
 
 import { db } from "../lib/firebase";
-import { Publicacao } from "../types/Publicacao";
+import { Publicacao, PublicacaoComID } from "../types/Publicacao";
 import { DADOS } from "../data/JsonTemp";
-
-/* =======================
-   Tipos auxiliares
-======================= */
-
-export interface PublicacaoComID extends Publicacao {
-  id: string;
-}
 
 /* =======================
    Coleção
@@ -29,14 +23,19 @@ export interface PublicacaoComID extends Publicacao {
 const PublicacoesCollection = collection(db, "publicacoes");
 
 /* =======================
-   Criar publicação
+   Criar publicação (UID)
 ======================= */
 
-export async function criarPublicacao(publicacao: Publicacao) {
+export async function criarPublicacao(publicacao: Publicacao): Promise<string> {
   try {
     const docRef = await addDoc(PublicacoesCollection, {
       ...publicacao,
-      criadoEm: new Date().toISOString(),
+      criadoEm: publicacao.criadoEm ?? new Date().toISOString(),
+    });
+
+    // salva o uid dentro do documento
+    await updateDoc(docRef, {
+      uid: docRef.id,
     });
 
     return docRef.id;
@@ -47,52 +46,19 @@ export async function criarPublicacao(publicacao: Publicacao) {
 }
 
 /* =======================
-   Criar ou atualizar por slug
-   (RECOMENDADO)
+   Buscar por UID
 ======================= */
 
-export async function salvarPublicacaoPorSlug(
-  publicacao: Publicacao
-) {
+export async function buscarPublicacaoPorUid(
+  uid: string
+): Promise<Publicacao | null> {
   try {
-    if (!publicacao.slug) {
-      throw new Error("Slug é obrigatório");
-    }
+    const docRef = doc(db, "publicacoes", uid);
+    const snap = await getDoc(docRef);
 
-    const docRef = doc(db, "publicacoes", publicacao.slug);
+    if (!snap.exists()) return null;
 
-    await setDoc(
-      docRef,
-      {
-        ...publicacao,
-        criadoEm:
-          publicacao.criadoEm ?? new Date().toISOString(),
-      },
-      { merge: true }
-    );
-  } catch (error) {
-    console.error("Erro ao salvar publicação:", error);
-    throw error;
-  }
-}
-
-/* =======================
-   Buscar por ID
-======================= */
-
-export async function buscarPublicacaoPorId(
-  id: string
-): Promise<PublicacaoComID | null> {
-  try {
-    const docRef = doc(db, "publicacoes", id);
-    const docSnap = await getDoc(docRef);
-
-    if (!docSnap.exists()) return null;
-
-    return {
-      id: docSnap.id,
-      ...(docSnap.data() as Publicacao),
-    };
+    return snap.data() as Publicacao;
   } catch (error) {
     console.error("Erro ao buscar publicação:", error);
     throw error;
@@ -100,21 +66,26 @@ export async function buscarPublicacaoPorId(
 }
 
 /* =======================
-   Buscar por slug
+   Buscar por slug (SEO)
 ======================= */
 
 export async function buscarPublicacaoPorSlug(
   slug: string
 ): Promise<Publicacao | null> {
   try {
-    const docRef = doc(db, "publicacoes", slug);
-    const docSnap = await getDoc(docRef);
+    const q = query(
+      PublicacoesCollection,
+      where("slug", "==", slug),
+      limit(1)
+    );
 
-    if (!docSnap.exists()) return null;
+    const snapshot = await getDocs(q);
 
-    return docSnap.data() as Publicacao;
+    if (snapshot.empty) return null;
+
+    return snapshot.docs[0].data() as Publicacao;
   } catch (error) {
-    console.error("Erro ao buscar publicação:", error);
+    console.error("Erro ao buscar publicação por slug:", error);
     throw error;
   }
 }
@@ -123,15 +94,13 @@ export async function buscarPublicacaoPorSlug(
    Buscar todas
 ======================= */
 
-export async function buscarTodasPublicacoes(): Promise<
-  PublicacaoComID[]
-> {
+export async function buscarTodasPublicacoes(): Promise<PublicacaoComID[]> {
   try {
     const snapshot = await getDocs(PublicacoesCollection);
 
     return snapshot.docs.map((docSnap) => ({
-      id: docSnap.id,
       ...(docSnap.data() as Publicacao),
+      uid: docSnap.id,
     }));
   } catch (error) {
     console.error("Erro ao buscar publicações:", error);
@@ -144,15 +113,12 @@ export async function buscarTodasPublicacoes(): Promise<
 ======================= */
 
 export async function atualizarPublicacao(
-  id: string,
+  uid: string,
   dados: Partial<Publicacao>
 ) {
   try {
-    const docRef = doc(db, "publicacoes", id);
-
-    await updateDoc(docRef, {
-      ...dados,
-    });
+    const docRef = doc(db, "publicacoes", uid);
+    await updateDoc(docRef, dados);
   } catch (error) {
     console.error("Erro ao atualizar publicação:", error);
     throw error;
@@ -163,24 +129,29 @@ export async function atualizarPublicacao(
    Excluir publicação
 ======================= */
 
-export async function excluirPublicacao(id: string) {
+export async function excluirPublicacao(uid: string) {
   try {
-    const docRef = doc(db, "publicacoes", id);
-    await deleteDoc(docRef);
+    await deleteDoc(doc(db, "publicacoes", uid));
   } catch (error) {
     console.error("Erro ao excluir publicação:", error);
     throw error;
   }
 }
 
+/* =======================
+   Importar publicações
+======================= */
 
 export async function importarPublicacoes() {
   for (const item of DADOS) {
-    try {
-      await addDoc(PublicacoesCollection, item);
-    } catch (e) {
-      console.log(e);
-    }
+    const docRef = await addDoc(PublicacoesCollection, {
+      ...item,
+      criadoEm: item.criadoEm ?? new Date().toISOString(),
+    });
+
+    await updateDoc(docRef, {
+      uid: docRef.id,
+    });
   }
 
   console.log("Importação concluída!");

@@ -1,4 +1,4 @@
-export type TipoPublicacao = "guia" | "artigo" | "checklist";
+export type TipoPublicacao = "guia" | "artigo" | "checklist" | "ranking";
 
 /* =======================
    Blocos de Conteúdo

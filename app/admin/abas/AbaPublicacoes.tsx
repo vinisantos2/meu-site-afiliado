@@ -6,9 +6,10 @@ import {
   buscarTodasPublicacoes,
   excluirPublicacao,
 } from "@/app/services/PublicacaoService";
-import { PublicacaoComID } from "@/app/services/PublicacaoService";
 import { useRouter } from "next/navigation";
 import CardPublicacaoAdmin from "../componentsAdmin/CardPublicacaoAdmin";
+import { PublicacaoComID } from "@/app/types/Publicacao";
+import ButtonPadrao from "@/app/components/BottonPadrao";
 
 export default function AbaPublicacoes() {
   const [publicacoes, setPublicacoes] = useState<PublicacaoComID[]>([]);
@@ -69,12 +70,10 @@ export default function AbaPublicacoes() {
           </p>
         </div>
 
-        <button
+        <ButtonPadrao
           onClick={() => router.push("/admin/publicacao/nova")}
-          className="bg-black text-white px-4 py-2 rounded"
-        >
-          Nova publicação
-        </button>
+          texto="Nova publicação"
+        />
       </div>
 
       {/* Busca + filtro */}
@@ -111,6 +110,7 @@ export default function AbaPublicacoes() {
             <option value="guia">Guia</option>
             <option value="artigo">Artigo</option>
             <option value="checklist">Checklist</option>
+            <option value="ranking">Ranking</option>
           </select>
         </div>
       </div>
@@ -126,10 +126,10 @@ export default function AbaPublicacoes() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {publicacoesFiltradas.map((pub) => (
             <CardPublicacaoAdmin
-              key={pub.id}
+              key={pub.uid}
               publicacao={pub}
-              onExcluir={() => handleExcluir(pub.id)}
-              onEditar={() => router.push(`/admin/publicacao/${pub.id}`)}
+              onExcluir={() => handleExcluir(pub.uid)}
+              onEditar={() => router.push(`/admin/publicacao/${pub.uid}`)}
             />
           ))}
         </div>

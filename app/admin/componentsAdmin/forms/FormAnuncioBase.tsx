@@ -13,9 +13,8 @@ type FormBaseProps = {
 };
 
 export default function FormBase({ data, onChange }: FormBaseProps) {
-
   const topicoSelecionado = TOPICOS.find((t) => t.titulo === data.topico);
-  
+
   return (
     <div className="space-y-6">
       {/* NOME */}
@@ -25,7 +24,13 @@ export default function FormBase({ data, onChange }: FormBaseProps) {
         onChange={(e) => onChange("nome", e.target.value)}
         placeholder="Digite o nome do produto"
       />
-
+      {/* VALOR */}
+      <InputPadrao
+        label="Valor do produto"
+        value={data.valor?.toString()}
+        onChange={(e) => onChange("valor", e.target.value)}
+        placeholder="Digite o nome do produto"
+      />
       {/* TÓPICO */}
       <SelectPadrao
         label="Tópico"
@@ -37,7 +42,6 @@ export default function FormBase({ data, onChange }: FormBaseProps) {
           label: t.titulo,
         }))}
       />
-      
 
       {/* ✅ CATEGORIAS */}
       {/* ✅ CATEGORIAS (DEPENDENTES DO TÓPICO) */}

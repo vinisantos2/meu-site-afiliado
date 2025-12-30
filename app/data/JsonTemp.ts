@@ -2,110 +2,67 @@ import { Publicacao } from "../types/Publicacao";
 
 export const DADOS: Publicacao[] = [
   {
-    titulo: "Como escolher um smartphone em 2025",
+    titulo: "Ranking de Fones de Ouvido",
     resumo:
-      "Descubra como escolher o smartphone ideal para o seu perfil, avaliando desempenho, câmera, bateria e custo-benefício.",
-    slug: "como-escolher-smartphone",
-    imagem: "/imagens/categorias/smartphone/smartphone.avif",
-    tipo: "guia",
+      "Veja os melhores fones de ouvido do mercado: custo-benefício, modelos para academia, trabalho, jogos e uso diário.",
+
+    slug: "topico/fone-de-ouvido",
+    imagem: "/imagens/categorias/fone-de-ouvido/fone-de-ouvido.jpg",
+    tipo: "ranking",
 
     publicado: false,
-    criadoEm: "2025-01-01",
-
-    blocos: [
-      // Introdução
-      {
-        tipo: "titulo",
-        conteudo: "O que avaliar antes de comprar um smartphone",
-      },
-      {
-        tipo: "paragrafo",
-        conteudo:
-          "Escolher um smartphone em 2025 vai muito além de preço ou marca. Com tantas opções no mercado, entender quais características realmente fazem diferença no dia a dia é essencial para evitar arrependimentos.",
-      },
-      {
-        tipo: "lista",
-        itens: [
-          "Desempenho e processador",
-          "Quantidade de memória RAM",
-          "Qualidade da tela",
-          "Autonomia da bateria",
-          "Câmeras e recursos de fotografia",
-          "Custo-benefício",
-        ],
-      },
-
-      // Uso básico
-      {
-        tipo: "titulo",
-        conteudo: "Smartphone para uso básico e cotidiano",
-      },
-      {
-        tipo: "paragrafo",
-        conteudo:
-          "Para quem utiliza o celular principalmente para redes sociais, mensagens, chamadas, vídeos e navegação na internet, não é necessário investir em modelos muito caros.",
-      },
-      {
-        tipo: "lista",
-        itens: [
-          "Processadores de entrada ou intermediários",
-          "4 GB a 6 GB de memória RAM",
-          "Bateria que dure um dia inteiro",
-          "Tela com boa resolução para consumo de conteúdo",
-        ],
-      },
-
-      // Trabalho e produtividade
-      {
-        tipo: "titulo",
-        conteudo: "Smartphone para trabalho e produtividade",
-      },
-      {
-        tipo: "paragrafo",
-        conteudo:
-          "Quem usa o smartphone para trabalho, como e-mails, aplicativos corporativos, reuniões online e organização de tarefas, precisa de um aparelho mais equilibrado em desempenho e autonomia.",
-      },
-      {
-        tipo: "lista",
-        itens: [
-          "Processadores intermediários",
-          "6 GB a 8 GB de memória RAM",
-          "Boa autonomia de bateria",
-          "Armazenamento interno suficiente para apps e arquivos",
-        ],
-      },
-
-      // Uso avançado e jogos
-      {
-        tipo: "titulo",
-        conteudo: "Smartphone para uso avançado, jogos e criação de conteúdo",
-      },
-      {
-        tipo: "paragrafo",
-        conteudo:
-          "Para quem joga, grava vídeos, edita fotos ou utiliza aplicativos mais pesados, é recomendado investir em smartphones mais potentes, que garantem fluidez e maior vida útil.",
-      },
-      {
-        tipo: "lista",
-        itens: [
-          "Processadores intermediários ou premium",
-          "8 GB ou mais de memória RAM",
-          "Tela com alta taxa de atualização",
-          "Bateria de maior capacidade",
-          "Câmeras de melhor qualidade",
-        ],
-      },
-
-      // Conclusão
-      {
-        tipo: "titulo",
-        conteudo: "Conclusão",
-      },
-      {
-        tipo: "paragrafo",
-        conteudo:
-          "O smartphone ideal é aquele que atende ao seu perfil de uso sem extrapolar o orçamento. Avaliar corretamente suas necessidades ajuda a fazer uma escolha mais consciente e evita gastos desnecessários.",
-      },
-    ],
+    criadoEm: "2025-12-29",
   },
+  {
+    titulo: "Ranking de Smartphones",
+    resumo:
+      "Confira os melhores smartphones do momento, com rankings por custo-benefício, desempenho, câmera e bateria.",
+
+    slug: "topico/smartphone",
+    imagem: "/imagens/categorias/smartphone/smartphone.jpg",
+    tipo: "ranking",
+
+    publicado: false,
+    criadoEm: "2025-12-28",
+  },
+
+  {
+  titulo: "Ranking de Placas-mãe",
+  resumo:
+    "Veja as placas-mãe mais recomendadas para diferentes perfis: custo-benefício, gamers, Intel e AMD.",
+
+  slug: "topico/placa-mae",
+  imagem: "/imagens/categorias/placa-mae/placa-mae.jpg",
+  tipo: "ranking",
+
+  publicado: false,
+  criadoEm: "2025-12-28",
+},
+{
+  titulo: "Ranking de Smartwatches",
+  resumo:
+    "Confira os melhores smartwatches para academia, uso diário, saúde, custo-benefício e modelos premium.",
+
+  slug: "topico/smartwatch",
+  imagem: "/imagens/categorias/smartwatch/smartwatch.jpg",
+  tipo: "ranking",
+
+  publicado: false,
+  criadoEm: "2025-12-28",
+},
+
+{
+  titulo: "Ranking de Smart TVs",
+  resumo:
+    "Veja as melhores Smart TVs do mercado, com rankings por qualidade de imagem, sistema, custo-benefício e tamanho.",
+
+  slug: "topico/smart-tv",
+  imagem: "/imagens/categorias/smart-tv/smart-tv.jpg",
+  tipo: "ranking",
+
+  publicado: false,
+  criadoEm: "2025-12-28",
+}
+
+
 ];

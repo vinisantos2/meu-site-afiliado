@@ -3,11 +3,20 @@
 import { Publicacao, TipoPublicacao } from "@/app/types/Publicacao";
 import { useState } from "react";
 import FormBlocos from "./FormBlocos";
+import SelectPadrao from "@/app/components/SelectPadrao";
+import ButtonPadrao from "@/app/components/BottonPadrao";
 
 type Props = {
   initialData?: Publicacao;
   onSubmit: (data: Publicacao) => void;
 };
+
+export const OPCOES_TIPO_PUBLICACAO = [
+  { label: "Artigo", value: "artigo" },
+  { label: "Guia", value: "guia" },
+  { label: "Checklist", value: "checklist" },
+  { label: "Ranking", value: "ranking" },
+] satisfies { label: string; value: TipoPublicacao }[];
 
 const publicacaoInicial: Publicacao = {
   titulo: "",
@@ -129,25 +138,18 @@ export default function FormPublicacao({ initialData, onSubmit }: Props) {
         <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">
           Tipo de publicação
         </label>
-        <select
-          className="
-            w-full rounded p-2 border
-            bg-white text-gray-900
-            dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700
-            focus:outline-none focus:ring-2 focus:ring-blue-500
-          "
+
+        <SelectPadrao
           value={publicacao.tipo}
-          onChange={(e) =>
+          options={OPCOES_TIPO_PUBLICACAO}
+          placeholder="Selecione o tipo"
+          onChange={(value) =>
             setPublicacao({
               ...publicacao,
-              tipo: e.target.value as TipoPublicacao,
+              tipo: value as TipoPublicacao,
             })
           }
-        >
-          <option value="artigo">Artigo</option>
-          <option value="guia">Guia</option>
-          <option value="checklist">Checklist</option>
-        </select>
+        />
       </div>
 
       {/* PUBLICAÇÃO */}
@@ -179,17 +181,10 @@ export default function FormPublicacao({ initialData, onSubmit }: Props) {
       />
 
       {/* SUBMIT */}
-      <button
+      <ButtonPadrao
+        texto={`${initialData ? "Salvar Alterações" : "Adicionar publicação"}`}
         type="submit"
-        className="
-          bg-black text-white px-4 py-2 rounded
-          hover:bg-gray-800
-          dark:bg-white dark:text-black dark:hover:bg-gray-200
-          transition
-        "
-      >
-        Salvar publicação
-      </button>
+      />
     </form>
   );
 }

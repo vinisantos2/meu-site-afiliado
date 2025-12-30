@@ -10,10 +10,13 @@ import { AnuncioComId } from "@/app/types/AnuncioBase";
 import CardAnuncioAdmin from "../componentsAdmin/CardAnuncioAdmin";
 import { useRouter } from "next/navigation";
 import { TOPICOS } from "@/app/data/DataTopicos";
+import { Router } from "next/router";
+import ButtonPadrao from "@/app/components/BottonPadrao";
 
 export default function AbaAnunciosAdmin() {
   const [anuncios, setAnuncios] = useState<AnuncioComId[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const [busca, setBusca] = useState(""); // Busca por nome
   const [filtroTopico, setFiltroTopico] = useState(""); // Novo filtro por tópico
@@ -56,15 +59,23 @@ export default function AbaAnunciosAdmin() {
   return (
     <section className="w-full">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-            Anúncios
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Gerencie todos os anúncios cadastrados
-          </p>
+
+      <div className="flex justify-between items-center mb-8">
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+              Anúncios
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400">
+              Gerencie todos os anúncios cadastrados
+            </p>
+          </div>
         </div>
+
+        <ButtonPadrao
+          texto="Novo anuncio"
+          onClick={() => router.push("/admin/anuncio/novo")}
+        />
       </div>
 
       {/* Busca + filtro */}

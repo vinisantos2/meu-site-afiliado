@@ -92,17 +92,10 @@ export const TOPICOS = <Array<Topico>>[
       "Top de Linha",
     ],
   },
-  // {
-  //   titulo: "Relogios",
-  //   url: "relogios",
-  //   icon: "relogio",
-  //   categorias: [],
-  // texto: "Descubra os melhores relógios e smartwatches para saúde, esportes, produtividade e uso diário. Organizamos os modelos por funcionalidades, estilos e faixas de preço, facilitando sua escolha com análises diretas e recomendações para cada tipo de usuário.",
-  // },
 
   {
     titulo: "Fone de ouvido",
-    url: "fones-de-ouvido",
+    url: "fone-de-ouvido",
     icon: "Headphones",
     texto:
       "Compare os melhores fones de ouvido e headphones sem fio do mercado. Avaliamos qualidade de som, bateria, conforto e custo-benefício para te ajudar a escolher o modelo ideal.",

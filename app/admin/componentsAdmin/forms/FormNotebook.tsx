@@ -27,7 +27,7 @@ export default function FormNotebook({ value, onChange }: Props) {
       <InputPadrao
         label="Processador"
         placeholder="Ex: Intel i5 1135G7"
-        value={value.processador}
+        value={value?.processador}
         onChange={(e) => handleChange("processador", e.target.value)}
       />
 

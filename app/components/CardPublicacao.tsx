@@ -6,9 +6,14 @@ type Props = {
 };
 
 export default function CardPublicacao({ publicacao }: Props) {
+  const href =
+    publicacao.tipo === "ranking"
+      ? `/topico/${publicacao.slug}`
+      : `/guias/${publicacao.slug}`;
+
   return (
     <Link
-      href={`/guias/${publicacao.slug}`}
+      href={href}
       className="
         relative overflow-hidden rounded-2xl
         border border-zinc-200 dark:border-zinc-700
@@ -32,34 +37,21 @@ export default function CardPublicacao({ publicacao }: Props) {
       {/* Overlay */}
       <div
         className="
-    absolute inset-0
-    bg-gradient-to-t
-    from-zinc-950/90
-    via-zinc-950/40
-    to-zinc-950/10
-    transition
-  "
+          absolute inset-0
+          bg-gradient-to-t
+          from-zinc-950/90
+          via-zinc-950/40
+          to-zinc-950/10
+        "
       />
 
       {/* Conteúdo */}
       <div className="relative h-full p-5 flex flex-col justify-end">
-        <h3
-          className="
-    text-lg font-semibold text-white
-    mb-2 leading-snug
-    line-clamp-2
-  "
-        >
+        <h3 className="text-lg font-semibold text-white mb-2 line-clamp-2">
           {publicacao.titulo}
         </h3>
 
-        <p
-          className="
-    text-sm text-zinc-200
-    leading-relaxed
-    line-clamp-2
-  "
-        >
+        <p className="text-sm text-zinc-200 line-clamp-2">
           {publicacao.resumo}
         </p>
       </div>

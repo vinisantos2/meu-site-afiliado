@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Loading from "@/app/components/Loading";
 import {
-  buscarPublicacaoPorId,
-  salvarPublicacaoPorSlug,
+  atualizarPublicacao,
+  buscarPublicacaoPorUid,
+  criarPublicacao,
 } from "@/app/services/PublicacaoService";
 import { Publicacao } from "@/app/types/Publicacao";
 import FormPublicacao from "../../componentsAdmin/forms/FormPublicacao";
@@ -39,7 +40,7 @@ export default function PagePublicacao() {
 
   async function carregarPublicacao() {
     setLoading(true);
-    const data = await buscarPublicacaoPorId(id);
+    const data = await buscarPublicacaoPorUid(id);
 
     if (!data) {
       alert("Publicação não encontrada");
@@ -52,8 +53,18 @@ export default function PagePublicacao() {
   }
 
   async function handleSalvar(data: Publicacao) {
-    await salvarPublicacaoPorSlug(data);
-    router.push("/admin/publicacao");
+    try {
+      if (id === "nova") {
+        await criarPublicacao(data);
+      } else {
+        await atualizarPublicacao(id, data);
+      }
+
+      router.push("/admin?aba=publicacoes");
+    } catch (error) {
+      alert("Erro ao salvar publicação");
+      console.error(error);
+    }
   }
 
   if (loading || !publicacao) return <Loading />;

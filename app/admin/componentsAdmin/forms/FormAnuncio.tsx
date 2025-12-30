@@ -35,6 +35,7 @@ import { useDetalhesNotebook } from "../../hooks/useDetalhesNotebook";
 import { useDetalhesSmartphone } from "../../hooks/useDetalhesSmartphone";
 import { useDetalhesPlacaMae } from "../../hooks/useDetalhesPlacaMae";
 import { useDetalhesFone } from "../../hooks/useDetalhesFone";
+import ButtonPadrao from "@/app/components/BottonPadrao";
 
 /* ---------------- PROPS ---------------- */
 type FormAnuncioProps = {
@@ -169,12 +170,11 @@ export default function FormAnuncio({
       )}
 
       {/* BOTÃO */}
-      <button
+
+      <ButtonPadrao
+        texto={`${initialData ? "Salvar Alterações" : "Adicionar Anúncio"}`}
         type="submit"
-        className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-3 rounded text-lg font-semibold transition"
-      >
-        💾 {initialData ? "Salvar Alterações" : "Adicionar Anúncio"}
-      </button>
+      />
     </form>
   );
 }
