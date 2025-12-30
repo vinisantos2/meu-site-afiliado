@@ -1,6 +1,7 @@
 "use client";
 
-import { PublicacaoComID } from "@/app/services/PublicacaoService";
+import { PublicacaoComID } from "@/app/types/Publicacao";
+
 
 type Props = {
   publicacao: PublicacaoComID;
