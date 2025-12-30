@@ -14,19 +14,6 @@ export default function Apresentacao() {
         smartphones, smartwatches, fones de ouvido e outros eletrônicos com mais
         segurança e informação.
       </p>
-
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <ButtonPadrao
-          texto="Explorar categorias"
-          href="#categorias"
-          variante="primario"
-        />
-
-        <ButtonPadrao
-          texto="Ver rankings"
-          href="/rankings"
-        />
-      </div>
     </section>
   );
 }
