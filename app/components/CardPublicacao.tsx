@@ -6,20 +6,24 @@ type Props = {
 };
 
 export default function CardPublicacao({ publicacao }: Props) {
-  const href =
-    publicacao.tipo === "ranking"
-      ? `/topico/${publicacao.slug}`
-      : `/guias/${publicacao.slug}`;
+  let href = "";
+  if (publicacao.tipo === "ranking") {
+    href = `/topico/${publicacao.slug}`;
+  } else if (publicacao.tipo === "cupom") {
+    href = publicacao.slug;
+  } else {
+    href = `/guias/${publicacao.slug}`;
+  }
 
   return (
     <Link
       href={href}
       className="
-        relative overflow-hidden rounded-2xl
+        relative aspect-square overflow-hidden rounded-2xl
         border border-zinc-200 dark:border-zinc-700
-        bg-white dark:bg-zinc-900
-        hover:shadow-xl transition
-        aspect-square
+        bg-zinc-100 dark:bg-zinc-900
+        transition-all duration-300
+        hover:shadow-xl
         group
       "
     >
@@ -27,26 +31,30 @@ export default function CardPublicacao({ publicacao }: Props) {
       {publicacao.imagem && (
         <div
           className="
-            absolute inset-0 bg-cover bg-center
-            group-hover:scale-110 transition-transform duration-500
+            absolute inset-0
+            bg-cover bg-center
+            transition-transform duration-500
+            group-hover:scale-110
           "
-          style={{ backgroundImage: `url(${publicacao.imagem})` }}
+          style={{
+            backgroundImage: `url(${publicacao.imagem})`,
+          }}
         />
       )}
 
-      {/* Overlay */}
+      {/* Overlay gradient */}
       <div
         className="
           absolute inset-0
           bg-gradient-to-t
-          from-zinc-950/90
-          via-zinc-950/40
-          to-zinc-950/10
+          from-black/80
+          via-black/40
+          to-black/10
         "
       />
 
       {/* Conteúdo */}
-      <div className="relative h-full p-5 flex flex-col justify-end">
+      <div className="relative z-10 h-full p-5 flex flex-col justify-end">
         <h3 className="text-lg font-semibold text-white mb-2 line-clamp-2">
           {publicacao.titulo}
         </h3>

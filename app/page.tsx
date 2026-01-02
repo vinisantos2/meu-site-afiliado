@@ -1,19 +1,20 @@
-import SecaoCupon from "./components/SecaoCupon";
-import Footer from "./components/Footer";
 import NavPadrao from "./components/NavPadrao";
-import Publicacoes from "./Publicacoes";
+import Footer from "./components/Footer";
+import SecaoCupon from "./components/SecaoCupon";
+import { buscarTodasPublicacoes } from "./services/PublicacaoService";
+import HomeClient from "./HomeClient";
 
 export default async function Home() {
-  // 🚀 A busca acontece no servidor automaticamente
+  // ✅ Busca no servidor (Google vê o conteúdo)
+  const publicacoes = await buscarTodasPublicacoes();
 
   return (
     <div className="font-sans min-h-screen bg-gray-50">
       <NavPadrao />
-      <main className="border-2 border-amber-300">
-        <Publicacoes />
-        <SecaoCupon />
-      </main>
 
+      <HomeClient publicacoes={publicacoes} />
+
+      <SecaoCupon />
       <Footer />
     </div>
   );

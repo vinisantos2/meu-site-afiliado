@@ -10,8 +10,8 @@ import { AnuncioComId } from "@/app/types/AnuncioBase";
 import CardAnuncioAdmin from "../componentsAdmin/CardAnuncioAdmin";
 import { useRouter } from "next/navigation";
 import { TOPICOS } from "@/app/data/DataTopicos";
-import { Router } from "next/router";
 import ButtonPadrao from "@/app/components/BottonPadrao";
+import CampoBuscaPadrao from "@/app/components/CampoBuscaPadrao";
 
 export default function AbaAnunciosAdmin() {
   const [anuncios, setAnuncios] = useState<AnuncioComId[]>([]);
@@ -81,21 +81,12 @@ export default function AbaAnunciosAdmin() {
       {/* Busca + filtro */}
       <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Campo de busca */}
-        <div className="col-span-2">
-          <input
-            type="text"
-            placeholder="Buscar anúncio pelo nome..."
-            value={busca}
-            onChange={(e) => setBusca(e.target.value)}
-            className="
-              w-full p-3 rounded-lg border 
-              bg-white text-gray-900 
-              dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700
-              focus:outline-none focus:ring-2 focus:ring-blue-500
-              transition
-            "
-          />
-        </div>
+
+        <CampoBuscaPadrao
+          value={busca}
+          onChange={(value) => setBusca(value)}
+          placeholder="Buscar anúncio pelo nome..."
+        />
 
         {/* Select de tópico */}
         <div>

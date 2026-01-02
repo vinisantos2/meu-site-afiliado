@@ -12,6 +12,7 @@ import { PublicacaoComID } from "@/app/types/Publicacao";
 import ButtonPadrao from "@/app/components/BottonPadrao";
 import { OPCOES_TIPO_PUBLICACAO } from "@/app/data/Constants";
 import SelectPadrao from "@/app/components/SelectPadrao";
+import CampoBuscaPadrao from "@/app/components/CampoBuscaPadrao";
 
 export default function AbaPublicacoes() {
   const [publicacoes, setPublicacoes] = useState<PublicacaoComID[]>([]);
@@ -82,17 +83,10 @@ export default function AbaPublicacoes() {
       <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Busca */}
         <div className="col-span-2">
-          <input
-            type="text"
-            placeholder="Buscar publicação pelo título..."
+          <CampoBuscaPadrao
             value={busca}
-            onChange={(e) => setBusca(e.target.value)}
-            className="
-              w-full p-3 rounded-lg border 
-              bg-white text-gray-900 
-              dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700
-              focus:outline-none focus:ring-2 focus:ring-blue-500
-            "
+            onChange={setBusca}
+            placeholder="Buscar publicação pelo título..."
           />
         </div>
 

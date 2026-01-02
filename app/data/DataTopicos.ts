@@ -63,14 +63,7 @@ export const TOPICOS = <Array<Topico>>[
       "Alto Desempenho",
     ],
   },
-  // {
-  //   titulo: "Tablet",
-  //   url: "tablet",
-  //   icon: "Tablet",
-  //   texto: "Os tablets oferecem ótimo equilíbrio entre portabilidade e produtividade. Se você busca um dispositivo para estudo, leitura, trabalho leve ou entretenimento, aqui você encontrará comparativos claros e sugestões dos melhores modelos para cada necessidade e orçamento.",
-
-  //   categorias: ["Para Estudo", "Baratos"],
-  // },
+ 
 
   {
     titulo: "Placa-mãe",
