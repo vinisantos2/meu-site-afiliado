@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { TOPICOS } from "@/app/data/DataTopicos";
 import ButtonPadrao from "@/app/components/BottonPadrao";
 import CampoBuscaPadrao from "@/app/components/CampoBuscaPadrao";
+import SelectPadrao from "@/app/components/SelectPadrao";
 
 export default function AbaAnunciosAdmin() {
   const [anuncios, setAnuncios] = useState<AnuncioComId[]>([]);
@@ -79,35 +80,27 @@ export default function AbaAnunciosAdmin() {
       </div>
 
       {/* Busca + filtro */}
+      {/* Busca + filtro */}
       <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {/* Campo de busca */}
-
-        <CampoBuscaPadrao
-          value={busca}
-          onChange={(value) => setBusca(value)}
-          placeholder="Buscar anúncio pelo nome..."
-        />
-
-        {/* Select de tópico */}
-        <div>
-          <select
-            value={filtroTopico}
-            onChange={(e) => setFiltroTopico(e.target.value)}
-            className="
-              w-full p-3 rounded-lg border 
-              bg-white text-gray-900 
-              dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700
-              focus:outline-none focus:ring-2 focus:ring-blue-500
-            "
-          >
-            <option value="">Todos os tópicos</option>
-            {TOPICOS.map((t, i) => (
-              <option key={i} value={t.titulo}>
-                {t.titulo}
-              </option>
-            ))}
-          </select>
+        {/* Busca */}
+        <div className="col-span-2">
+          <CampoBuscaPadrao
+            value={busca}
+            onChange={setBusca}
+            placeholder="Buscar publicação pelo título..."
+          />
         </div>
+
+        {/* Filtro por tipo */}
+        <SelectPadrao
+          value={filtroTopico}
+          options={TOPICOS.map((item) => ({
+            label: item.titulo,
+            value: item.titulo,
+          }))}
+          placeholder="Selecione o tipo"
+          onChange={(value) => setFiltroTopico(value)}
+        />
       </div>
 
       {/* Conteúdo */}

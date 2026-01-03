@@ -7,12 +7,11 @@ import { auth } from "../lib/firebase";
 
 import AbaAnunciosAmin from "./abas/AbaAnuncios";
 import AbaCupons from "./abas/AbaCupons";
-import AbaAddCupon from "./abas/AbaAddCupon";
 import AbaPublicacoes from "./abas/AbaPublicacoes";
 
 import { useAuthRedirectAdmin } from "./hooks/useAuthRedirectAdmin";
 
-type Aba = "anuncios" | "cupons" | "add-cupons" | "publicacoes";
+type Aba = "anuncios" | "cupons" | "publicacoes";
 
 export default function DashboardClient() {
   const { loading } = useAuthRedirectAdmin();
@@ -77,15 +76,6 @@ export default function DashboardClient() {
         </button>
 
         <button
-          onClick={() => trocarAba("add-cupons")}
-          className={`text-left px-4 py-2 rounded mb-2 ${
-            aba === "add-cupons" ? "bg-gray-700" : "hover:bg-gray-700"
-          }`}
-        >
-          Adicionar Cupons
-        </button>
-
-        <button
           onClick={() => trocarAba("cupons")}
           className={`text-left px-4 py-2 rounded mb-2 ${
             aba === "cupons" ? "bg-gray-700" : "hover:bg-gray-700"
@@ -124,7 +114,6 @@ export default function DashboardClient() {
       {/* Conteúdo */}
       <main className="flex-1 p-8 overflow-auto text-gray-900 dark:text-gray-100">
         {aba === "anuncios" && <AbaAnunciosAmin />}
-        {aba === "add-cupons" && <AbaAddCupon />}
         {aba === "cupons" && <AbaCupons />}
         {aba === "publicacoes" && <AbaPublicacoes />}
       </main>

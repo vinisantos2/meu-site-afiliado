@@ -36,8 +36,7 @@ export default function SelectPadrao({
           onChange={(e) => onChange?.(e.target.value)}
           className={`
             appearance-none
-            w-full h-10 px-3 pr-9
-            rounded-lg border
+            w-full p-3 h-12 rounded-lg border
             bg-white text-sm text-gray-900
             dark:bg-gray-800 dark:text-white dark:border-gray-700
             focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
