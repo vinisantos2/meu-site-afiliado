@@ -48,12 +48,38 @@ export default function AbaAnunciosAdmin() {
 
   if (loading) return <Loading />;
 
-  // 🔥 FILTRO FINAL (busca + tópico)
-  const anunciosFiltrados = anuncios.filter((anuncio) => {
+  // 🔥 FILTRO FINAL (busca + tópico) com tratamento
+  const anunciosFiltrados = anuncios.filter((anuncio, index) => {
+    // 🔍 Validação defensiva
+    if (!anuncio || typeof anuncio !== "object") {
+      console.error("❌ Anúncio inválido (não é objeto):", anuncio);
+      return false;
+    }
+
+    if (typeof anuncio.nome !== "string") {
+      console.error("❌ Anúncio com nome inválido:", {
+        index,
+        anuncio,
+      });
+      return false;
+    }
+
+    if (typeof anuncio.topico !== "string") {
+      console.error("❌ Anúncio com tópico inválido:", {
+        index,
+        anuncio,
+      });
+      return false;
+    }
+
+    // ✅ Busca segura
     const combinaBusca = anuncio.nome
       .toLowerCase()
       .includes(busca.toLowerCase());
+
+    // ✅ Filtro por tópico
     const combinaTopico = filtroTopico ? anuncio.topico === filtroTopico : true;
+
     return combinaBusca && combinaTopico;
   });
 

@@ -11,6 +11,7 @@ export const TOPICOS = <Array<Topico>>[
     categorias: [
       // Preço
       "Até 2000R$",
+      "Até 3000R$",
 
       // Ranking
       "Top 10 Notebooks",
@@ -23,6 +24,18 @@ export const TOPICOS = <Array<Topico>>[
 
       // Gamer
       "Gamer",
+
+      // Design e portabilidade
+      "Ultrafino",
+      "Leve e Portátil",
+
+      // Marcas
+      "Notebook Asus",
+      "Notebook Dell",
+      "Notebook Lenovo",
+      "Notebook Acer",
+      "Notebook Samsung",
+      "Notebook HP",
 
       // Sistemas e linhas especiais
       "MacBook",
@@ -63,7 +76,6 @@ export const TOPICOS = <Array<Topico>>[
       "Alto Desempenho",
     ],
   },
- 
 
   {
     titulo: "Placa-mãe",

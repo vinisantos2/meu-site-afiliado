@@ -9,8 +9,8 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../lib/firebase";
-import { DADOS } from "../data/JsonTemp";
 import { Anuncio, AnuncioComId } from "../types/AnuncioBase";
+import { DADOS_ANUNCIOS } from "../data/JsonTempAnuncios";
 
 // Coleção de usuários
 const AnunciosCollection = collection(db, "anuncios");
@@ -88,7 +88,7 @@ export async function excluirAnuncio(id: string) {
 }
 
 export async function importarAnuncios() {
-  for (const item of DADOS) {
+  for (const item of DADOS_ANUNCIOS) {
     try {
       await addDoc(AnunciosCollection, item);
     } catch (e) {

@@ -1,4 +1,9 @@
-export type TipoPublicacao = "guia" | "artigo" | "checklist" | "ranking"| "cupom";
+export type TipoPublicacao =
+  | "guia"
+  | "artigo"
+  | "checklist"
+  | "ranking"
+  | "cupom";
 
 /* =======================
    Blocos de Conteúdo
@@ -44,15 +49,16 @@ export interface Publicacao {
   resumo: string;
   slug: string;
   imagem: string;
+
   tipo: TipoPublicacao;
+  categoria?: string;
 
   publicado: boolean;
   criadoEm: string;
   publicadoEm?: string;
 
-  // você pode usar um OU outro
-  conteudo?: string; // texto longo (HTML ou simples)
-  blocos?: BlocoConteudo[]; // ✅ array de blocos
+  conteudo?: string;
+  blocos?: BlocoConteudo[];
 }
 
 export type PublicacaoComID = Publicacao & {

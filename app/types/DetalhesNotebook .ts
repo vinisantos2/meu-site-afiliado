@@ -9,7 +9,7 @@ export interface DetalhesNotebook {
   processador: string;
   ramGB: number;
   armazenamento: string;
-  tipoArmazenamento: "SSD" | "HDD" | "NVMe";
+  tipoArmazenamento: "SSD" | "HDD" | "NVMe" | "UFS"| "SSD NVMe"| "eUFS";
   placaVideo?: string;
   tela: string;
   sistema: string;

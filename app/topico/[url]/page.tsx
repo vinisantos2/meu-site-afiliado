@@ -8,33 +8,64 @@ import NavPadrao from "@/app/components/NavPadrao";
 import CardAnuncio from "@/app/components/CardAnuncio";
 import Footer from "@/app/components/Footer";
 import { TOPICOS } from "@/app/data/DataTopicos";
+import { useSearchParams } from "next/navigation";
 
 export default function Topico({
   params,
 }: {
   params: Promise<{ url: string }>;
 }) {
+  const { url } = use(params);
+
   const [anuncios, setAnuncios] = useState<AnuncioComId[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const { url } = use(params);
+  const searchParams = useSearchParams();
+  const categoriaParam = searchParams.get("categoria");
 
-  // Pega o tópico atual
+  /* ===============================
+     TÓPICO ATUAL
+  =============================== */
+
   const topicoAtual = TOPICOS.find((t) => t.url === url);
   const categoriasDoTopico = topicoAtual?.categorias || [];
 
-  // Define categoria inicial: "Top"
-  const categoriaTop10 = categoriasDoTopico.find((c) =>
-    c.toLowerCase().includes("top")
-  );
+  /* ===============================
+     CATEGORIA PADRÃO (fallback)
+     prioridade:
+     1. ?categoria=URL
+     2. categoria com "top"
+     3. primeira categoria
+  =============================== */
 
-  // Estado do filtro
-  const [categoria, setCategoria] = useState(categoriaTop10 || "");
+  const categoriaTop =
+    categoriasDoTopico.find((c) => c.toLowerCase().includes("top")) ??
+    categoriasDoTopico[0] ??
+    null;
 
-  // Atualiza categoria quando mudar de tópico
+  const [categoria, setCategoria] = useState<string | null>(null);
+
+  /* ===============================
+     SINCRONIZA CATEGORIA
+  =============================== */
+
   useEffect(() => {
-    setCategoria(categoriaTop10 || "");
-  }, [url]);
+    if (categoriaParam) {
+      setCategoria(categoriaParam);
+      return;
+    }
+
+    if (categoriaTop) {
+      setCategoria(categoriaTop);
+      return;
+    }
+
+    setCategoria(null);
+  }, [categoriaParam, categoriaTop, url]);
+
+  /* ===============================
+     BUSCA E FILTRAGEM
+  =============================== */
 
   useEffect(() => {
     async function carregarDados() {
@@ -42,7 +73,6 @@ export default function Topico({
 
       const todos = await buscarTodosAnuncios();
 
-      // FILTRO FINAL → tópico + categoria
       const filtrados = todos
         .filter((item) => item.topico === topicoAtual?.titulo)
         .filter((item) => {
@@ -50,14 +80,18 @@ export default function Topico({
           return item.categorias?.includes(categoria);
         })
         .sort((a, b) => (b.nota ?? 5) - (a.nota ?? 5))
-        .slice(0, 10); // ranking
+        .slice(0, 10);
 
       setAnuncios(filtrados);
       setLoading(false);
     }
 
     carregarDados();
-  }, [url, categoria]);
+  }, [categoria, url, topicoAtual?.titulo]);
+
+  /* ===============================
+     LOADING
+  =============================== */
 
   if (loading) {
     return (
@@ -67,20 +101,22 @@ export default function Topico({
     );
   }
 
+  /* ===============================
+     RENDER
+  =============================== */
+
   return (
     <>
       <NavPadrao />
 
       <main className="min-h-screen bg-gray-100 dark:bg-gray-900 py-12 px-6">
         <div className="max-w-4xl mx-auto bg-gray-50 dark:bg-[#1f1f1f] p-6 md:p-10 rounded-xl shadow-lg border border-gray-200 dark:border-[#333]">
-          {/* TÍTULO */}
           <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-100">
             {topicoAtual?.titulo} — Ranking atualizado
           </h1>
 
-          {/* TEXTO EXPLICATIVO DO TÓPICO */}
           {topicoAtual?.texto && (
-            <p className="text-center text-gray-700 dark:text-gray-300 mb-10 leading-relaxed">
+            <p className="text-center text-gray-700 dark:text-gray-300 mb-10">
               {topicoAtual.texto}
             </p>
           )}
@@ -90,20 +126,22 @@ export default function Topico({
             ar, sem custo extra para você.
           </p>
 
-          {/* FILTRO DE CATEGORIAS (SEM BOTÃO TODOS) */}
+          {/* ===============================
+              FILTRO DE CATEGORIAS
+          =============================== */}
+
           {categoriasDoTopico.length > 0 && (
             <div className="flex flex-wrap justify-center gap-3 mb-10">
-              {categoriasDoTopico.map((cat, i) => (
+              {categoriasDoTopico.map((cat) => (
                 <button
-                  key={i}
+                  key={cat}
                   onClick={() => setCategoria(cat)}
                   className={`px-4 py-2 rounded-full border transition
                     ${
                       categoria === cat
                         ? "bg-blue-600 text-white"
                         : "bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-200"
-                    }
-                  `}
+                    }`}
                 >
                   {cat}
                 </button>
@@ -111,7 +149,10 @@ export default function Topico({
             </div>
           )}
 
-          {/* RESULTADOS */}
+          {/* ===============================
+              RESULTADOS
+          =============================== */}
+
           {anuncios.length > 0 ? (
             <div className="flex flex-col gap-8 items-center">
               {anuncios.map((item, index) => (

@@ -7,8 +7,15 @@ type Props = {
 
 export default function CardPublicacao({ publicacao }: Props) {
   let href = "";
+
   if (publicacao.tipo === "ranking") {
-    href = `/topico/${publicacao.slug}`;
+    if (publicacao.categoria) {
+      href = `/topico/${publicacao.slug}?categoria=${encodeURIComponent(
+        publicacao.categoria
+      )}`;
+    } else {
+      href = `/topico/${publicacao.slug}`;
+    }
   } else if (publicacao.tipo === "cupom") {
     href = publicacao.slug;
   } else {

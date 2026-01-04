@@ -14,7 +14,7 @@ import {
 
 import { db } from "../lib/firebase";
 import { Publicacao, PublicacaoComID } from "../types/Publicacao";
-import { DADOS } from "../data/JsonTemp";
+import { DADOS_PUBLICACOES } from "../data/JsonTempPublicacoes";
 
 /* =======================
    Coleção
@@ -73,11 +73,7 @@ export async function buscarPublicacaoPorSlug(
   slug: string
 ): Promise<Publicacao | null> {
   try {
-    const q = query(
-      PublicacoesCollection,
-      where("slug", "==", slug),
-      limit(1)
-    );
+    const q = query(PublicacoesCollection, where("slug", "==", slug), limit(1));
 
     const snapshot = await getDocs(q);
 
@@ -143,7 +139,7 @@ export async function excluirPublicacao(uid: string) {
 ======================= */
 
 export async function importarPublicacoes() {
-  for (const item of DADOS) {
+  for (const item of DADOS_PUBLICACOES) {
     const docRef = await addDoc(PublicacoesCollection, {
       ...item,
       criadoEm: item.criadoEm ?? new Date().toISOString(),
