@@ -5,10 +5,10 @@ import Publicacoes from "./Publicacoes";
 import SelectPadrao from "./components/SelectPadrao";
 import CampoBuscaPadrao from "./components/CampoBuscaPadrao";
 import { OPCOES_TIPO_PUBLICACAO } from "./data/Constants";
-import { Publicacao } from "./types/Publicacao";
+import { Publicacao, PublicacaoComID } from "./types/Publicacao";
 
 type Props = {
-  publicacoes: Publicacao[];
+  publicacoes: PublicacaoComID[];
 };
 
 export default function HomeClient({ publicacoes }: Props) {

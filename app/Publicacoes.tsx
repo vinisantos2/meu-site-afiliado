@@ -1,9 +1,9 @@
 import CardPublicacao from "./components/CardPublicacao";
-import { Publicacao } from "./types/Publicacao";
+import { Publicacao, PublicacaoComID } from "./types/Publicacao";
 
 
 type Props = {
-  publicacoes: Publicacao[];
+  publicacoes: PublicacaoComID[];
 };
 
 export default function Publicacoes({ publicacoes }: Props) {
@@ -22,7 +22,7 @@ export default function Publicacoes({ publicacoes }: Props) {
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {publicacoes.map((publicacao) => (
           <CardPublicacao
-            key={publicacao.slug}
+            key={publicacao.uid}
             publicacao={publicacao}
           />
         ))}

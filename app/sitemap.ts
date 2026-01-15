@@ -21,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       return {
         url: `${baseUrl}${path}`,
-        lastModified: new Date(p.criadoEm),
+        lastModified: safeDate(p.criadoEm), // 🔥 AQUI
         changeFrequency: "weekly",
         priority: 0.7,
       };
@@ -36,4 +36,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     ...paginasPublicacoes,
   ];
+}
+
+function safeDate(value: any) {
+  const d = new Date(value);
+  return isNaN(d.getTime()) ? new Date() : d;
 }

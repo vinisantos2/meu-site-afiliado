@@ -95,7 +95,7 @@ export async function buscarTodasPublicacoes(): Promise<PublicacaoComID[]> {
     const snapshot = await getDocs(PublicacoesCollection);
 
     return snapshot.docs.map((docSnap) => ({
-      ...(docSnap.data() as Publicacao),
+      ...(docSnap.data() as PublicacaoComID),
       uid: docSnap.id,
     }));
   } catch (error) {
