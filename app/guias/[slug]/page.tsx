@@ -38,9 +38,10 @@ export default async function GuiaPage({
         </header>
 
         <article className="prose dark:prose-invert max-w-none">
-          {publicacao.blocos?.map((bloco, index) => (
-            <CardBloco key={index} blocoConteudo={bloco} />
-          ))}
+          {publicacao?.blocos &&
+            publicacao.blocos.map((bloco) => (
+              <CardBloco blocoConteudo={bloco} />
+            ))}
         </article>
       </section>
     </main>
