@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { CuponComId } from "@/app/types/Cupon";
 import { buscarTodosCupons } from "@/app/services/CuponService";
 import { ChevronDown, Filter } from "lucide-react";
-import NavPadrao from "../components/NavPadrao";
 import CardCupon from "../components/CardCupon";
 
 export default function ListaCupons() {
@@ -38,8 +37,7 @@ export default function ListaCupons() {
 
   return (
     <>
-      <NavPadrao />
-      <main className="min-h-screen bg-gray-100 dark:bg-gray-900 py-10 px-4 transition-colors duration-300">
+        <main className="min-h-screen bg-gray-100 dark:bg-gray-900 py-10 px-4 transition-colors duration-300">
         {/* Filtros */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
           {/* Filtro por categoria */}

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NOME_LOJA } from "../data/Constants";
+import { NOME_LOJA } from "./data/Constants";
 
 export default function Footer() {
   return (

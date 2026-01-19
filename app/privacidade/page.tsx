@@ -1,11 +1,8 @@
-import NavPadrao from "../components/NavPadrao";
-import Footer from "../components/Footer";
 import { NOME_LOJA } from "../data/Constants";
 
 export default function Privacidade() {
   return (
     <div className="font-sans min-h-screen bg-gray-50 dark:bg-gray-950">
-      <NavPadrao />
 
       <main className="max-w-4xl mx-auto px-6 py-20">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">
@@ -80,7 +77,6 @@ export default function Privacidade() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

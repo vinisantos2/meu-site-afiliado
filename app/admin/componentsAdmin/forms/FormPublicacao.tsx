@@ -100,7 +100,7 @@ export default function FormPublicacao({ initialData, onSubmit }: Props) {
               publicado: e.target.checked,
               publicadoEm: e.target.checked
                 ? new Date().toISOString()
-                : undefined,
+                : "",
             })
           }
         />

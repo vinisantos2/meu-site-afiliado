@@ -26,6 +26,8 @@ export default function PagePublicacao() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
 
+  console.log(id)
+
   const [publicacao, setPublicacao] = useState<Publicacao | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -54,6 +56,7 @@ export default function PagePublicacao() {
 
   async function handleSalvar(data: Publicacao) {
     try {
+      console.log(data)
       if (id === "nova") {
         await criarPublicacao(data);
       } else {

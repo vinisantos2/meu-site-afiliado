@@ -1,10 +1,7 @@
-import Footer from "../components/Footer";
-import NavPadrao from "../components/NavPadrao";
 
 export default function Sobre() {
   return (
     <>
-    <NavPadrao />
       <main className="max-w-6xl mx-auto px-6 py-16">
         {/* Título */}
         <section className="mb-16 text-center">
@@ -91,7 +88,6 @@ export default function Sobre() {
           </p>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

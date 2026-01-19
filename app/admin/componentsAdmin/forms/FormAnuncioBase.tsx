@@ -174,16 +174,6 @@ export default function FormBase({ data, onChange }: FormBaseProps) {
         }
       />
 
-      {/* PREÇO */}
-      <InputPadrao
-        label="Preço"
-        type="number"
-        value={data.valor?.toString() ?? ""}
-        onChange={(e) =>
-          onChange("valor", e.target.value ? Number(e.target.value) : undefined)
-        }
-      />
-
       {/* DESTAQUE */}
       <CheckboxPadrao
         label="Destaque"
