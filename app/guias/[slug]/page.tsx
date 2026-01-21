@@ -36,9 +36,23 @@ export default async function GuiaPage({
             headline: publicacao.titulo,
             description: publicacao.resumo,
             url: `https://vstechdigital.com.br/guias/${slug}`,
+            datePublished: publicacao.publicadoEm || "2026-01-01",
+            dateModified: publicacao.publicadoEm || "2026-01-01",
+            author: {
+              "@type": "Organization",
+              name: "VS Tech Digital",
+            },
             publisher: {
               "@type": "Organization",
               name: "VS Tech Digital",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://vstechdigital.com.br/logo.png",
+              },
+            },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": `https://vstechdigital.com.br/guias/${slug}`,
             },
           }),
         }}
@@ -85,13 +99,13 @@ export async function generateMetadata({
   if (!publicacao) return {};
 
   return {
-    title: publicacao.titulo + " | VS Tech Digital",
+    title: `${publicacao.titulo} em 2026 – Guia completo`,
     description: publicacao.resumo,
     alternates: {
       canonical: `https://vstechdigital.com.br/guias/${slug}`,
     },
     openGraph: {
-      title: publicacao.titulo,
+      title: `${publicacao.titulo} em 2026`,
       description: publicacao.resumo,
       url: `https://vstechdigital.com.br/guias/${slug}`,
       siteName: "VS Tech Digital",
